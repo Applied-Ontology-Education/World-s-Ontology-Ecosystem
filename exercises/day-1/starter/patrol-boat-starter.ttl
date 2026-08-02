@@ -1,0 +1,66 @@
+@prefix ex: <https://example.org/worlds-ontology-ecosystem/day1/> .
+@prefix bfo: <http://purl.obolibrary.org/obo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/worlds-ontology-ecosystem/day1>
+    a owl:Ontology ;
+    owl:imports <http://purl.obolibrary.org/obo/bfo.owl> ;
+    rdfs:label "Day 1 Patrol Boat Exercise"@en ;
+    rdfs:comment "Starter ontology for the Day 1 exercise. Students complete the class hierarchy, create individuals, add assertions, define MovingPatrolBoat, and run a reasoner."@en .
+
+#################################################################
+# Local classes
+#################################################################
+
+ex:PatrolBoat
+    a owl:Class ;
+    rdfs:label "PatrolBoat"@en ;
+    rdfs:comment "A patrol boat class to be placed beneath BFO material entity."@en .
+
+ex:ActOfMotion
+    a owl:Class ;
+    rdfs:label "ActOfMotion"@en ;
+    rdfs:comment "An act of motion class to be placed beneath BFO process."@en .
+
+ex:MeasurementDatum
+    a owl:Class ;
+    rdfs:label "MeasurementDatum"@en ;
+    rdfs:comment "An informational measurement datum to be placed beneath BFO generically dependent continuant."@en .
+
+ex:SpeedMeasurementDatum
+    a owl:Class ;
+    rdfs:label "SpeedMeasurementDatum"@en .
+
+ex:DurationMeasurementDatum
+    a owl:Class ;
+    rdfs:label "DurationMeasurementDatum"@en .
+
+ex:MeasurementUnit
+    a owl:Class ;
+    rdfs:label "MeasurementUnit"@en ;
+    rdfs:comment "A simplified informational representation of a measurement unit for this exercise."@en .
+
+ex:MovingPatrolBoat
+    a owl:Class ;
+    rdfs:label "MovingPatrolBoat"@en ;
+    rdfs:comment "Students will define this class using necessary and sufficient conditions."@en .
+
+#################################################################
+# Local properties
+#################################################################
+
+ex:isAbout
+    a owl:ObjectProperty ;
+    rdfs:label "is about"@en .
+
+ex:hasMeasurementUnit
+    a owl:ObjectProperty ;
+    rdfs:label "has measurement unit"@en .
+
+ex:hasDecimalValue
+    a owl:DatatypeProperty ;
+    rdfs:label "has decimal value"@en ;
+    rdfs:range xsd:decimal .
