@@ -74,7 +74,7 @@ The exercise uses a local ontology import. You must preserve the supplied folder
 1. Open the course repository on GitHub.
 2. Select **Code → Download ZIP**.
 3. Extract the ZIP file fully.
-4. Navigate to the Day 1 exercise folder.
+4. Navigate to the Day 1 exercise folder at world-s-ontogy-ecosystem/exercises/day-1/
 
 Do not:
 
@@ -82,6 +82,7 @@ Do not:
 - download only `patrol-boat-starter.ttl`;
 - move `patrol-boat-starter.ttl` away from `catalog-v001.xml`;
 - rename the `imports` folder.
+- download the zip if you have already used git:clone
 
 The expected structure is:
 
