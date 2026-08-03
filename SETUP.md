@@ -4,6 +4,8 @@ Complete these steps before beginning the course exercises.
 
 The goal is to confirm that you can access the course repository, edit its files, and submit your work through GitHub.
 
+Detailed Protégé installation and ontology configuration instructions are provided separately in `exercises/day-1/protege-setup.md`.
+
 ## 1. Create a GitHub Account
 
 Create a free GitHub account if you do not already have one:
@@ -162,7 +164,6 @@ When instructed to submit:
 3. Select **Contribute**.
 4. Select **Open pull request**.
 5. Confirm that:
-
    * The base repository is the original course repository.
    * The head repository is your fork.
    * The selected branches are correct.
@@ -171,56 +172,3 @@ When instructed to submit:
 8. Select **Create pull request**.
 
 Do not open a pull request until the exercise instructions ask you to do so.
-
-## Troubleshooting
-
-### I cannot find my fork
-
-Open your GitHub profile and select **Repositories**. Look for the course repository under your account.
-
-### I edited a file, but the change is not visible on GitHub
-
-Saving a file does not automatically upload it. You must:
-
-1. Commit the change.
-2. Push or sync the commit to GitHub.
-
-### GitHub says I do not have permission to make changes
-
-Confirm that you are working in your fork. The repository address should contain your GitHub username.
-
-### The terminal says `git` is not recognized
-
-Install Git and restart Visual Studio Code or the terminal.
-
-### GitHub asks for a password when I push
-
-GitHub does not accept normal account passwords for command-line Git operations. Sign in through the browser when prompted or use a GitHub-supported authentication method.
-
-### I cannot access GitHub on the local network
-
-Try the following:
-
-1. Confirm that you have completed any guest Wi-Fi sign-in page.
-2. Open the repository in another browser.
-3. Disable a VPN temporarily if it is interfering with the connection.
-4. Try a personal hotspot or another network.
-5. Notify an instructor if access remains blocked.
-
-### I accidentally changed the original repository
-
-Most participants will not have permission to modify the original repository. Return to your fork and repeat the edit there.
-
-## Completion Checklist
-
-Before the first exercise, confirm that you have:
-
-* A working GitHub account.
-* Forked the course repository.
-* Opened the repository in Codespaces or Visual Studio Code.
-* Edited or created a file.
-* Committed the change.
-* Pushed the change to GitHub.
-* Confirmed that the change appears in your fork.
-
-Detailed Protégé installation and ontology configuration instructions are provided separately in `exercises/day-1/protege-setup.md`.
