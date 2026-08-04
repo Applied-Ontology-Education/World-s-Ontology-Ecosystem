@@ -54,6 +54,18 @@ ex:DurationMeasurementDatum rdf:type owl:Class ;
                             rdfs:label "DurationMeasurementDatum"@en .
 
 
+###  https://example.org/worlds-ontology-ecosystem/day1/KnotSpeedMeasurementDatum
+ex:KnotSpeedMeasurementDatum rdf:type owl:Class ;
+                             owl:equivalentClass [ owl:intersectionOf ( ex:SpeedMeasurementDatum
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty ex:hasMeasurementUnit ;
+                                                                          owl:hasValue ex:knot
+                                                                        ]
+                                                                      ) ;
+                                                   rdf:type owl:Class
+                                                 ] .
+
+
 ###  https://example.org/worlds-ontology-ecosystem/day1/MeasurementDatum
 ex:MeasurementDatum rdf:type owl:Class ;
                     rdfs:subClassOf bfo:BFO_0000031 ;
@@ -87,6 +99,15 @@ ex:PatrolBoat rdf:type owl:Class ;
               rdfs:subClassOf bfo:BFO_0000040 ;
               rdfs:comment "A patrol boat class to be placed beneath BFO material entity."@en ;
               rdfs:label "PatrolBoat"@en .
+
+
+###  https://example.org/worlds-ontology-ecosystem/day1/ProcessMeasurement
+ex:ProcessMeasurement rdf:type owl:Class ;
+                      owl:equivalentClass [ owl:intersectionOf ( ex:ActOfMotion
+                                                                 ex:MeasurementDatum
+                                                               ) ;
+                                            rdf:type owl:Class
+                                          ] .
 
 
 ###  https://example.org/worlds-ontology-ecosystem/day1/SpeedMeasurementDatum
