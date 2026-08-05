@@ -6,6 +6,14 @@ The course is designed for a mixed audience. Some participants are experienced o
 
 The course is led by **John Beverley** and **Barry Smith**, with contributions from researchers and practitioners working in government, industry, applied research, ontology engineering, and artificial intelligence.
 
+## Videos for Each Day
+
+- Day 1 - [Introduction and What You Need to Succeed](https://www.youtube.com/watch?v=BxRlOgPpNUk)
+- Day 2 - [Careful Modeling]()
+- Day 3 - [The Good, Bad, and Ugly of AI]()
+- Day 4 - [Ontology Engineering in a Contemporary AI Workflow]()
+- Day 5 - [THe Future of Ontology Engineering]()
+
 ## Course Approach
 
 The central theme of the course is that producing ontology syntax is relatively easy. Producing ontology content that is clear, reusable, logically sound, standards-aligned, and fit for operational use is much harder.
@@ -25,11 +33,10 @@ Across the week, participants will practice an ontology-engineering tradecraft t
 ## Start Here
 
 1. Review the [course schedule](https://ncor-network.org/documents/summer-school-2026/Worlds_Ontology_Ecosystem_Welcome_Packet.docx).
-2. Choose how you would like to participate.
-3. Builders and enrolled students should complete the instructions in [SETUP.md](SETUP.md).
-4. Review the shared [resources](resources/).
-5. Open the exercise folder for the relevant day.
-6. Use [GitHub Discussions](https://github.com/Applied-Ontology-Education/World-s-Ontology-Ecosystem/discussions) to ask questions, share work, and propose debate topics.
+2. Participants should complete the instructions in [SETUP.md](SETUP.md).
+3. Review the shared [resources](resources/).
+4. Open the exercise folder for the relevant day.
+5. Use [GitHub Discussions](https://github.com/Applied-Ontology-Education/World-s-Ontology-Ecosystem/discussions) to ask questions, share work, and propose debate topics.
 
 ## Ways to Participate
 
@@ -58,7 +65,7 @@ Builders should:
 2. Clone or download their fork.
 3. Open the relevant daily exercise folder.
 4. Read that day’s `README.md`.
-5. Complete the files provided in `starter-files/`.
+5. Complete the associated exercises.
 6. Commit and push the completed work to their fork.
 7. Share a link in GitHub Discussions.
 
@@ -71,11 +78,9 @@ Enrolled students follow the same exercise process as Builders.
 They are additionally expected to:
 
 - participate actively throughout the week;
-- retain examples, disagreements, and modeling decisions from each day;
-- connect their exercise work to their assigned presentation question;
 - give a synthesis presentation on Friday.
 
-The Friday presentation should not merely summarize the schedule. It should defend a substantive conclusion using evidence from the talks, exercises, debates, and participant work.
+The Friday presentation topics will be provided to each enrolled student. 
 
 ## Daily Exercises
 
@@ -100,8 +105,6 @@ When reporting a technical problem, include:
 - the text of any error message;
 - which operating system and tool you were using;
 - a screenshot, when helpful.
-
-Do not allow a GitHub or software problem to prevent you from participating. You may follow the exercise as an Observer while the problem is being resolved.
 
 ## Course Links
 
