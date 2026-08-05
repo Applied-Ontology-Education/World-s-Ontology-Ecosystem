@@ -158,22 +158,22 @@ For this exercise, measurement units are treated as informational standards that
 Your asserted class hierarchy should now include the following paths:
 
 ```text
-PatrolBoat
-  └── material entity
+material entity
+  └── PatrolBoat
 
-ActOfMotion
-  └── process
+process
+  └── ActOfMotion
 
-SpeedMeasurementDatum
+generically dependent continuant
   └── MeasurementDatum
-      └── generically dependent continuant
+      └── SpeedMeasurementDatum
 
-DurationMeasurementDatum
+generically dependent continuant
   └── MeasurementDatum
-      └── generically dependent continuant
+      └── DurationMeasurementDatum
 
-MeasurementUnit
-  └── generically dependent continuant
+generically dependent continuant
+  └── MeasurementUnit
 ```
 
 Do not yet add a superclass or definition for `MovingPatrolBoat`.
