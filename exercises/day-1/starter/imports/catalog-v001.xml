@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri id="Imports Wizard Entry" name="http://purl.obolibrary.org/obo/bfo/2020/bfo-core.ttl" uri="https://raw.githubusercontent.com/John-D-4/World-s-Ontology-Ecosystem/refs/heads/main/exercises/day-2/bfo-core%2B.ttl"/>
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public"/>
+</catalog>

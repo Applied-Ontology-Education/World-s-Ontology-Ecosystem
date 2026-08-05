@@ -19,6 +19,7 @@
 
 ###  https://example.org/worlds-ontology-ecosystem/day1/hasMeasurementUnit
 ex:hasMeasurementUnit rdf:type owl:ObjectProperty ;
+                      rdfs:domain ex:MeasurementDatum ;
                       rdfs:label "has measurement unit"@en .
 
 
@@ -33,6 +34,7 @@ ex:isAbout rdf:type owl:ObjectProperty ;
 
 ###  https://example.org/worlds-ontology-ecosystem/day1/hasDecimalValue
 ex:hasDecimalValue rdf:type owl:DatatypeProperty ;
+                   rdfs:domain ex:MeasurementDatum ;
                    rdfs:range xsd:decimal ;
                    rdfs:label "has decimal value"@en .
 
@@ -145,15 +147,26 @@ ex:SpeedMeasurementDatum rdf:type owl:Class ;
                ex:MeasurementUnit .
 
 
+###  https://example.org/worlds-ontology-ecosystem/day1#minute
+:minute rdf:type owl:NamedIndividual ,
+                 ex:MeasurementUnit .
+
+
 ###  https://example.org/worlds-ontology-ecosystem/day1#motion_01
 :motion_01 rdf:type owl:NamedIndividual ,
                     ex:ActOfMotion .
 
 
+###  https://example.org/worlds-ontology-ecosystem/day1#mrycrb02
+:mrycrb02 rdf:type owl:NamedIndividual ,
+                   ex:ActOfMotion .
+
+
 ###  https://example.org/worlds-ontology-ecosystem/day1#patrol_boat_01
 :patrol_boat_01 rdf:type owl:NamedIndividual ,
                          ex:PatrolBoat ;
-                bfo:BFO_0000056 :motion_01 .
+                bfo:BFO_0000056 :motion_01 ,
+                                :mrycrb02 .
 
 
 ###  https://example.org/worlds-ontology-ecosystem/day1#speed_measurement_01
