@@ -1,16 +1,19 @@
 # Day 4 Exercise: Ground, Critique, Validate
 
-## Central question
+## What you will investigate
 
-What does each component add to an ontology-enabled AI workflow, and how does
-an abductive hypothesis differ from a deductively entailed conclusion?
+One question drives this exercise:
 
-Students audit four increasingly constrained solutions to the question:
 **Which resident is the best current candidate for owning `Zebra`?**
 
-## Learning objectives
+You will audit four increasingly constrained ways of answering it, and along
+the way answer a deeper question: what does each component add to an
+ontology-enabled AI workflow, and how does an abductive hypothesis differ from
+a deductively entailed conclusion?
 
-By the end of the exercise, students should be able to:
+## What you will learn
+
+By the end of the exercise, you should be able to:
 
 - recognize an unsupported LLM answer;
 - ground a hypothesis in explicit ontology axioms;
@@ -19,7 +22,7 @@ By the end of the exercise, students should be able to:
 - distinguish plausible, possible, inconsistent, and entailed claims;
 - compare an abductive workflow result with an OWL reasoner result.
 
-## Comparison design
+## The four experiments
 
 | Experiment | Ontology | Critic | SHACL | Stages |
 |---|:---:|:---:|:---:|---|
@@ -28,8 +31,8 @@ By the end of the exercise, students should be able to:
 | 3. Critic added | Yes | Yes | No | Round 4 |
 | 4. SHACL feedback loop | Yes | Yes | Yes | Core and Rounds 1–4 |
 
-The first three experiments isolate the contribution of each workflow
-component on the same problem. The final experiment shows belief revision over
+The first three experiments run on the same problem, so you can isolate what
+each component contributes. The final experiment shows belief revision over
 successively richer ontology states.
 
 ```text
@@ -44,25 +47,26 @@ Constraint-checked feedback loop
 Deductive entailment result
 ```
 
-SHACL answers whether one concrete five-house arrangement satisfies the active
-constraints. It establishes possibility, not uniqueness or entailment. The
-final OWL reasoner query is a separate deductive check.
+Keep one distinction in mind while you audit: SHACL answers whether one
+concrete five-house arrangement satisfies the active constraints. It
+establishes possibility, not uniqueness or entailment. The final OWL reasoner
+query is a separate deductive check.
 
-## Student-facing scope
+## Where you will work
 
-Students stay in one file:
+You stay in one file:
 
 ```text
 exercise.json
 ```
 
-That file contains the question, both complete task prompts, four experiment
+It contains the question, both complete task prompts, four experiment
 definitions, selected ontology stages, component switches, revision budgets,
-final reasoner query, and output filename. It works as provided. Students
-primarily read and audit it; an optional JSON change supports a second
-comparison run.
+the final reasoner query, and the output filename. It works as provided. Your
+job is mainly to read and audit it; if you want a second comparison run, one
+optional JSON change is enough.
 
-They do not need to understand or modify:
+You do not need to understand or modify:
 
 - `src/day4/exercise.py`: stage sessions and evidence preservation;
 - `src/day4/workflows/ExercisePlumbing.py`: ABI calls and run artifacts;
@@ -72,11 +76,10 @@ They do not need to understand or modify:
 - `scripts/export_current_axioms.py`: ontology-to-text export;
 - `main.py`: ABI initialization and dependency wiring.
 
-## Run locally
+## Run it locally
 
 Use macOS, Linux, or WSL on Windows. Install
-[UV](https://docs.astral.sh/uv/), copy `.env.example` to `.env`, add an
-OpenRouter API key, and run:
+[UV](https://docs.astral.sh/uv/) and run:
 
 ```bash
 make
@@ -92,20 +95,20 @@ To prepare everything without making model calls:
 make install verify-setup test
 ```
 
-The `day4.config.agent_models` list in `config.yaml` selects the models used by
-the two agents. Each listed model runs every configured experiment and appends
-its results to the same CSV. The starter selects Claude Opus 4.8 through
-OpenRouter.
+The `day4.config.agent_models` list in `config.yaml` selects the models used
+by the two agents. Each listed model runs every configured experiment and
+appends its results to the same CSV. The starter selects Claude Opus 4.8
+through OpenRouter.
 
 Every execution creates one timestamped `runs/day4-run-*` directory. Its
-`agent-run-log.csv` consolidates every comparison row. Detailed JSON, Markdown,
-ontology snapshots, SHACL reports, and Turtle proposals are grouped by
-experiment and stage beneath the same directory.
+`agent-run-log.csv` consolidates every comparison row. Detailed JSON,
+Markdown, ontology snapshots, SHACL reports, and Turtle proposals are grouped
+by experiment and stage beneath the same directory.
 
 ## Files
 
-- `EXERCISE.md`: student procedure and audit questions
-- `exercise.json`: the complete student-readable experiment declaration
+- `EXERCISE.md`: your step-by-step procedure and audit questions
+- `exercise.json`: the complete experiment declaration you will read and audit
 - `config.yaml`: provider settings and the agent-model list
 - `Makefile`: one-command setup, verification, and execution
 - `ontology/zebra-core.owl`: clue-free structural model
@@ -114,27 +117,17 @@ experiment and stage beneath the same directory.
 - `clue-packets/`: new clues introduced at each round
 - `templates/`: CSV and analysis templates
 
-The ontology uses masked identifiers such as `Resident_A` and `Color_B` to
-reduce contamination from remembered Zebra Puzzle answers.
+The ontology uses masked identifiers such as `Resident_A` and `Color_B`. If
+you already know the classic Zebra Puzzle answer, the masking keeps it from
+contaminating your results.
 
 ## Final deductive check
 
-After Experiment 4, students open `ontology/zebra-round-4.owl` in Protégé, run
-an OWL 2 DL reasoner, and issue:
+After Experiment 4, open `ontology/zebra-round-4.owl` in Protégé, run an
+OWL 2 DL reasoner, and issue:
 
 ```text
 Resident and livesIn some (hasPet value Zebra)
 ```
 
-## Suggested two-hour schedule
-
-| Time | Activity |
-|---|---|
-| 0:00–0:15 | Introduction and environment check |
-| 0:15–0:30 | Read `exercise.json` and predict the four outcomes |
-| 0:30–0:50 | Run the four comparison experiments |
-| 0:50–1:20 | Audit the consolidated CSV and selected artifacts |
-| 1:20–1:35 | Compare Core through Round 4 belief revision |
-| 1:35–1:45 | Optionally change one prompt and rerun |
-| 1:45–1:55 | Run the final OWL reasoner query |
-| 1:55–2:00 | Discuss the audit findings and final takeaways |
+Compare what the reasoner entails with what the abductive workflow proposed.
