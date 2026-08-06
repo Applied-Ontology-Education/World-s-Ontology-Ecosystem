@@ -1,0 +1,1233 @@
+@prefix : <http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix zeb: <http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25> .
+
+<http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25#OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO
+:OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO rdf:type owl:ObjectProperty ;
+                                                           owl:inverseOf :OWLObjectProperty_8e4b25ba_4ae7_4212_9514_ade2af3ce12dMPO ;
+                                                           rdf:type owl:FunctionalProperty ,
+                                                                    owl:InverseFunctionalProperty ;
+                                                           rdfs:domain zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO ;
+                                                           rdfs:range :OWLClass_37bbfec2_3533_4cfa_87e4_d11946b937d0MPO ;
+                                                           rdfs:label "Has_color"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25#OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO
+:OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO rdf:type owl:ObjectProperty ;
+                                                           owl:inverseOf zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO ;
+                                                           rdf:type owl:FunctionalProperty ,
+                                                                    owl:InverseFunctionalProperty ;
+                                                           rdfs:domain zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO ;
+                                                           rdfs:range zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO ;
+                                                           rdfs:label "Home_of"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25#OWLObjectProperty_8e4b25ba_4ae7_4212_9514_ade2af3ce12dMPO
+:OWLObjectProperty_8e4b25ba_4ae7_4212_9514_ade2af3ce12dMPO rdf:type owl:ObjectProperty ,
+                                                                    owl:FunctionalProperty ,
+                                                                    owl:InverseFunctionalProperty ;
+                                                           rdfs:domain :OWLClass_37bbfec2_3533_4cfa_87e4_d11946b937d0MPO ;
+                                                           rdfs:range zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO ;
+                                                           rdfs:label "Color_of"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25#OWLObjectProperty_a5f290f0_358a_4c0a_b808_73a24609720dMPO
+:OWLObjectProperty_a5f290f0_358a_4c0a_b808_73a24609720dMPO rdf:type owl:ObjectProperty ;
+                                                           owl:inverseOf zeb:OWLObjectProperty_18d5cfb3_344b_490f_8a45_b6d5adcd53efMPO ;
+                                                           rdf:type owl:FunctionalProperty ,
+                                                                    owl:InverseFunctionalProperty ;
+                                                           rdfs:domain zeb:OWLClass_b98a860a_4177_4013_bc27_90a428abd97bMPO ;
+                                                           rdfs:range zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO ;
+                                                           rdfs:label "Smoked_by"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25#OWLObjectProperty_a8b2f101_2e4e_49fb_951d_71c4ff66f028MPO
+:OWLObjectProperty_a8b2f101_2e4e_49fb_951d_71c4ff66f028MPO rdf:type owl:ObjectProperty ;
+                                                           owl:inverseOf zeb:OWLObjectProperty_8b924f2d_2e54_4115_88e9_5e8c95f23999MPO ;
+                                                           rdf:type owl:FunctionalProperty ,
+                                                                    owl:InverseFunctionalProperty ;
+                                                           rdfs:domain zeb:OWLClass_8f30729b_04a8_4977_a42f_0d0a650735d0MPO ;
+                                                           rdfs:range zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO ;
+                                                           rdfs:label "Owned_by"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25#OWLObjectProperty_deecce9d_7b88_4f78_a024_63cae70e0138MPO
+:OWLObjectProperty_deecce9d_7b88_4f78_a024_63cae70e0138MPO rdf:type owl:ObjectProperty ;
+                                                           owl:inverseOf zeb:OWLObjectProperty_1f2529fe_694b_4e4b_ae76_6c50164b96b2MPO ;
+                                                           rdf:type owl:FunctionalProperty ,
+                                                                    owl:InverseFunctionalProperty ;
+                                                           rdfs:domain zeb:OWLClass_b9d57693_5e6c_4725_993f_044518c811fdMPO ;
+                                                           rdfs:range zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO ;
+                                                           rdfs:label "Drunk_by"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLObjectProperty_17dde3a8_775e_4cd2_96c9_6b6b0becd32cMPO
+zeb:OWLObjectProperty_17dde3a8_775e_4cd2_96c9_6b6b0becd32cMPO rdf:type owl:ObjectProperty ,
+                                                                       owl:FunctionalProperty ,
+                                                                       owl:InverseFunctionalProperty ;
+                                                              rdfs:domain zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO ;
+                                                              rdfs:range zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO ;
+                                                              rdfs:label "IsLeftOf"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLObjectProperty_18d5cfb3_344b_490f_8a45_b6d5adcd53efMPO
+zeb:OWLObjectProperty_18d5cfb3_344b_490f_8a45_b6d5adcd53efMPO rdf:type owl:ObjectProperty ,
+                                                                       owl:FunctionalProperty ,
+                                                                       owl:InverseFunctionalProperty ;
+                                                              rdfs:domain zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO ;
+                                                              rdfs:range zeb:OWLClass_b98a860a_4177_4013_bc27_90a428abd97bMPO ;
+                                                              rdfs:label "Smokes"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLObjectProperty_1f2529fe_694b_4e4b_ae76_6c50164b96b2MPO
+zeb:OWLObjectProperty_1f2529fe_694b_4e4b_ae76_6c50164b96b2MPO rdf:type owl:ObjectProperty ,
+                                                                       owl:FunctionalProperty ,
+                                                                       owl:InverseFunctionalProperty ;
+                                                              rdfs:domain zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO ;
+                                                              rdfs:range zeb:OWLClass_b9d57693_5e6c_4725_993f_044518c811fdMPO ;
+                                                              rdfs:label "Drinks"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLObjectProperty_3904695e_ca42_4132_932a_671e3b17a0e4MPO
+zeb:OWLObjectProperty_3904695e_ca42_4132_932a_671e3b17a0e4MPO rdf:type owl:ObjectProperty ,
+                                                                       owl:FunctionalProperty ,
+                                                                       owl:InverseFunctionalProperty ;
+                                                              rdfs:domain zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO ;
+                                                              rdfs:range zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO ;
+                                                              rdfs:label "IsRightOf"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLObjectProperty_8b924f2d_2e54_4115_88e9_5e8c95f23999MPO
+zeb:OWLObjectProperty_8b924f2d_2e54_4115_88e9_5e8c95f23999MPO rdf:type owl:ObjectProperty ,
+                                                                       owl:FunctionalProperty ,
+                                                                       owl:InverseFunctionalProperty ;
+                                                              rdfs:domain zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO ;
+                                                              rdfs:range zeb:OWLClass_8f30729b_04a8_4977_a42f_0d0a650735d0MPO ;
+                                                              rdfs:label <Owns> .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO
+zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO rdf:type owl:ObjectProperty ,
+                                                                       owl:FunctionalProperty ,
+                                                                       owl:InverseFunctionalProperty ;
+                                                              rdfs:domain zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO ;
+                                                              rdfs:range zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO ;
+                                                              rdfs:label "LivesIn"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25#OWLClass_37bbfec2_3533_4cfa_87e4_d11946b937d0MPO
+:OWLClass_37bbfec2_3533_4cfa_87e4_d11946b937d0MPO rdf:type owl:Class ;
+                                                  owl:equivalentClass [ rdf:type owl:Class ;
+                                                                        owl:unionOf ( [ rdf:type owl:Class ;
+                                                                                        owl:oneOf ( :OWLNamedIndividual_133e61db_701c_40d7_9a08_cf162db0e2adMPO
+                                                                                                  )
+                                                                                      ]
+                                                                                      [ rdf:type owl:Class ;
+                                                                                        owl:oneOf ( :OWLNamedIndividual_5184a258_4ace_4dfd_9b16_ffb3d59a5422MPO
+                                                                                                  )
+                                                                                      ]
+                                                                                      [ rdf:type owl:Class ;
+                                                                                        owl:oneOf ( :OWLNamedIndividual_7a20b9e4_cf18_401d_8f0a_203a4e25a06cMPO
+                                                                                                  )
+                                                                                      ]
+                                                                                      [ rdf:type owl:Class ;
+                                                                                        owl:oneOf ( :OWLNamedIndividual_7aca9537_55cf_411c_a8b2_b952cd25f169MPO
+                                                                                                  )
+                                                                                      ]
+                                                                                      [ rdf:type owl:Class ;
+                                                                                        owl:oneOf ( :OWLNamedIndividual_d950f192_cedf_4187_9a43_7358d2dc2306MPO
+                                                                                                  )
+                                                                                      ]
+                                                                                    )
+                                                                      ] ,
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty :OWLObjectProperty_8e4b25ba_4ae7_4212_9514_ade2af3ce12dMPO ;
+                                                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                        owl:onClass zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO
+                                                                      ] ;
+                                                  owl:disjointWith zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO ,
+                                                                   zeb:OWLClass_8f30729b_04a8_4977_a42f_0d0a650735d0MPO ,
+                                                                   zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO ,
+                                                                   zeb:OWLClass_b9d57693_5e6c_4725_993f_044518c811fdMPO ;
+                                                  rdfs:label "Color"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO rdf:type owl:Class ;
+                                                     owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                  owl:onProperty zeb:OWLObjectProperty_18d5cfb3_344b_490f_8a45_b6d5adcd53efMPO ;
+                                                                                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                                  owl:onClass zeb:OWLClass_b98a860a_4177_4013_bc27_90a428abd97bMPO
+                                                                                                ]
+                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                  owl:onProperty zeb:OWLObjectProperty_1f2529fe_694b_4e4b_ae76_6c50164b96b2MPO ;
+                                                                                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                                  owl:onClass zeb:OWLClass_b9d57693_5e6c_4725_993f_044518c811fdMPO
+                                                                                                ]
+                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                  owl:onProperty zeb:OWLObjectProperty_8b924f2d_2e54_4115_88e9_5e8c95f23999MPO ;
+                                                                                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                                  owl:onClass zeb:OWLClass_8f30729b_04a8_4977_a42f_0d0a650735d0MPO
+                                                                                                ]
+                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                  owl:onProperty zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO ;
+                                                                                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                                  owl:onClass zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO
+                                                                                                ]
+                                                                                              ) ;
+                                                                           rdf:type owl:Class
+                                                                         ] ,
+                                                                         [ rdf:type owl:Class ;
+                                                                           owl:unionOf ( [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_2d5b4988_03c1_4fa5_8839_f1947497a74eMPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_5c3a12ca_5e22_47c9_962c_8dc5537d8953MPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_d20d56e9_e21f_4ef8_a2e4_b1e9dfb94399MPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_dc45201c_574e_4c9c_9696_3f4f133e7071MPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_e9156816_375c_4524_a0fa_36d0c82352c7MPO
+                                                                                                     )
+                                                                                         ]
+                                                                                       )
+                                                                         ] ;
+                                                     owl:disjointWith zeb:OWLClass_8f30729b_04a8_4977_a42f_0d0a650735d0MPO ,
+                                                                      zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO ,
+                                                                      zeb:OWLClass_b98a860a_4177_4013_bc27_90a428abd97bMPO ,
+                                                                      zeb:OWLClass_b9d57693_5e6c_4725_993f_044518c811fdMPO ;
+                                                     rdfs:label "Person"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLClass_8f30729b_04a8_4977_a42f_0d0a650735d0MPO
+zeb:OWLClass_8f30729b_04a8_4977_a42f_0d0a650735d0MPO rdf:type owl:Class ;
+                                                     owl:equivalentClass [ rdf:type owl:Class ;
+                                                                           owl:unionOf ( [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_0b831c15_b1e3_4f67_9e49_d6836b97d061MPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_597abc4f_5b43_4d26_8edd_1e2a60bbc69aMPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_a3f04438_0834_4079_8e5d_7e2f393e3028MPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_bc9b57f5_62aa_4d43_9e86_671a5c2429d1MPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_fb6e89db_0271_4586_b237_004a0070bee3MPO
+                                                                                                     )
+                                                                                         ]
+                                                                                       )
+                                                                         ] ,
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty :OWLObjectProperty_a8b2f101_2e4e_49fb_951d_71c4ff66f028MPO ;
+                                                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                           owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                         ] ;
+                                                     owl:disjointWith zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO ,
+                                                                      zeb:OWLClass_b98a860a_4177_4013_bc27_90a428abd97bMPO ,
+                                                                      zeb:OWLClass_b9d57693_5e6c_4725_993f_044518c811fdMPO ;
+                                                     rdfs:label "Animal"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO
+zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO rdf:type owl:Class ;
+                                                     owl:equivalentClass [ rdf:type owl:Class ;
+                                                                           owl:unionOf ( [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_1464e7ba_8e33_406d_b391_04992c3cf1b8MPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_69fc28b4_878b_4e43_ac56_f9c5879208f1MPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_ba0603c8_bc76_4aee_b611_a5d741ff5c1cMPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_bcbe0c9f_34ad_46de_8d07_b8b5b4f9648dMPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_d48c7130_538c_459f_b555_cc6d3640508dMPO
+                                                                                                     )
+                                                                                         ]
+                                                                                       )
+                                                                         ] ,
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                           owl:onClass :OWLClass_37bbfec2_3533_4cfa_87e4_d11946b937d0MPO
+                                                                         ] ,
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                           owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                         ] ;
+                                                     owl:disjointWith zeb:OWLClass_b98a860a_4177_4013_bc27_90a428abd97bMPO ,
+                                                                      zeb:OWLClass_b9d57693_5e6c_4725_993f_044518c811fdMPO ;
+                                                     rdfs:label "House"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLClass_b98a860a_4177_4013_bc27_90a428abd97bMPO
+zeb:OWLClass_b98a860a_4177_4013_bc27_90a428abd97bMPO rdf:type owl:Class ;
+                                                     owl:equivalentClass [ rdf:type owl:Class ;
+                                                                           owl:unionOf ( [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_3b6a8e36_d3ae_4e9b_a06c_ffa36cffcf1fMPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_3d8faa87_4f3a_4f03_a11d_896f31ef7b4cMPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_839116c2_1351_49e1_bb24_dd6f5dd00249MPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_a84824df_129e_4688_9b17_23346c4bfd7aMPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_b6d9b232_e5f8_4a6a_a35e_7c8799f5f923MPO
+                                                                                                     )
+                                                                                         ]
+                                                                                       )
+                                                                         ] ,
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty :OWLObjectProperty_a5f290f0_358a_4c0a_b808_73a24609720dMPO ;
+                                                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                           owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                         ] ;
+                                                     owl:disjointWith zeb:OWLClass_b9d57693_5e6c_4725_993f_044518c811fdMPO ;
+                                                     rdfs:label "Cigarettes"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLClass_b9d57693_5e6c_4725_993f_044518c811fdMPO
+zeb:OWLClass_b9d57693_5e6c_4725_993f_044518c811fdMPO rdf:type owl:Class ;
+                                                     owl:equivalentClass [ rdf:type owl:Class ;
+                                                                           owl:unionOf ( [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_11e2023c_59ab_4408_9703_ee2fe2afec1cMPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_21556fab_4062_45f6_8b7a_0398b9a800d9MPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_4216d947_0c66_4d4b_8849_6531fd4b0c8cMPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_7a375f87_9d4e_4c3f_bdda_77d734bd76bdMPO
+                                                                                                     )
+                                                                                         ]
+                                                                                         [ rdf:type owl:Class ;
+                                                                                           owl:oneOf ( zeb:OWLNamedIndividual_ee686453_4ca7_4131_b417_b07b6346cd71MPO
+                                                                                                     )
+                                                                                         ]
+                                                                                       )
+                                                                         ] ,
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty :OWLObjectProperty_deecce9d_7b88_4f78_a024_63cae70e0138MPO ;
+                                                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                           owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                         ] ;
+                                                     rdfs:label "Beverage"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25#OWLNamedIndividual_133e61db_701c_40d7_9a08_cf162db0e2adMPO
+:OWLNamedIndividual_133e61db_701c_40d7_9a08_cf162db0e2adMPO rdf:type owl:NamedIndividual ,
+                                                                     :OWLClass_37bbfec2_3533_4cfa_87e4_d11946b937d0MPO ,
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty :OWLObjectProperty_8e4b25ba_4ae7_4212_9514_ade2af3ce12dMPO ;
+                                                                       owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                            owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                            owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                 owl:onProperty zeb:OWLObjectProperty_18d5cfb3_344b_490f_8a45_b6d5adcd53efMPO ;
+                                                                                                                 owl:hasValue zeb:OWLNamedIndividual_3b6a8e36_d3ae_4e9b_a06c_ffa36cffcf1fMPO
+                                                                                                               ]
+                                                                                          ]
+                                                                     ] ,
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty :OWLObjectProperty_8e4b25ba_4ae7_4212_9514_ade2af3ce12dMPO ;
+                                                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                       owl:onClass zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO
+                                                                     ] ;
+                                                            owl:differentFrom :OWLNamedIndividual_5184a258_4ace_4dfd_9b16_ffb3d59a5422MPO ,
+                                                                              :OWLNamedIndividual_7a20b9e4_cf18_401d_8f0a_203a4e25a06cMPO ,
+                                                                              :OWLNamedIndividual_7aca9537_55cf_411c_a8b2_b952cd25f169MPO ,
+                                                                              :OWLNamedIndividual_d950f192_cedf_4187_9a43_7358d2dc2306MPO ;
+                                                            rdfs:label "Yellow"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25#OWLNamedIndividual_5184a258_4ace_4dfd_9b16_ffb3d59a5422MPO
+:OWLNamedIndividual_5184a258_4ace_4dfd_9b16_ffb3d59a5422MPO rdf:type owl:NamedIndividual ,
+                                                                     :OWLClass_37bbfec2_3533_4cfa_87e4_d11946b937d0MPO ,
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty :OWLObjectProperty_8e4b25ba_4ae7_4212_9514_ade2af3ce12dMPO ;
+                                                                       owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                            owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                            owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                 owl:onProperty zeb:OWLObjectProperty_1f2529fe_694b_4e4b_ae76_6c50164b96b2MPO ;
+                                                                                                                 owl:hasValue zeb:OWLNamedIndividual_ee686453_4ca7_4131_b417_b07b6346cd71MPO
+                                                                                                               ]
+                                                                                          ]
+                                                                     ] ,
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty :OWLObjectProperty_8e4b25ba_4ae7_4212_9514_ade2af3ce12dMPO ;
+                                                                       owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                            owl:onProperty zeb:OWLObjectProperty_3904695e_ca42_4132_932a_671e3b17a0e4MPO ;
+                                                                                            owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                 owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                                                                 owl:hasValue :OWLNamedIndividual_7aca9537_55cf_411c_a8b2_b952cd25f169MPO
+                                                                                                               ]
+                                                                                          ]
+                                                                     ] ;
+                                                            owl:differentFrom :OWLNamedIndividual_7a20b9e4_cf18_401d_8f0a_203a4e25a06cMPO ,
+                                                                              :OWLNamedIndividual_7aca9537_55cf_411c_a8b2_b952cd25f169MPO ,
+                                                                              :OWLNamedIndividual_d950f192_cedf_4187_9a43_7358d2dc2306MPO ;
+                                                            rdfs:label "Green"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25#OWLNamedIndividual_7a20b9e4_cf18_401d_8f0a_203a4e25a06cMPO
+:OWLNamedIndividual_7a20b9e4_cf18_401d_8f0a_203a4e25a06cMPO rdf:type owl:NamedIndividual ,
+                                                                     :OWLClass_37bbfec2_3533_4cfa_87e4_d11946b937d0MPO ,
+                                                                     [ rdf:type owl:Class ;
+                                                                       owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                       owl:onProperty :OWLObjectProperty_8e4b25ba_4ae7_4212_9514_ade2af3ce12dMPO ;
+                                                                                       owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                            owl:onProperty zeb:OWLObjectProperty_17dde3a8_775e_4cd2_96c9_6b6b0becd32cMPO ;
+                                                                                                            owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                 owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                                                                 owl:hasValue zeb:OWLNamedIndividual_5c3a12ca_5e22_47c9_962c_8dc5537d8953MPO
+                                                                                                                               ]
+                                                                                                          ]
+                                                                                     ]
+                                                                                     [ rdf:type owl:Restriction ;
+                                                                                       owl:onProperty :OWLObjectProperty_8e4b25ba_4ae7_4212_9514_ade2af3ce12dMPO ;
+                                                                                       owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                            owl:onProperty zeb:OWLObjectProperty_3904695e_ca42_4132_932a_671e3b17a0e4MPO ;
+                                                                                                            owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                 owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                                                                 owl:hasValue zeb:OWLNamedIndividual_5c3a12ca_5e22_47c9_962c_8dc5537d8953MPO
+                                                                                                                               ]
+                                                                                                          ]
+                                                                                     ]
+                                                                                   )
+                                                                     ] ;
+                                                            owl:differentFrom :OWLNamedIndividual_7aca9537_55cf_411c_a8b2_b952cd25f169MPO ,
+                                                                              :OWLNamedIndividual_d950f192_cedf_4187_9a43_7358d2dc2306MPO ;
+                                                            :OWLObjectProperty_8e4b25ba_4ae7_4212_9514_ade2af3ce12dMPO zeb:OWLNamedIndividual_ba0603c8_bc76_4aee_b611_a5d741ff5c1cMPO ;
+                                                            rdfs:label "Blue"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25#OWLNamedIndividual_7aca9537_55cf_411c_a8b2_b952cd25f169MPO
+:OWLNamedIndividual_7aca9537_55cf_411c_a8b2_b952cd25f169MPO rdf:type owl:NamedIndividual ,
+                                                                     :OWLClass_37bbfec2_3533_4cfa_87e4_d11946b937d0MPO ,
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty :OWLObjectProperty_8e4b25ba_4ae7_4212_9514_ade2af3ce12dMPO ;
+                                                                       owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                            owl:onProperty zeb:OWLObjectProperty_17dde3a8_775e_4cd2_96c9_6b6b0becd32cMPO ;
+                                                                                            owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                 owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                                                 owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                      owl:onProperty zeb:OWLObjectProperty_1f2529fe_694b_4e4b_ae76_6c50164b96b2MPO ;
+                                                                                                                                      owl:hasValue zeb:OWLNamedIndividual_ee686453_4ca7_4131_b417_b07b6346cd71MPO
+                                                                                                                                    ]
+                                                                                                               ]
+                                                                                          ]
+                                                                     ] ;
+                                                            owl:differentFrom :OWLNamedIndividual_d950f192_cedf_4187_9a43_7358d2dc2306MPO ;
+                                                            rdfs:label "Ivory"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25#OWLNamedIndividual_d950f192_cedf_4187_9a43_7358d2dc2306MPO
+:OWLNamedIndividual_d950f192_cedf_4187_9a43_7358d2dc2306MPO rdf:type owl:NamedIndividual ,
+                                                                     :OWLClass_37bbfec2_3533_4cfa_87e4_d11946b937d0MPO ,
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty :OWLObjectProperty_8e4b25ba_4ae7_4212_9514_ade2af3ce12dMPO ;
+                                                                       owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                            owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                            owl:hasValue zeb:OWLNamedIndividual_d20d56e9_e21f_4ef8_a2e4_b1e9dfb94399MPO
+                                                                                          ]
+                                                                     ] ,
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty :OWLObjectProperty_8e4b25ba_4ae7_4212_9514_ade2af3ce12dMPO ;
+                                                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                       owl:onClass zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO
+                                                                     ] ;
+                                                            rdfs:label "Red"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_0b831c15_b1e3_4f67_9e49_d6836b97d061MPO
+zeb:OWLNamedIndividual_0b831c15_b1e3_4f67_9e49_d6836b97d061MPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_8f30729b_04a8_4977_a42f_0d0a650735d0MPO ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_a8b2f101_2e4e_49fb_951d_71c4ff66f028MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_597abc4f_5b43_4d26_8edd_1e2a60bbc69aMPO ,
+                                                                                 zeb:OWLNamedIndividual_a3f04438_0834_4079_8e5d_7e2f393e3028MPO ,
+                                                                                 zeb:OWLNamedIndividual_bc9b57f5_62aa_4d43_9e86_671a5c2429d1MPO ,
+                                                                                 zeb:OWLNamedIndividual_fb6e89db_0271_4586_b237_004a0070bee3MPO ;
+                                                               rdfs:label "Fox 001"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_11e2023c_59ab_4408_9703_ee2fe2afec1cMPO
+zeb:OWLNamedIndividual_11e2023c_59ab_4408_9703_ee2fe2afec1cMPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_b9d57693_5e6c_4725_993f_044518c811fdMPO ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_deecce9d_7b88_4f78_a024_63cae70e0138MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_21556fab_4062_45f6_8b7a_0398b9a800d9MPO ,
+                                                                                 zeb:OWLNamedIndividual_4216d947_0c66_4d4b_8849_6531fd4b0c8cMPO ,
+                                                                                 zeb:OWLNamedIndividual_7a375f87_9d4e_4c3f_bdda_77d734bd76bdMPO ,
+                                                                                 zeb:OWLNamedIndividual_ee686453_4ca7_4131_b417_b07b6346cd71MPO ;
+                                                               :OWLObjectProperty_deecce9d_7b88_4f78_a024_63cae70e0138MPO zeb:OWLNamedIndividual_2d5b4988_03c1_4fa5_8839_f1947497a74eMPO ;
+                                                               rdfs:label "Tea 001"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_1464e7ba_8e33_406d_b391_04992c3cf1b8MPO
+zeb:OWLNamedIndividual_1464e7ba_8e33_406d_b391_04992c3cf1b8MPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO ,
+                                                                        [ rdf:type owl:Class ;
+                                                                          owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                                          owl:hasValue :OWLNamedIndividual_133e61db_701c_40d7_9a08_cf162db0e2adMPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                                          owl:hasValue :OWLNamedIndividual_d950f192_cedf_4187_9a43_7358d2dc2306MPO
+                                                                                        ]
+                                                                                      )
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_69fc28b4_878b_4e43_ac56_f9c5879208f1MPO ,
+                                                                                 zeb:OWLNamedIndividual_ba0603c8_bc76_4aee_b611_a5d741ff5c1cMPO ,
+                                                                                 zeb:OWLNamedIndividual_bcbe0c9f_34ad_46de_8d07_b8b5b4f9648dMPO ,
+                                                                                 zeb:OWLNamedIndividual_d48c7130_538c_459f_b555_cc6d3640508dMPO ;
+                                                               :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO zeb:OWLNamedIndividual_5c3a12ca_5e22_47c9_962c_8dc5537d8953MPO ;
+                                                               zeb:OWLObjectProperty_17dde3a8_775e_4cd2_96c9_6b6b0becd32cMPO zeb:OWLNamedIndividual_ba0603c8_bc76_4aee_b611_a5d741ff5c1cMPO ;
+                                                               rdfs:label "House 001"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_21556fab_4062_45f6_8b7a_0398b9a800d9MPO
+zeb:OWLNamedIndividual_21556fab_4062_45f6_8b7a_0398b9a800d9MPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_b9d57693_5e6c_4725_993f_044518c811fdMPO ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_deecce9d_7b88_4f78_a024_63cae70e0138MPO ;
+                                                                          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty zeb:OWLObjectProperty_18d5cfb3_344b_490f_8a45_b6d5adcd53efMPO ;
+                                                                                               owl:hasValue zeb:OWLNamedIndividual_839116c2_1351_49e1_bb24_dd6f5dd00249MPO
+                                                                                             ]
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_deecce9d_7b88_4f78_a024_63cae70e0138MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_4216d947_0c66_4d4b_8849_6531fd4b0c8cMPO ,
+                                                                                 zeb:OWLNamedIndividual_7a375f87_9d4e_4c3f_bdda_77d734bd76bdMPO ,
+                                                                                 zeb:OWLNamedIndividual_ee686453_4ca7_4131_b417_b07b6346cd71MPO ;
+                                                               rdfs:label "Orange Juice 001"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_2d5b4988_03c1_4fa5_8839_f1947497a74eMPO
+zeb:OWLNamedIndividual_2d5b4988_03c1_4fa5_8839_f1947497a74eMPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty zeb:OWLObjectProperty_18d5cfb3_344b_490f_8a45_b6d5adcd53efMPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_b98a860a_4177_4013_bc27_90a428abd97bMPO
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty zeb:OWLObjectProperty_1f2529fe_694b_4e4b_ae76_6c50164b96b2MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_b9d57693_5e6c_4725_993f_044518c811fdMPO
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty zeb:OWLObjectProperty_8b924f2d_2e54_4115_88e9_5e8c95f23999MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_8f30729b_04a8_4977_a42f_0d0a650735d0MPO
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_5c3a12ca_5e22_47c9_962c_8dc5537d8953MPO ,
+                                                                                 zeb:OWLNamedIndividual_d20d56e9_e21f_4ef8_a2e4_b1e9dfb94399MPO ,
+                                                                                 zeb:OWLNamedIndividual_dc45201c_574e_4c9c_9696_3f4f133e7071MPO ,
+                                                                                 zeb:OWLNamedIndividual_e9156816_375c_4524_a0fa_36d0c82352c7MPO ;
+                                                               zeb:OWLObjectProperty_1f2529fe_694b_4e4b_ae76_6c50164b96b2MPO zeb:OWLNamedIndividual_11e2023c_59ab_4408_9703_ee2fe2afec1cMPO ;
+                                                               rdfs:label "Ukrainian"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_3b6a8e36_d3ae_4e9b_a06c_ffa36cffcf1fMPO
+zeb:OWLNamedIndividual_3b6a8e36_d3ae_4e9b_a06c_ffa36cffcf1fMPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_b98a860a_4177_4013_bc27_90a428abd97bMPO ,
+                                                                        [ rdf:type owl:Class ;
+                                                                          owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_a5f290f0_358a_4c0a_b808_73a24609720dMPO ;
+                                                                                          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO ;
+                                                                                                               owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                    owl:onProperty zeb:OWLObjectProperty_17dde3a8_775e_4cd2_96c9_6b6b0becd32cMPO ;
+                                                                                                                                    owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                                         owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                                                                                         owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                                                              owl:onProperty zeb:OWLObjectProperty_8b924f2d_2e54_4115_88e9_5e8c95f23999MPO ;
+                                                                                                                                                                              owl:hasValue zeb:OWLNamedIndividual_a3f04438_0834_4079_8e5d_7e2f393e3028MPO
+                                                                                                                                                                            ]
+                                                                                                                                                       ]
+                                                                                                                                  ]
+                                                                                                             ]
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_a5f290f0_358a_4c0a_b808_73a24609720dMPO ;
+                                                                                          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO ;
+                                                                                                               owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                    owl:onProperty zeb:OWLObjectProperty_3904695e_ca42_4132_932a_671e3b17a0e4MPO ;
+                                                                                                                                    owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                                         owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                                                                                         owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                                                              owl:onProperty zeb:OWLObjectProperty_8b924f2d_2e54_4115_88e9_5e8c95f23999MPO ;
+                                                                                                                                                                              owl:hasValue zeb:OWLNamedIndividual_a3f04438_0834_4079_8e5d_7e2f393e3028MPO
+                                                                                                                                                                            ]
+                                                                                                                                                       ]
+                                                                                                                                  ]
+                                                                                                             ]
+                                                                                        ]
+                                                                                      )
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_3d8faa87_4f3a_4f03_a11d_896f31ef7b4cMPO ,
+                                                                                 zeb:OWLNamedIndividual_839116c2_1351_49e1_bb24_dd6f5dd00249MPO ,
+                                                                                 zeb:OWLNamedIndividual_a84824df_129e_4688_9b17_23346c4bfd7aMPO ,
+                                                                                 zeb:OWLNamedIndividual_b6d9b232_e5f8_4a6a_a35e_7c8799f5f923MPO ;
+                                                               rdfs:label "Kools 001"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_3d8faa87_4f3a_4f03_a11d_896f31ef7b4cMPO
+zeb:OWLNamedIndividual_3d8faa87_4f3a_4f03_a11d_896f31ef7b4cMPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_b98a860a_4177_4013_bc27_90a428abd97bMPO ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_a5f290f0_358a_4c0a_b808_73a24609720dMPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_839116c2_1351_49e1_bb24_dd6f5dd00249MPO ,
+                                                                                 zeb:OWLNamedIndividual_a84824df_129e_4688_9b17_23346c4bfd7aMPO ,
+                                                                                 zeb:OWLNamedIndividual_b6d9b232_e5f8_4a6a_a35e_7c8799f5f923MPO ;
+                                                               :OWLObjectProperty_a5f290f0_358a_4c0a_b808_73a24609720dMPO zeb:OWLNamedIndividual_dc45201c_574e_4c9c_9696_3f4f133e7071MPO ;
+                                                               rdfs:label "Parliaments 001"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_4216d947_0c66_4d4b_8849_6531fd4b0c8cMPO
+zeb:OWLNamedIndividual_4216d947_0c66_4d4b_8849_6531fd4b0c8cMPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_b9d57693_5e6c_4725_993f_044518c811fdMPO ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_deecce9d_7b88_4f78_a024_63cae70e0138MPO ;
+                                                                          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO ;
+                                                                                               owl:hasValue zeb:OWLNamedIndividual_bcbe0c9f_34ad_46de_8d07_b8b5b4f9648dMPO
+                                                                                             ]
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_7a375f87_9d4e_4c3f_bdda_77d734bd76bdMPO ,
+                                                                                 zeb:OWLNamedIndividual_ee686453_4ca7_4131_b417_b07b6346cd71MPO ;
+                                                               rdfs:label "Milk 001"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_597abc4f_5b43_4d26_8edd_1e2a60bbc69aMPO
+zeb:OWLNamedIndividual_597abc4f_5b43_4d26_8edd_1e2a60bbc69aMPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_8f30729b_04a8_4977_a42f_0d0a650735d0MPO ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_a8b2f101_2e4e_49fb_951d_71c4ff66f028MPO ;
+                                                                          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty zeb:OWLObjectProperty_18d5cfb3_344b_490f_8a45_b6d5adcd53efMPO ;
+                                                                                               owl:hasValue zeb:OWLNamedIndividual_b6d9b232_e5f8_4a6a_a35e_7c8799f5f923MPO
+                                                                                             ]
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_a8b2f101_2e4e_49fb_951d_71c4ff66f028MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_a3f04438_0834_4079_8e5d_7e2f393e3028MPO ,
+                                                                                 zeb:OWLNamedIndividual_bc9b57f5_62aa_4d43_9e86_671a5c2429d1MPO ,
+                                                                                 zeb:OWLNamedIndividual_fb6e89db_0271_4586_b237_004a0070bee3MPO ;
+                                                               rdfs:label "Snail 001"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_5c3a12ca_5e22_47c9_962c_8dc5537d8953MPO
+zeb:OWLNamedIndividual_5c3a12ca_5e22_47c9_962c_8dc5537d8953MPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO ,
+                                                                        [ rdf:type owl:Class ;
+                                                                          owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO ;
+                                                                                          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty zeb:OWLObjectProperty_17dde3a8_775e_4cd2_96c9_6b6b0becd32cMPO ;
+                                                                                                               owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                    owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                                                                                    owl:hasValue :OWLNamedIndividual_7a20b9e4_cf18_401d_8f0a_203a4e25a06cMPO
+                                                                                                                                  ]
+                                                                                                             ]
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO ;
+                                                                                          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty zeb:OWLObjectProperty_3904695e_ca42_4132_932a_671e3b17a0e4MPO ;
+                                                                                                               owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                    owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                                                                                    owl:hasValue :OWLNamedIndividual_7a20b9e4_cf18_401d_8f0a_203a4e25a06cMPO
+                                                                                                                                  ]
+                                                                                                             ]
+                                                                                        ]
+                                                                                      )
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty zeb:OWLObjectProperty_18d5cfb3_344b_490f_8a45_b6d5adcd53efMPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_b98a860a_4177_4013_bc27_90a428abd97bMPO
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty zeb:OWLObjectProperty_1f2529fe_694b_4e4b_ae76_6c50164b96b2MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_b9d57693_5e6c_4725_993f_044518c811fdMPO
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty zeb:OWLObjectProperty_8b924f2d_2e54_4115_88e9_5e8c95f23999MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_8f30729b_04a8_4977_a42f_0d0a650735d0MPO
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_d20d56e9_e21f_4ef8_a2e4_b1e9dfb94399MPO ,
+                                                                                 zeb:OWLNamedIndividual_dc45201c_574e_4c9c_9696_3f4f133e7071MPO ,
+                                                                                 zeb:OWLNamedIndividual_e9156816_375c_4524_a0fa_36d0c82352c7MPO ;
+                                                               zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO zeb:OWLNamedIndividual_1464e7ba_8e33_406d_b391_04992c3cf1b8MPO ;
+                                                               rdfs:label "Norwegian Man"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_69fc28b4_878b_4e43_ac56_f9c5879208f1MPO
+zeb:OWLNamedIndividual_69fc28b4_878b_4e43_ac56_f9c5879208f1MPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO ,
+                                                                        [ rdf:type owl:Class ;
+                                                                          owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                                          owl:hasValue :OWLNamedIndividual_133e61db_701c_40d7_9a08_cf162db0e2adMPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                                          owl:hasValue :OWLNamedIndividual_5184a258_4ace_4dfd_9b16_ffb3d59a5422MPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                                          owl:hasValue :OWLNamedIndividual_7aca9537_55cf_411c_a8b2_b952cd25f169MPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                                          owl:hasValue :OWLNamedIndividual_d950f192_cedf_4187_9a43_7358d2dc2306MPO
+                                                                                        ]
+                                                                                      )
+                                                                        ] ,
+                                                                        [ rdf:type owl:Class ;
+                                                                          owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                          owl:hasValue zeb:OWLNamedIndividual_2d5b4988_03c1_4fa5_8839_f1947497a74eMPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                          owl:hasValue zeb:OWLNamedIndividual_d20d56e9_e21f_4ef8_a2e4_b1e9dfb94399MPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                          owl:hasValue zeb:OWLNamedIndividual_dc45201c_574e_4c9c_9696_3f4f133e7071MPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                          owl:hasValue zeb:OWLNamedIndividual_e9156816_375c_4524_a0fa_36d0c82352c7MPO
+                                                                                        ]
+                                                                                      )
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_ba0603c8_bc76_4aee_b611_a5d741ff5c1cMPO ,
+                                                                                 zeb:OWLNamedIndividual_bcbe0c9f_34ad_46de_8d07_b8b5b4f9648dMPO ,
+                                                                                 zeb:OWLNamedIndividual_d48c7130_538c_459f_b555_cc6d3640508dMPO ;
+                                                               zeb:OWLObjectProperty_3904695e_ca42_4132_932a_671e3b17a0e4MPO zeb:OWLNamedIndividual_d48c7130_538c_459f_b555_cc6d3640508dMPO ;
+                                                               rdfs:label "House 005"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_7a375f87_9d4e_4c3f_bdda_77d734bd76bdMPO
+zeb:OWLNamedIndividual_7a375f87_9d4e_4c3f_bdda_77d734bd76bdMPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_b9d57693_5e6c_4725_993f_044518c811fdMPO ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_deecce9d_7b88_4f78_a024_63cae70e0138MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_ee686453_4ca7_4131_b417_b07b6346cd71MPO ;
+                                                               rdfs:label "Water 001"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_839116c2_1351_49e1_bb24_dd6f5dd00249MPO
+zeb:OWLNamedIndividual_839116c2_1351_49e1_bb24_dd6f5dd00249MPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_b98a860a_4177_4013_bc27_90a428abd97bMPO ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_a5f290f0_358a_4c0a_b808_73a24609720dMPO ;
+                                                                          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty zeb:OWLObjectProperty_1f2529fe_694b_4e4b_ae76_6c50164b96b2MPO ;
+                                                                                               owl:hasValue zeb:OWLNamedIndividual_21556fab_4062_45f6_8b7a_0398b9a800d9MPO
+                                                                                             ]
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_a84824df_129e_4688_9b17_23346c4bfd7aMPO ,
+                                                                                 zeb:OWLNamedIndividual_b6d9b232_e5f8_4a6a_a35e_7c8799f5f923MPO ;
+                                                               rdfs:label "Lucky Strike 001"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_a3f04438_0834_4079_8e5d_7e2f393e3028MPO
+zeb:OWLNamedIndividual_a3f04438_0834_4079_8e5d_7e2f393e3028MPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_8f30729b_04a8_4977_a42f_0d0a650735d0MPO ,
+                                                                        [ rdf:type owl:Class ;
+                                                                          owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_a8b2f101_2e4e_49fb_951d_71c4ff66f028MPO ;
+                                                                                          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO ;
+                                                                                                               owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                    owl:onProperty zeb:OWLObjectProperty_17dde3a8_775e_4cd2_96c9_6b6b0becd32cMPO ;
+                                                                                                                                    owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                                         owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                                                                                         owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                                                              owl:onProperty zeb:OWLObjectProperty_18d5cfb3_344b_490f_8a45_b6d5adcd53efMPO ;
+                                                                                                                                                                              owl:hasValue zeb:OWLNamedIndividual_3b6a8e36_d3ae_4e9b_a06c_ffa36cffcf1fMPO
+                                                                                                                                                                            ]
+                                                                                                                                                       ]
+                                                                                                                                  ]
+                                                                                                             ]
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_a8b2f101_2e4e_49fb_951d_71c4ff66f028MPO ;
+                                                                                          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO ;
+                                                                                                               owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                    owl:onProperty zeb:OWLObjectProperty_3904695e_ca42_4132_932a_671e3b17a0e4MPO ;
+                                                                                                                                    owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                                         owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                                                                                         owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                                                              owl:onProperty zeb:OWLObjectProperty_18d5cfb3_344b_490f_8a45_b6d5adcd53efMPO ;
+                                                                                                                                                                              owl:hasValue zeb:OWLNamedIndividual_3b6a8e36_d3ae_4e9b_a06c_ffa36cffcf1fMPO
+                                                                                                                                                                            ]
+                                                                                                                                                       ]
+                                                                                                                                  ]
+                                                                                                             ]
+                                                                                        ]
+                                                                                      )
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_a8b2f101_2e4e_49fb_951d_71c4ff66f028MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_bc9b57f5_62aa_4d43_9e86_671a5c2429d1MPO ,
+                                                                                 zeb:OWLNamedIndividual_fb6e89db_0271_4586_b237_004a0070bee3MPO ;
+                                                               rdfs:label "Horse 001"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_a84824df_129e_4688_9b17_23346c4bfd7aMPO
+zeb:OWLNamedIndividual_a84824df_129e_4688_9b17_23346c4bfd7aMPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_b98a860a_4177_4013_bc27_90a428abd97bMPO ,
+                                                                        [ rdf:type owl:Class ;
+                                                                          owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_a5f290f0_358a_4c0a_b808_73a24609720dMPO ;
+                                                                                          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO ;
+                                                                                                               owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                    owl:onProperty zeb:OWLObjectProperty_17dde3a8_775e_4cd2_96c9_6b6b0becd32cMPO ;
+                                                                                                                                    owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                                         owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                                                                                         owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                                                              owl:onProperty zeb:OWLObjectProperty_8b924f2d_2e54_4115_88e9_5e8c95f23999MPO ;
+                                                                                                                                                                              owl:hasValue zeb:OWLNamedIndividual_0b831c15_b1e3_4f67_9e49_d6836b97d061MPO
+                                                                                                                                                                            ]
+                                                                                                                                                       ]
+                                                                                                                                  ]
+                                                                                                             ]
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_a5f290f0_358a_4c0a_b808_73a24609720dMPO ;
+                                                                                          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO ;
+                                                                                                               owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                    owl:onProperty zeb:OWLObjectProperty_3904695e_ca42_4132_932a_671e3b17a0e4MPO ;
+                                                                                                                                    owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                                         owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                                                                                         owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                                                              owl:onProperty zeb:OWLObjectProperty_8b924f2d_2e54_4115_88e9_5e8c95f23999MPO ;
+                                                                                                                                                                              owl:hasValue zeb:OWLNamedIndividual_0b831c15_b1e3_4f67_9e49_d6836b97d061MPO
+                                                                                                                                                                            ]
+                                                                                                                                                       ]
+                                                                                                                                  ]
+                                                                                                             ]
+                                                                                        ]
+                                                                                      )
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_b6d9b232_e5f8_4a6a_a35e_7c8799f5f923MPO ;
+                                                               rdfs:label "Chesterfields 001"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_b6d9b232_e5f8_4a6a_a35e_7c8799f5f923MPO
+zeb:OWLNamedIndividual_b6d9b232_e5f8_4a6a_a35e_7c8799f5f923MPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_b98a860a_4177_4013_bc27_90a428abd97bMPO ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_a5f290f0_358a_4c0a_b808_73a24609720dMPO ;
+                                                                          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty zeb:OWLObjectProperty_8b924f2d_2e54_4115_88e9_5e8c95f23999MPO ;
+                                                                                               owl:hasValue zeb:OWLNamedIndividual_597abc4f_5b43_4d26_8edd_1e2a60bbc69aMPO
+                                                                                             ]
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_a5f290f0_358a_4c0a_b808_73a24609720dMPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                        ] ;
+                                                               rdfs:label "Old Gold 001"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_ba0603c8_bc76_4aee_b611_a5d741ff5c1cMPO
+zeb:OWLNamedIndividual_ba0603c8_bc76_4aee_b611_a5d741ff5c1cMPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO ,
+                                                                        [ rdf:type owl:Class ;
+                                                                          owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                          owl:hasValue zeb:OWLNamedIndividual_2d5b4988_03c1_4fa5_8839_f1947497a74eMPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                          owl:hasValue zeb:OWLNamedIndividual_dc45201c_574e_4c9c_9696_3f4f133e7071MPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                          owl:hasValue zeb:OWLNamedIndividual_e9156816_375c_4524_a0fa_36d0c82352c7MPO
+                                                                                        ]
+                                                                                      )
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty zeb:OWLObjectProperty_8b924f2d_2e54_4115_88e9_5e8c95f23999MPO ;
+                                                                                               owl:hasValue zeb:OWLNamedIndividual_a3f04438_0834_4079_8e5d_7e2f393e3028MPO
+                                                                                             ]
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_bcbe0c9f_34ad_46de_8d07_b8b5b4f9648dMPO ,
+                                                                                 zeb:OWLNamedIndividual_d48c7130_538c_459f_b555_cc6d3640508dMPO ;
+                                                               :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO :OWLNamedIndividual_7a20b9e4_cf18_401d_8f0a_203a4e25a06cMPO ;
+                                                               zeb:OWLObjectProperty_17dde3a8_775e_4cd2_96c9_6b6b0becd32cMPO zeb:OWLNamedIndividual_bcbe0c9f_34ad_46de_8d07_b8b5b4f9648dMPO ;
+                                                               zeb:OWLObjectProperty_3904695e_ca42_4132_932a_671e3b17a0e4MPO zeb:OWLNamedIndividual_1464e7ba_8e33_406d_b391_04992c3cf1b8MPO ;
+                                                               rdfs:label "House 002"@en .
+
+[ rdf:type owl:NegativePropertyAssertion ;
+   owl:sourceIndividual zeb:OWLNamedIndividual_ba0603c8_bc76_4aee_b611_a5d741ff5c1cMPO ;
+   owl:assertionProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+   owl:targetIndividual zeb:OWLNamedIndividual_5c3a12ca_5e22_47c9_962c_8dc5537d8953MPO
+ ] .
+
+[ rdf:type owl:NegativePropertyAssertion ;
+   owl:sourceIndividual zeb:OWLNamedIndividual_ba0603c8_bc76_4aee_b611_a5d741ff5c1cMPO ;
+   owl:assertionProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+   owl:targetIndividual zeb:OWLNamedIndividual_d20d56e9_e21f_4ef8_a2e4_b1e9dfb94399MPO
+ ] .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_bc9b57f5_62aa_4d43_9e86_671a5c2429d1MPO
+zeb:OWLNamedIndividual_bc9b57f5_62aa_4d43_9e86_671a5c2429d1MPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_8f30729b_04a8_4977_a42f_0d0a650735d0MPO ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_a8b2f101_2e4e_49fb_951d_71c4ff66f028MPO ;
+                                                                          owl:hasValue zeb:OWLNamedIndividual_e9156816_375c_4524_a0fa_36d0c82352c7MPO
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_a8b2f101_2e4e_49fb_951d_71c4ff66f028MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_fb6e89db_0271_4586_b237_004a0070bee3MPO ;
+                                                               :OWLObjectProperty_a8b2f101_2e4e_49fb_951d_71c4ff66f028MPO zeb:OWLNamedIndividual_e9156816_375c_4524_a0fa_36d0c82352c7MPO ;
+                                                               rdfs:label "Dog 001"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_bcbe0c9f_34ad_46de_8d07_b8b5b4f9648dMPO
+zeb:OWLNamedIndividual_bcbe0c9f_34ad_46de_8d07_b8b5b4f9648dMPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO ,
+                                                                        [ rdf:type owl:Class ;
+                                                                          owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                                          owl:hasValue :OWLNamedIndividual_133e61db_701c_40d7_9a08_cf162db0e2adMPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                                          owl:hasValue :OWLNamedIndividual_5184a258_4ace_4dfd_9b16_ffb3d59a5422MPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                                          owl:hasValue :OWLNamedIndividual_7aca9537_55cf_411c_a8b2_b952cd25f169MPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                                          owl:hasValue :OWLNamedIndividual_d950f192_cedf_4187_9a43_7358d2dc2306MPO
+                                                                                        ]
+                                                                                      )
+                                                                        ] ,
+                                                                        [ rdf:type owl:Class ;
+                                                                          owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                          owl:hasValue zeb:OWLNamedIndividual_2d5b4988_03c1_4fa5_8839_f1947497a74eMPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                          owl:hasValue zeb:OWLNamedIndividual_d20d56e9_e21f_4ef8_a2e4_b1e9dfb94399MPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                          owl:hasValue zeb:OWLNamedIndividual_dc45201c_574e_4c9c_9696_3f4f133e7071MPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                          owl:hasValue zeb:OWLNamedIndividual_e9156816_375c_4524_a0fa_36d0c82352c7MPO
+                                                                                        ]
+                                                                                      )
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty zeb:OWLObjectProperty_1f2529fe_694b_4e4b_ae76_6c50164b96b2MPO ;
+                                                                                               owl:hasValue zeb:OWLNamedIndividual_4216d947_0c66_4d4b_8849_6531fd4b0c8cMPO
+                                                                                             ]
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_d48c7130_538c_459f_b555_cc6d3640508dMPO ;
+                                                               zeb:OWLObjectProperty_17dde3a8_775e_4cd2_96c9_6b6b0becd32cMPO zeb:OWLNamedIndividual_d48c7130_538c_459f_b555_cc6d3640508dMPO ;
+                                                               zeb:OWLObjectProperty_3904695e_ca42_4132_932a_671e3b17a0e4MPO zeb:OWLNamedIndividual_ba0603c8_bc76_4aee_b611_a5d741ff5c1cMPO ;
+                                                               rdfs:label "House 003"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_d20d56e9_e21f_4ef8_a2e4_b1e9dfb94399MPO
+zeb:OWLNamedIndividual_d20d56e9_e21f_4ef8_a2e4_b1e9dfb94399MPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO ;
+                                                                          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                                               owl:hasValue :OWLNamedIndividual_d950f192_cedf_4187_9a43_7358d2dc2306MPO
+                                                                                             ]
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty zeb:OWLObjectProperty_18d5cfb3_344b_490f_8a45_b6d5adcd53efMPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_b98a860a_4177_4013_bc27_90a428abd97bMPO
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty zeb:OWLObjectProperty_1f2529fe_694b_4e4b_ae76_6c50164b96b2MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_b9d57693_5e6c_4725_993f_044518c811fdMPO
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty zeb:OWLObjectProperty_8b924f2d_2e54_4115_88e9_5e8c95f23999MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_8f30729b_04a8_4977_a42f_0d0a650735d0MPO
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_dc45201c_574e_4c9c_9696_3f4f133e7071MPO ,
+                                                                                 zeb:OWLNamedIndividual_e9156816_375c_4524_a0fa_36d0c82352c7MPO ;
+                                                               rdfs:label "Englishman"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_d48c7130_538c_459f_b555_cc6d3640508dMPO
+zeb:OWLNamedIndividual_d48c7130_538c_459f_b555_cc6d3640508dMPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO ,
+                                                                        [ rdf:type owl:Class ;
+                                                                          owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                                          owl:hasValue :OWLNamedIndividual_133e61db_701c_40d7_9a08_cf162db0e2adMPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                                          owl:hasValue :OWLNamedIndividual_5184a258_4ace_4dfd_9b16_ffb3d59a5422MPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                                          owl:hasValue :OWLNamedIndividual_7aca9537_55cf_411c_a8b2_b952cd25f169MPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                                          owl:hasValue :OWLNamedIndividual_d950f192_cedf_4187_9a43_7358d2dc2306MPO
+                                                                                        ]
+                                                                                      )
+                                                                        ] ,
+                                                                        [ rdf:type owl:Class ;
+                                                                          owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                          owl:hasValue zeb:OWLNamedIndividual_2d5b4988_03c1_4fa5_8839_f1947497a74eMPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                          owl:hasValue zeb:OWLNamedIndividual_d20d56e9_e21f_4ef8_a2e4_b1e9dfb94399MPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                          owl:hasValue zeb:OWLNamedIndividual_dc45201c_574e_4c9c_9696_3f4f133e7071MPO
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                                          owl:hasValue zeb:OWLNamedIndividual_e9156816_375c_4524_a0fa_36d0c82352c7MPO
+                                                                                        ]
+                                                                                      )
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_2d88166e_4a19_4b5d_835f_2075cdeb3843MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                        ] ;
+                                                               zeb:OWLObjectProperty_17dde3a8_775e_4cd2_96c9_6b6b0becd32cMPO zeb:OWLNamedIndividual_69fc28b4_878b_4e43_ac56_f9c5879208f1MPO ;
+                                                               zeb:OWLObjectProperty_3904695e_ca42_4132_932a_671e3b17a0e4MPO zeb:OWLNamedIndividual_bcbe0c9f_34ad_46de_8d07_b8b5b4f9648dMPO ;
+                                                               rdfs:label "House 004"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_dc45201c_574e_4c9c_9696_3f4f133e7071MPO
+zeb:OWLNamedIndividual_dc45201c_574e_4c9c_9696_3f4f133e7071MPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty zeb:OWLObjectProperty_18d5cfb3_344b_490f_8a45_b6d5adcd53efMPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_b98a860a_4177_4013_bc27_90a428abd97bMPO
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty zeb:OWLObjectProperty_1f2529fe_694b_4e4b_ae76_6c50164b96b2MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_b9d57693_5e6c_4725_993f_044518c811fdMPO
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty zeb:OWLObjectProperty_8b924f2d_2e54_4115_88e9_5e8c95f23999MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_8f30729b_04a8_4977_a42f_0d0a650735d0MPO
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO
+                                                                        ] ;
+                                                               owl:differentFrom zeb:OWLNamedIndividual_e9156816_375c_4524_a0fa_36d0c82352c7MPO ;
+                                                               zeb:OWLObjectProperty_18d5cfb3_344b_490f_8a45_b6d5adcd53efMPO zeb:OWLNamedIndividual_3d8faa87_4f3a_4f03_a11d_896f31ef7b4cMPO ;
+                                                               rdfs:label "Japanese Man"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_e9156816_375c_4524_a0fa_36d0c82352c7MPO
+zeb:OWLNamedIndividual_e9156816_375c_4524_a0fa_36d0c82352c7MPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty zeb:OWLObjectProperty_8b924f2d_2e54_4115_88e9_5e8c95f23999MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_8f30729b_04a8_4977_a42f_0d0a650735d0MPO
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_9a98ef78_a768_43a4_aa99_1cd425374e60MPO
+                                                                        ] ;
+                                                               zeb:OWLObjectProperty_8b924f2d_2e54_4115_88e9_5e8c95f23999MPO zeb:OWLNamedIndividual_bc9b57f5_62aa_4d43_9e86_671a5c2429d1MPO ;
+                                                               rdfs:label "Spaniard"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_ee686453_4ca7_4131_b417_b07b6346cd71MPO
+zeb:OWLNamedIndividual_ee686453_4ca7_4131_b417_b07b6346cd71MPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_b9d57693_5e6c_4725_993f_044518c811fdMPO ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_deecce9d_7b88_4f78_a024_63cae70e0138MPO ;
+                                                                          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty zeb:OWLObjectProperty_f14bf5d9_6194_43f4_856e_fe10d205231eMPO ;
+                                                                                               owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                    owl:onProperty :OWLObjectProperty_20f89152_52de_4f66_a693_d6b4fea4d4dfMPO ;
+                                                                                                                    owl:hasValue :OWLNamedIndividual_5184a258_4ace_4dfd_9b16_ffb3d59a5422MPO
+                                                                                                                  ]
+                                                                                             ]
+                                                                        ] ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_deecce9d_7b88_4f78_a024_63cae70e0138MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                        ] ;
+                                                               rdfs:label "Coffee 001"@en .
+
+
+###  http://www.semanticweb.org/erichapsion/ontologies/2026/5/ZebraPuzzle-25/OWLNamedIndividual_fb6e89db_0271_4586_b237_004a0070bee3MPO
+zeb:OWLNamedIndividual_fb6e89db_0271_4586_b237_004a0070bee3MPO rdf:type owl:NamedIndividual ,
+                                                                        zeb:OWLClass_8f30729b_04a8_4977_a42f_0d0a650735d0MPO ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :OWLObjectProperty_a8b2f101_2e4e_49fb_951d_71c4ff66f028MPO ;
+                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                          owl:onClass zeb:OWLClass_7d3e374f_d1fe_4b1c_8e0e_b852267a464cMPO
+                                                                        ] ;
+                                                               rdfs:label "Zebra 001"@en .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
