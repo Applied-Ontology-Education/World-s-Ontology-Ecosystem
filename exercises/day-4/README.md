@@ -1,3 +1,10 @@
+# Day 4 Ontology Exercise
+
+1. If needed, complete [`protege-setup.md`](protege-setup.md).
+2. Follow [`exercise-instructions.md`](exercise-instructions.md).
+
+---
+
 # Day 4 Exercise: Ground, Critique, Validate
 
 ## What you will investigate
@@ -115,7 +122,7 @@ by experiment and stage beneath the same directory.
 - `ontology/zebra-round-1.owl` through `zebra-round-4.owl`: cumulative stages
 - `ontology/zebra-proposal-shapes.ttl`: executable arrangement constraints
 - `clue-packets/`: new clues introduced at each round
-- `templates/`: CSV and analysis templates
+- `templates/`: CSV
 
 The ontology uses masked identifiers such as `Resident_A` and `Color_B`. If
 you already know the classic Zebra Puzzle answer, the masking keeps it from
