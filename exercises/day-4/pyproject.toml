@@ -1,0 +1,29 @@
+[project]
+name = "student-package"
+version = "0.1.0"
+description = "Day 4 ontology-enabled abductive reasoning exercise"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "langchain-core>=0.3.86,<0.4",
+    "naas-abi-cli>=2.16.1",
+    "pydantic>=2.10,<3",
+    "pyshacl>=0.40.1",
+    "rdflib>=7.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "ruff>=0.12",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
