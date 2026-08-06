@@ -1,0 +1,5 @@
+langchain-core<0.4,>=0.3.86
+naas-abi-cli>=2.16.1
+pydantic<3,>=2.10
+pyshacl>=0.40.1
+rdflib>=7.0
