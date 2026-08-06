@@ -1,0 +1,27 @@
+api:
+  title: "ABI API"
+  description: "API for ABI"
+
+global_config:
+  ai_mode: 'cloud'
+
+modules:
+  - module: 'naas_abi_marketplace.ai.openrouter'
+    enabled: true
+    config:
+      openrouter_api_key: "{{ secret.OPENROUTER_API_KEY }}"
+ 
+  - module: 'day4'
+    enabled: true
+    config:
+      agent_models:
+        - "claude-opus-4.8"
+
+services:
+  model_registry:
+    default_chat_model: "claude-opus-4.8"
+    default_embedding_model: "text-embedding-3-small"
+  secret:
+    secret_adapters:
+      - adapter: "dotenv"
+        config: {}

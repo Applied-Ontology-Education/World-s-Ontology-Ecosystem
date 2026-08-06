@@ -1,0 +1,177 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix zebra: <https://ncor-network.org/course/day4/zebra#> .
+
+zebra:HouseAssignmentShape a sh:NodeShape ;
+    sh:targetClass zebra:House ;
+    sh:property
+        [ sh:path zebra:hasResident ; sh:minCount 1 ; sh:maxCount 1 ; sh:class zebra:Resident ],
+        [ sh:path zebra:hasColor ; sh:minCount 1 ; sh:maxCount 1 ; sh:class zebra:Color ],
+        [ sh:path zebra:hasDrink ; sh:minCount 1 ; sh:maxCount 1 ; sh:class zebra:Beverage ],
+        [ sh:path zebra:hasPet ; sh:minCount 1 ; sh:maxCount 1 ; sh:class zebra:Pet ],
+        [ sh:path zebra:hasSmoke ; sh:minCount 1 ; sh:maxCount 1 ; sh:class zebra:CigaretteBrand ] .
+
+zebra:Z01Shape a sh:NodeShape ;
+    sh:targetNode zebra:CurrentProposal ;
+    sh:sparql [
+        sh:message "Z01: Resident_A must live in the Color_A house." ;
+        sh:select """PREFIX zebra: <https://ncor-network.org/course/day4/zebra#>
+SELECT $this WHERE {
+  $this zebra:activeRound ?round . FILTER(?round >= 1)
+  FILTER NOT EXISTS { ?house zebra:hasResident zebra:Resident_A ; zebra:hasColor zebra:Color_A . }
+}"""
+    ] .
+
+zebra:Z02Shape a sh:NodeShape ;
+    sh:targetNode zebra:CurrentProposal ;
+    sh:sparql [
+        sh:message "Z02: Resident_B must own Pet_A." ;
+        sh:select """PREFIX zebra: <https://ncor-network.org/course/day4/zebra#>
+SELECT $this WHERE {
+  $this zebra:activeRound ?round . FILTER(?round >= 1)
+  FILTER NOT EXISTS { ?house zebra:hasResident zebra:Resident_B ; zebra:hasPet zebra:Pet_A . }
+}"""
+    ] .
+
+zebra:Z03Shape a sh:NodeShape ;
+    sh:targetNode zebra:CurrentProposal ;
+    sh:sparql [
+        sh:message "Z03: Drink_A must be consumed in the Color_B house." ;
+        sh:select """PREFIX zebra: <https://ncor-network.org/course/day4/zebra#>
+SELECT $this WHERE {
+  $this zebra:activeRound ?round . FILTER(?round >= 3)
+  FILTER NOT EXISTS { ?house zebra:hasDrink zebra:Drink_A ; zebra:hasColor zebra:Color_B . }
+}"""
+    ] .
+
+zebra:Z04Shape a sh:NodeShape ;
+    sh:targetNode zebra:CurrentProposal ;
+    sh:sparql [
+        sh:message "Z04: Resident_C must drink Drink_B." ;
+        sh:select """PREFIX zebra: <https://ncor-network.org/course/day4/zebra#>
+SELECT $this WHERE {
+  $this zebra:activeRound ?round . FILTER(?round >= 1)
+  FILTER NOT EXISTS { ?house zebra:hasResident zebra:Resident_C ; zebra:hasDrink zebra:Drink_B . }
+}"""
+    ] .
+
+zebra:Z05Shape a sh:NodeShape ;
+    sh:targetNode zebra:CurrentProposal ;
+    sh:sparql [
+        sh:message "Z05: The Color_B house must be immediately right of Color_C." ;
+        sh:select """PREFIX zebra: <https://ncor-network.org/course/day4/zebra#>
+SELECT $this WHERE {
+  $this zebra:activeRound ?round . FILTER(?round >= 3)
+  FILTER NOT EXISTS {
+    ?right zebra:hasColor zebra:Color_B ; zebra:immediatelyRightOf ?left .
+    ?left zebra:hasColor zebra:Color_C .
+  }
+}"""
+    ] .
+
+zebra:Z06Shape a sh:NodeShape ;
+    sh:targetNode zebra:CurrentProposal ;
+    sh:sparql [
+        sh:message "Z06: The Brand_A smoker must own Pet_B." ;
+        sh:select """PREFIX zebra: <https://ncor-network.org/course/day4/zebra#>
+SELECT $this WHERE {
+  $this zebra:activeRound ?round . FILTER(?round >= 4)
+  FILTER NOT EXISTS { ?house zebra:hasSmoke zebra:Brand_A ; zebra:hasPet zebra:Pet_B . }
+}"""
+    ] .
+
+zebra:Z07Shape a sh:NodeShape ;
+    sh:targetNode zebra:CurrentProposal ;
+    sh:sparql [
+        sh:message "Z07: Brand_B must be smoked in the Color_D house." ;
+        sh:select """PREFIX zebra: <https://ncor-network.org/course/day4/zebra#>
+SELECT $this WHERE {
+  $this zebra:activeRound ?round . FILTER(?round >= 3)
+  FILTER NOT EXISTS { ?house zebra:hasSmoke zebra:Brand_B ; zebra:hasColor zebra:Color_D . }
+}"""
+    ] .
+
+zebra:Z08Shape a sh:NodeShape ;
+    sh:targetNode zebra:CurrentProposal ;
+    sh:sparql [
+        sh:message "Z08: Drink_C must be consumed in House3." ;
+        sh:select """PREFIX zebra: <https://ncor-network.org/course/day4/zebra#>
+SELECT $this WHERE {
+  $this zebra:activeRound ?round . FILTER(?round >= 2)
+  FILTER NOT EXISTS { zebra:House3 zebra:hasDrink zebra:Drink_C . }
+}"""
+    ] .
+
+zebra:Z09Shape a sh:NodeShape ;
+    sh:targetNode zebra:CurrentProposal ;
+    sh:sparql [
+        sh:message "Z09: Resident_D must live in House1." ;
+        sh:select """PREFIX zebra: <https://ncor-network.org/course/day4/zebra#>
+SELECT $this WHERE {
+  $this zebra:activeRound ?round . FILTER(?round >= 2)
+  FILTER NOT EXISTS { zebra:House1 zebra:hasResident zebra:Resident_D . }
+}"""
+    ] .
+
+zebra:Z10Shape a sh:NodeShape ;
+    sh:targetNode zebra:CurrentProposal ;
+    sh:sparql [
+        sh:message "Z10: The Brand_C smoker must live next to the owner of Pet_C." ;
+        sh:select """PREFIX zebra: <https://ncor-network.org/course/day4/zebra#>
+SELECT $this WHERE {
+  $this zebra:activeRound ?round . FILTER(?round >= 4)
+  FILTER NOT EXISTS {
+    ?brandHouse zebra:hasSmoke zebra:Brand_C ; zebra:nextTo ?petHouse .
+    ?petHouse zebra:hasPet zebra:Pet_C .
+  }
+}"""
+    ] .
+
+zebra:Z11Shape a sh:NodeShape ;
+    sh:targetNode zebra:CurrentProposal ;
+    sh:sparql [
+        sh:message "Z11: The Brand_B house must be next to the Pet_D house." ;
+        sh:select """PREFIX zebra: <https://ncor-network.org/course/day4/zebra#>
+SELECT $this WHERE {
+  $this zebra:activeRound ?round . FILTER(?round >= 4)
+  FILTER NOT EXISTS {
+    ?brandHouse zebra:hasSmoke zebra:Brand_B ; zebra:nextTo ?petHouse .
+    ?petHouse zebra:hasPet zebra:Pet_D .
+  }
+}"""
+    ] .
+
+zebra:Z12Shape a sh:NodeShape ;
+    sh:targetNode zebra:CurrentProposal ;
+    sh:sparql [
+        sh:message "Z12: The Brand_D smoker must drink Drink_D." ;
+        sh:select """PREFIX zebra: <https://ncor-network.org/course/day4/zebra#>
+SELECT $this WHERE {
+  $this zebra:activeRound ?round . FILTER(?round >= 4)
+  FILTER NOT EXISTS { ?house zebra:hasSmoke zebra:Brand_D ; zebra:hasDrink zebra:Drink_D . }
+}"""
+    ] .
+
+zebra:Z13Shape a sh:NodeShape ;
+    sh:targetNode zebra:CurrentProposal ;
+    sh:sparql [
+        sh:message "Z13: Resident_E must smoke Brand_E." ;
+        sh:select """PREFIX zebra: <https://ncor-network.org/course/day4/zebra#>
+SELECT $this WHERE {
+  $this zebra:activeRound ?round . FILTER(?round >= 1)
+  FILTER NOT EXISTS { ?house zebra:hasResident zebra:Resident_E ; zebra:hasSmoke zebra:Brand_E . }
+}"""
+    ] .
+
+zebra:Z14Shape a sh:NodeShape ;
+    sh:targetNode zebra:CurrentProposal ;
+    sh:sparql [
+        sh:message "Z14: Resident_D must live next to the Color_E house." ;
+        sh:select """PREFIX zebra: <https://ncor-network.org/course/day4/zebra#>
+SELECT $this WHERE {
+  $this zebra:activeRound ?round . FILTER(?round >= 2)
+  FILTER NOT EXISTS {
+    ?residentHouse zebra:hasResident zebra:Resident_D ; zebra:nextTo ?colorHouse .
+    ?colorHouse zebra:hasColor zebra:Color_E .
+  }
+}"""
+    ] .

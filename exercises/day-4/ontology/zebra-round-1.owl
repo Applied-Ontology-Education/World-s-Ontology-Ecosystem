@@ -1,0 +1,192 @@
+    @prefix : <https://ncor-network.org/course/day4/zebra#> .
+    @prefix owl: <http://www.w3.org/2002/07/owl#> .
+    @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+    @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+    @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+    <https://ncor-network.org/course/day4/zebra/round-1> a owl:Ontology ;
+        rdfs:label "Zebra Puzzle masked round 1"@en ;
+        :activeRound "1"^^xsd:nonNegativeInteger ;
+        rdfs:comment "Day 4 Zebra Puzzle ontology for staged agent hypothesis generation and OWL reasoner validation."@en .
+
+    :activeRound a owl:AnnotationProperty .
+    :axiomId a owl:AnnotationProperty .
+    :clueRound a owl:AnnotationProperty .
+    :clueText a owl:AnnotationProperty .
+    :sourceClue a owl:AnnotationProperty .
+    :ClueRecord a owl:Class .
+
+    :House a owl:Class ;
+        owl:equivalentClass [ a owl:Class ; owl:oneOf ( :House1 :House2 :House3 :House4 :House5 ) ] ;
+        rdfs:subClassOf
+            [ a owl:Restriction ; owl:onProperty :hasResident ; owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onClass :Resident ],
+            [ a owl:Restriction ; owl:onProperty :hasColor ; owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onClass :Color ],
+            [ a owl:Restriction ; owl:onProperty :hasDrink ; owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onClass :Beverage ],
+            [ a owl:Restriction ; owl:onProperty :hasPet ; owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onClass :Pet ],
+            [ a owl:Restriction ; owl:onProperty :hasSmoke ; owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onClass :CigaretteBrand ] .
+
+    :Resident a owl:Class ;
+        owl:equivalentClass [ a owl:Class ; owl:oneOf ( :Resident_A :Resident_B :Resident_C :Resident_D :Resident_E ) ] ;
+        rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :livesIn ; owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onClass :House ] .
+
+    :Color a owl:Class ;
+        owl:equivalentClass [ a owl:Class ; owl:oneOf ( :Color_A :Color_B :Color_C :Color_D :Color_E ) ] ;
+        rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :colorOf ; owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onClass :House ] .
+
+    :Beverage a owl:Class ;
+        owl:equivalentClass [ a owl:Class ; owl:oneOf ( :Drink_A :Drink_B :Drink_C :Drink_D :Drink_E ) ] ;
+        rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :drinkOf ; owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onClass :House ] .
+
+    :Pet a owl:Class ;
+        owl:equivalentClass [ a owl:Class ; owl:oneOf ( :Pet_A :Pet_B :Pet_C :Pet_D :Zebra ) ] ;
+        rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :petOf ; owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onClass :House ] .
+
+    :CigaretteBrand a owl:Class ;
+        owl:equivalentClass [ a owl:Class ; owl:oneOf ( :Brand_A :Brand_B :Brand_C :Brand_D :Brand_E ) ] ;
+        rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :smokeOf ; owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onClass :House ] .
+
+    [] a owl:AllDisjointClasses ; owl:members ( :House :Resident :Color :Beverage :Pet :CigaretteBrand ) .
+
+    :livesIn a owl:ObjectProperty, owl:FunctionalProperty, owl:InverseFunctionalProperty ; rdfs:domain :Resident ; rdfs:range :House ; owl:inverseOf :hasResident .
+    :hasResident a owl:ObjectProperty, owl:FunctionalProperty, owl:InverseFunctionalProperty ; rdfs:domain :House ; rdfs:range :Resident .
+    :colorOf a owl:ObjectProperty, owl:FunctionalProperty, owl:InverseFunctionalProperty ; rdfs:domain :Color ; rdfs:range :House ; owl:inverseOf :hasColor .
+    :hasColor a owl:ObjectProperty, owl:FunctionalProperty, owl:InverseFunctionalProperty ; rdfs:domain :House ; rdfs:range :Color .
+    :drinkOf a owl:ObjectProperty, owl:FunctionalProperty, owl:InverseFunctionalProperty ; rdfs:domain :Beverage ; rdfs:range :House ; owl:inverseOf :hasDrink .
+    :hasDrink a owl:ObjectProperty, owl:FunctionalProperty, owl:InverseFunctionalProperty ; rdfs:domain :House ; rdfs:range :Beverage .
+    :petOf a owl:ObjectProperty, owl:FunctionalProperty, owl:InverseFunctionalProperty ; rdfs:domain :Pet ; rdfs:range :House ; owl:inverseOf :hasPet .
+    :hasPet a owl:ObjectProperty, owl:FunctionalProperty, owl:InverseFunctionalProperty ; rdfs:domain :House ; rdfs:range :Pet .
+    :smokeOf a owl:ObjectProperty, owl:FunctionalProperty, owl:InverseFunctionalProperty ; rdfs:domain :CigaretteBrand ; rdfs:range :House ; owl:inverseOf :hasSmoke .
+    :hasSmoke a owl:ObjectProperty, owl:FunctionalProperty, owl:InverseFunctionalProperty ; rdfs:domain :House ; rdfs:range :CigaretteBrand .
+
+    :nextTo a owl:ObjectProperty, owl:SymmetricProperty, owl:IrreflexiveProperty ; rdfs:domain :House ; rdfs:range :House .
+    :immediatelyRightOf a owl:ObjectProperty, owl:FunctionalProperty, owl:InverseFunctionalProperty, owl:IrreflexiveProperty, owl:AsymmetricProperty ; rdfs:domain :House ; rdfs:range :House .
+
+    :House1 a owl:NamedIndividual, :House .
+:House2 a owl:NamedIndividual, :House .
+:House3 a owl:NamedIndividual, :House .
+:House4 a owl:NamedIndividual, :House .
+:House5 a owl:NamedIndividual, :House .
+    :Resident_A a owl:NamedIndividual, :Resident .
+:Resident_B a owl:NamedIndividual, :Resident .
+:Resident_C a owl:NamedIndividual, :Resident .
+:Resident_D a owl:NamedIndividual, :Resident .
+:Resident_E a owl:NamedIndividual, :Resident .
+    :Color_A a owl:NamedIndividual, :Color .
+:Color_B a owl:NamedIndividual, :Color .
+:Color_C a owl:NamedIndividual, :Color .
+:Color_D a owl:NamedIndividual, :Color .
+:Color_E a owl:NamedIndividual, :Color .
+    :Drink_A a owl:NamedIndividual, :Beverage .
+:Drink_B a owl:NamedIndividual, :Beverage .
+:Drink_C a owl:NamedIndividual, :Beverage .
+:Drink_D a owl:NamedIndividual, :Beverage .
+:Drink_E a owl:NamedIndividual, :Beverage .
+    :Pet_A a owl:NamedIndividual, :Pet .
+:Pet_B a owl:NamedIndividual, :Pet .
+:Pet_C a owl:NamedIndividual, :Pet .
+:Pet_D a owl:NamedIndividual, :Pet .
+:Zebra a owl:NamedIndividual, :Pet .
+    :Brand_A a owl:NamedIndividual, :CigaretteBrand .
+:Brand_B a owl:NamedIndividual, :CigaretteBrand .
+:Brand_C a owl:NamedIndividual, :CigaretteBrand .
+:Brand_D a owl:NamedIndividual, :CigaretteBrand .
+:Brand_E a owl:NamedIndividual, :CigaretteBrand .
+
+    [] a owl:AllDifferent ; owl:distinctMembers ( :House1 :House2 :House3 :House4 :House5 ) .
+    [] a owl:AllDifferent ; owl:distinctMembers ( :Resident_A :Resident_B :Resident_C :Resident_D :Resident_E ) .
+    [] a owl:AllDifferent ; owl:distinctMembers ( :Color_A :Color_B :Color_C :Color_D :Color_E ) .
+    [] a owl:AllDifferent ; owl:distinctMembers ( :Drink_A :Drink_B :Drink_C :Drink_D :Drink_E ) .
+    [] a owl:AllDifferent ; owl:distinctMembers ( :Pet_A :Pet_B :Pet_C :Pet_D :Zebra ) .
+    [] a owl:AllDifferent ; owl:distinctMembers ( :Brand_A :Brand_B :Brand_C :Brand_D :Brand_E ) .
+
+    :House1 :nextTo :House2 .
+    :House2 :nextTo :House1, :House3 ; :immediatelyRightOf :House1 .
+    :House3 :nextTo :House2, :House4 ; :immediatelyRightOf :House2 .
+    :House4 :nextTo :House3, :House5 ; :immediatelyRightOf :House3 .
+    :House5 :nextTo :House4 ; :immediatelyRightOf :House4 .
+
+# Close the spatial relations under OWL's open-world semantics.
+:House1 rdf:type
+    [ a owl:Restriction ;
+      owl:onProperty :nextTo ;
+      owl:allValuesFrom [ a owl:Class ; owl:oneOf ( :House2 ) ] ],
+    [ a owl:Restriction ;
+      owl:onProperty :immediatelyRightOf ;
+      owl:maxCardinality "0"^^xsd:nonNegativeInteger ] .
+
+:House2 rdf:type
+    [ a owl:Restriction ;
+      owl:onProperty :nextTo ;
+      owl:allValuesFrom [ a owl:Class ; owl:oneOf ( :House1 :House3 ) ] ],
+    [ a owl:Restriction ;
+      owl:onProperty :immediatelyRightOf ;
+      owl:allValuesFrom [ a owl:Class ; owl:oneOf ( :House1 ) ] ] .
+
+:House3 rdf:type
+    [ a owl:Restriction ;
+      owl:onProperty :nextTo ;
+      owl:allValuesFrom [ a owl:Class ; owl:oneOf ( :House2 :House4 ) ] ],
+    [ a owl:Restriction ;
+      owl:onProperty :immediatelyRightOf ;
+      owl:allValuesFrom [ a owl:Class ; owl:oneOf ( :House2 ) ] ] .
+
+:House4 rdf:type
+    [ a owl:Restriction ;
+      owl:onProperty :nextTo ;
+      owl:allValuesFrom [ a owl:Class ; owl:oneOf ( :House3 :House5 ) ] ],
+    [ a owl:Restriction ;
+      owl:onProperty :immediatelyRightOf ;
+      owl:allValuesFrom [ a owl:Class ; owl:oneOf ( :House3 ) ] ] .
+
+:House5 rdf:type
+    [ a owl:Restriction ;
+      owl:onProperty :nextTo ;
+      owl:allValuesFrom [ a owl:Class ; owl:oneOf ( :House4 ) ] ],
+    [ a owl:Restriction ;
+      owl:onProperty :immediatelyRightOf ;
+      owl:allValuesFrom [ a owl:Class ; owl:oneOf ( :House4 ) ] ] .
+
+# Active clue records and logical encodings
+:Z01 a :ClueRecord ; :axiomId "Z01" ; :clueRound "1"^^xsd:nonNegativeInteger ; :clueText "Resident_A lives in the Color_A house." ; :sourceClue "The Englishman lives in the red house." .
+:Resident_A rdf:type [
+    a owl:Restriction ;
+    owl:onProperty :livesIn ;
+    owl:someValuesFrom [
+        a owl:Restriction ;
+        owl:onProperty :hasColor ;
+        owl:hasValue :Color_A
+    ]
+] .
+
+:Z02 a :ClueRecord ; :axiomId "Z02" ; :clueRound "1"^^xsd:nonNegativeInteger ; :clueText "Resident_B owns Pet_A." ; :sourceClue "The Spaniard owns the dog." .
+:Resident_B rdf:type [
+    a owl:Restriction ;
+    owl:onProperty :livesIn ;
+    owl:someValuesFrom [
+        a owl:Restriction ;
+        owl:onProperty :hasPet ;
+        owl:hasValue :Pet_A
+    ]
+] .
+
+:Z04 a :ClueRecord ; :axiomId "Z04" ; :clueRound "1"^^xsd:nonNegativeInteger ; :clueText "Resident_C drinks Drink_B." ; :sourceClue "The Ukrainian drinks tea." .
+:Resident_C rdf:type [
+    a owl:Restriction ;
+    owl:onProperty :livesIn ;
+    owl:someValuesFrom [
+        a owl:Restriction ;
+        owl:onProperty :hasDrink ;
+        owl:hasValue :Drink_B
+    ]
+] .
+
+:Z13 a :ClueRecord ; :axiomId "Z13" ; :clueRound "1"^^xsd:nonNegativeInteger ; :clueText "Resident_E smokes Brand_E." ; :sourceClue "The Japanese man smokes Parliaments." .
+:Resident_E rdf:type [
+    a owl:Restriction ;
+    owl:onProperty :livesIn ;
+    owl:someValuesFrom [
+        a owl:Restriction ;
+        owl:onProperty :hasSmoke ;
+        owl:hasValue :Brand_E
+    ]
+] .

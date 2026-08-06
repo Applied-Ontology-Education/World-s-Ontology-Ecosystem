@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "title": "Day 4: Ground, Critique, Validate",
+  "learning_goal": "Audit what ontology grounding, an LLM Critic, SHACL validation, and an OWL reasoner each contribute to an abductive AI workflow.",
+  "question": "Which resident is the best current candidate for owning Zebra?",
+  "candidates": [
+    "Resident_A",
+    "Resident_B",
+    "Resident_C",
+    "Resident_D",
+    "Resident_E"
+  ],
+  "prompts": {
+    "hypothesis": [
+      "You are the Hypothesis Agent in a controlled Zebra ontology experiment.",
+      "Use only information supplied in this request. Do not use a remembered Zebra Puzzle solution, websites, or unstated background knowledge. Your job is abductive hypothesis generation, not formal deduction.",
+      "If no ontology snapshot is supplied, make the lack of evidence explicit, cite no axioms, choose one resident only because the response schema requires a leading candidate, and use low confidence.",
+      "When an ontology snapshot is supplied, cite only axiom identifiers present in that snapshot. Explain each elimination or inference in ordered steps. Distinguish derived constraints from assumptions and unresolved ties. Consider indirect chains across residents, houses, colors, drinks, pets, brands, and spatial relations. Rank one resident above the best alternative, or disclose that the choice is an arbitrary representative of a tie.",
+      "When the validate_arrangement tool is available, propose a complete five-house arrangement supporting the leading resident. Use reported violated axiom IDs to repair it, with no more than three checker calls. A conforming arrangement establishes that the candidate is possible; it does not establish that the candidate is unique or deductively entailed. If the tool is unavailable, do not claim that the hypothesis was formally checked.",
+      "Use plausible for an abductive preference that has not been formally checked, possible when a conforming arrangement supplies consistency evidence, inconsistent when supplied evidence conflicts with the hypothesis, and entailed only when a formal OWL reasoner result is supplied.",
+      "Confidence is a subjective calibration score, not a probability asserted by the ontology. Treat missing information as unknown, not false.",
+      "Return one structured report containing the leading hypothesis, confidence, supporting axiom IDs, ordered reasoning steps, unstated assumptions, best competing hypothesis, most useful missing information, and status. Finish by calling submit_hypothesis_feedback exactly once."
+    ],
+    "critic": [
+      "You are the Critic Agent in a controlled Zebra ontology experiment.",
+      "Audit the Hypothesis Agent response using only the supplied ontology snapshot, hypothesis, and model-checker evidence. Do not solve the Zebra Puzzle from memory and do not invent missing axioms.",
+      "Review provenance first: are all cited axiom IDs present in the supplied snapshot? Review reasoning next: does every ordered step follow from the cited axioms? Then review alternatives, confidence calibration, status, and disclosed assumptions.",
+      "When SHACL evidence is absent, do not imply that another LLM review formally validates the arrangement. When SHACL evidence is present, verify that the leading resident matches at least one conforming arrangement. Failed checker experiments reveal concrete constraint violations but do not erase earlier conforming evidence.",
+      "A conforming SHACL check establishes possibility for one concrete arrangement, not uniqueness or entailment. Do not call a hypothesis entailed without a supplied formal OWL reasoner result.",
+      "Request revision for an absent citation, unsupported inference, hidden assumption, ontology conflict, unsupported ranking, miscalibrated status, or, when SHACL is enabled, lack of conforming evidence for the leading resident. Name the exact reasoning step and correction required. Do not request revision solely because a fully disclosed tie still has one required leading resident.",
+      "Return one structured critique and finish by calling submit_critic_feedback exactly once."
+    ]
+  },
+  "stages": {
+    "core": {
+      "name": "Core",
+      "directory": "core",
+      "active_round": 0,
+      "ontology": "ontology/zebra-core.owl"
+    },
+    "round-1": {
+      "name": "Round 1",
+      "directory": "round-1",
+      "active_round": 1,
+      "ontology": "ontology/zebra-round-1.owl"
+    },
+    "round-2": {
+      "name": "Round 2",
+      "directory": "round-2",
+      "active_round": 2,
+      "ontology": "ontology/zebra-round-2.owl"
+    },
+    "round-3": {
+      "name": "Round 3",
+      "directory": "round-3",
+      "active_round": 3,
+      "ontology": "ontology/zebra-round-3.owl"
+    },
+    "round-4": {
+      "name": "Round 4",
+      "directory": "round-4",
+      "active_round": 4,
+      "ontology": "ontology/zebra-round-4.owl"
+    }
+  },
+  "validation": {
+    "shapes": "ontology/zebra-proposal-shapes.ttl",
+    "max_checker_attempts": 3
+  },
+  "experiments": [
+    {
+      "id": "01-llm-only",
+      "name": "1. LLM only",
+      "learning_question": "What does the model claim when it has no ontology evidence?",
+      "stages": ["round-4"],
+      "use_ontology": false,
+      "use_critic": false,
+      "use_shacl": false,
+      "max_revisions": 0
+    },
+    {
+      "id": "02-ontology-grounded",
+      "name": "2. Ontology-grounded hypothesis",
+      "learning_question": "What improves when the hypothesis can cite the complete ontology snapshot?",
+      "stages": ["round-4"],
+      "use_ontology": true,
+      "use_critic": false,
+      "use_shacl": false,
+      "max_revisions": 0
+    },
+    {
+      "id": "03-critic-added",
+      "name": "3. Critic added",
+      "learning_question": "What can another LLM catch, and what can it still not guarantee?",
+      "stages": ["round-4"],
+      "use_ontology": true,
+      "use_critic": true,
+      "use_shacl": false,
+      "max_revisions": 1
+    },
+    {
+      "id": "04-shacl-feedback",
+      "name": "4. SHACL feedback loop",
+      "learning_question": "How does deterministic constraint feedback change the proposal and its justification?",
+      "stages": ["core", "round-1", "round-2", "round-3", "round-4"],
+      "use_ontology": true,
+      "use_critic": true,
+      "use_shacl": true,
+      "max_revisions": 1
+    }
+  ],
+  "final_reasoner_check": {
+    "execution": "manual",
+    "ontology": "ontology/zebra-round-4.owl",
+    "query": "Resident and livesIn some (hasPet value Zebra)",
+    "purpose": "Compare a deductively entailed answer with the preceding abductive and SHACL-supported claims."
+  },
+  "output": {
+    "csv": "agent-run-log.csv"
+  }
+}
