@@ -12,7 +12,7 @@ The course is led by **John Beverley** and **Barry Smith**, with contributions f
 - Day 2 - [Careful Modeling]()
 - Day 3 - [The Good, Bad, and Ugly of AI]()
 - Day 4 - [Ontology Engineering in a Contemporary AI Workflow]()
-- Day 5 - [THe Future of Ontology Engineering]()
+- Day 5 - [The Future of Ontology Engineering]()
 
 ## Course Approach
 
