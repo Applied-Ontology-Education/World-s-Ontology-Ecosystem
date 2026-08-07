@@ -1,0 +1,21 @@
+1. MaintenanceProcedure (class)
+
+Genus: information artifact (the closest asserted parent in the model — bfo:GenericallyDependentContinuant, informally glossed this way, consistent with how this term's been used throughout this whole conversation)
+Differentia: specifies a recurring inspection requirement for a piece of equipment
+
+Definition: An information artifact that specifies a recurring inspection requirement for a piece of equipment.
+
+2. Inspection (class)
+
+Genus: process (matches bfo:Process, the direct OWL parent — genus proximus, per §3.1.1)
+Differentia: performed by a person bearing a technician role, evaluates a piece of equipment against a maintenance procedure's requirements, yields a report and measurement data as output
+
+Definition: A process, performed by a person bearing a technician role, that evaluates a piece of equipment against the requirements of a maintenance procedure and yields a report and associated measurement data as output.
+
+Note I deliberately avoided "examines" or "inspects" as the verb — those are grammatically-derived synonyms of the definiendum itself, which §7 flags as circularity even when the exact label isn't repeated (the fear/fearful case).
+
+3. recommends (relation)
+
+Relations don't take genus-differentia — the guidelines call for "when does this hold between two entities" phrasing instead:
+
+Definition: recommends holds between an inspection report and a process type when the content of the report states that an instance of that process type ought to be performed, without the report asserting that such a process has already taken place.

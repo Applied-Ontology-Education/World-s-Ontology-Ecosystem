@@ -1,0 +1,233 @@
+@prefix : <http://example.org/ontology/maintenance#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix bfo: <http://purl.obolibrary.org/obo/BFO_> .
+@base <http://example.org/ontology/maintenance> .
+
+<http://example.org/ontology/maintenance> rdf:type owl:Ontology ;
+    rdfs:comment "A BFO-aligned ODP for a pump inspection, its report, its recorded vibration measurement, and the resulting work order." .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+:realizes rdf:type owl:ObjectProperty ;
+    rdfs:label "realizes" ;
+    rdfs:comment "Relates a process to the documented procedure it executes. Plays the role IAO calls is_concretization_of: a particular occurrent instantiating a generically dependent directive." ;
+    rdfs:domain bfo:Process ;
+    rdfs:range :MaintenanceProcedure .
+
+:has_participant rdf:type owl:ObjectProperty ;
+    rdfs:label "has participant" ;
+    rdfs:comment "Relates a process to a continuant that takes part in it (agent or patient)." ;
+    rdfs:domain bfo:Process .
+
+:has_specified_output rdf:type owl:ObjectProperty ;
+    rdfs:label "has specified output" ;
+    rdfs:comment "Relates a process to an information content entity it generates." ;
+    rdfs:domain bfo:Process ;
+    rdfs:range bfo:GenericallyDependentContinuant .
+
+:recommends rdf:type owl:ObjectProperty ;
+    rdfs:label "recommends" ;
+    rdfs:comment "Relates a report to a process type it advises should be carried out. Does not assert the process has occurred." ;
+    rdfs:domain :InspectionReport .
+
+:requests rdf:type owl:ObjectProperty ;
+    rdfs:label "requests" ;
+    rdfs:comment "Relates a work order to a process type it calls for. Does not assert the process has occurred." ;
+    rdfs:domain :WorkOrder .
+
+:based_on rdf:type owl:ObjectProperty ;
+    rdfs:label "based on" ;
+    rdfs:comment "Relates a work order to the report that motivated it (provenance, not aboutness)." ;
+    rdfs:domain :WorkOrder ;
+    rdfs:range :InspectionReport .
+
+:bearer_of rdf:type owl:ObjectProperty ;
+    rdfs:label "bearer of" ;
+    rdfs:comment "Relates an independent continuant to a role it bears. Keeps the role distinct from the person who bears it." ;
+    rdfs:range bfo:Role .
+
+:inheres_in rdf:type owl:ObjectProperty ;
+    rdfs:label "inheres in" ;
+    rdfs:comment "Relates a quality to the independent continuant it depends on for its existence." ;
+    rdfs:domain bfo:Quality .
+
+:is_about rdf:type owl:ObjectProperty ;
+    rdfs:label "is about" ;
+    rdfs:comment "Relates an information content entity to the entity it concerns, without that entity being identical to the artifact." .
+
+#################################################################
+#    Data Properties
+#################################################################
+
+:has_decimal_value rdf:type owl:DatatypeProperty ;
+    rdfs:label "has decimal value" ;
+    rdfs:comment "The numeric magnitude recorded by a measurement datum. Attached to the datum, not the quality itself." ;
+    rdfs:domain :VibrationMeasurementDatum ;
+    rdfs:range xsd:decimal .
+
+:has_measurement_unit rdf:type owl:DatatypeProperty ;
+    rdfs:label "has measurement unit" ;
+    rdfs:domain :VibrationMeasurementDatum ;
+    rdfs:range xsd:string .
+
+:has_inspection_interval rdf:type owl:DatatypeProperty ;
+    rdfs:label "has inspection interval" ;
+    rdfs:domain :MaintenanceProcedure ;
+    rdfs:range xsd:string .
+
+#################################################################
+#    Classes — Upper-level stubs (for clean, self-contained loading)
+#################################################################
+
+bfo:GenericallyDependentContinuant rdf:type owl:Class ;
+    rdfs:label "generically dependent continuant" .
+
+bfo:MaterialEntity rdf:type owl:Class ;
+    rdfs:label "material entity" .
+
+bfo:Process rdf:type owl:Class ;
+    rdfs:label "process" .
+
+bfo:Quality rdf:type owl:Class ;
+    rdfs:label "quality" .
+
+bfo:Role rdf:type owl:Class ;
+    rdfs:label "role" .
+
+#################################################################
+#    Classes — Domain
+#################################################################
+
+### Information artifacts (prescriptive and descriptive) ###
+
+:MaintenanceProcedure rdf:type owl:Class ;
+    rdfs:subClassOf bfo:GenericallyDependentContinuant ;
+    rdfs:label "maintenance procedure" ;
+    rdfs:comment "A directive information artifact that specifies a recurring inspection requirement for a piece of equipment. It prescribes what should happen; it does not itself record that anything has happened." .
+
+:InspectionReport rdf:type owl:Class ;
+    rdfs:subClassOf bfo:GenericallyDependentContinuant ;
+    rdfs:label "inspection report" ;
+    rdfs:comment "A descriptive information artifact produced as the output of a specific inspection, recording findings such as measurements and recommendations." .
+
+:WorkOrder rdf:type owl:Class ;
+    rdfs:subClassOf bfo:GenericallyDependentContinuant ;
+    rdfs:label "work order" ;
+    rdfs:comment "A directive information artifact that requests a specific maintenance action, typically issued on the basis of a report's findings." .
+
+:VibrationMeasurementDatum rdf:type owl:Class ;
+    rdfs:subClassOf bfo:GenericallyDependentContinuant ;
+    rdfs:label "vibration measurement datum" .
+
+### Processes (occurrents) ###
+
+:Inspection rdf:type owl:Class ;
+    rdfs:subClassOf bfo:Process ;
+    rdfs:label "inspection" ;
+    rdfs:comment "A process in which a technician examines a piece of equipment against the criteria of a maintenance procedure, producing a report and any associated measurements as output." .
+
+:BearingReplacement rdf:type owl:Class ;
+    rdfs:subClassOf bfo:Process ;
+    rdfs:label "bearing replacement" ;
+    rdfs:comment "A process type referenced by reports and work orders as a recommended or requested action. Never instantiated in this pattern, since no bearing replacement is asserted to have occurred." .
+
+### Quality ###
+
+:Vibration rdf:type owl:Class ;
+    rdfs:subClassOf bfo:Quality ;
+    rdfs:label "vibration" ;
+    rdfs:comment "A physical quality that inheres in equipment such as a pump, and which can be the target of a measurement." .
+
+### Role ###
+
+:TechnicianRole rdf:type owl:Class ;
+    rdfs:subClassOf bfo:Role ;
+    rdfs:label "technician role" ;
+    rdfs:comment "A role borne by a person that licenses them to perform inspections and other maintenance processes. Kept distinct from Person: the role is instantiated separately and connected to its bearer via bearer_of, so that the role is never confused with the person who happens to hold it." .
+
+### Independent continuants ###
+
+:Person rdf:type owl:Class ;
+    rdfs:subClassOf bfo:MaterialEntity ;
+    rdfs:label "person" .
+
+:Pump rdf:type owl:Class ;
+    rdfs:subClassOf bfo:MaterialEntity ;
+    rdfs:label "pump" .
+
+#################################################################
+#    Individuals (A-Box)
+#################################################################
+
+### Independent continuants ###
+
+:Alex rdf:type owl:NamedIndividual ,
+              :Person ;
+      :bearer_of :Alex_TechnicianRole ;
+      rdfs:label "Alex" .
+
+:Pump_P17 rdf:type owl:NamedIndividual ,
+                   :Pump ;
+          rdfs:label "Pump P-17" .
+
+### Role instance ###
+
+:Alex_TechnicianRole rdf:type owl:NamedIndividual ,
+                              :TechnicianRole ;
+                      rdfs:label "Alex's technician role" .
+
+### Prescriptive artifact ###
+
+:MaintenanceProcedure_1 rdf:type owl:NamedIndividual ,
+                                  :MaintenanceProcedure ;
+                         :has_inspection_interval "30 days" ;
+                         rdfs:label "Pump maintenance procedure" .
+
+### The inspection process ###
+
+:Inspection_17 rdf:type owl:NamedIndividual ,
+                         :Inspection ;
+               :realizes :MaintenanceProcedure_1 ;
+               :has_participant :Alex ,
+                                :Pump_P17 ;
+               :has_specified_output :Report_R17 ,
+                                     :VibrationMeasurementDatum_1 ;
+               rdfs:label "Inspection 17" .
+
+### Quality instance ###
+
+:PumpVibration_1 rdf:type owl:NamedIndividual ,
+                          :Vibration ;
+                  :inheres_in :Pump_P17 ;
+                  rdfs:label "Pump P-17's vibration (as measured during Inspection 17)" .
+
+### Measurement datum ###
+
+:VibrationMeasurementDatum_1 rdf:type owl:NamedIndividual ,
+                                      :VibrationMeasurementDatum ;
+                              :is_about :PumpVibration_1 ;
+                              :has_decimal_value "4.2"^^xsd:decimal ;
+                              :has_measurement_unit "mm/s" ;
+                              rdfs:label "Vibration reading from Inspection 17" .
+
+### Report ###
+
+:Report_R17 rdf:type owl:NamedIndividual ,
+                     :InspectionReport ;
+            :is_about :VibrationMeasurementDatum_1 ;
+            :recommends :BearingReplacement ;
+            rdfs:label "Report R-17" .
+
+### Work order ###
+
+:WorkOrder_W22 rdf:type owl:NamedIndividual ,
+                        :WorkOrder ;
+               :based_on :Report_R17 ;
+               :requests :BearingReplacement ;
+               rdfs:label "Work Order W-22" .

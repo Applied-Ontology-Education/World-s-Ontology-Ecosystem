@@ -1,0 +1,18 @@
+- Consistent:            Yes. HermiT completed with no inconsistency.
+- Unsatisfiable classes: None. Every class remains distinct from owl:Nothing.
+- Expected inferences:   Upward class propagation for every individual, correctly following the
+                          asserted subclass hierarchy — none of this was asserted directly on the
+                          individuals, only derived from class-level subClassOf axioms:
+                            Inspection_17          → also classified as bfo:Process
+                            MaintenanceProcedure_1 → also classified as bfo:GDC
+                            Report_R17, WorkOrder_W22, VibrationMeasurementDatum_1
+                                                    → also classified as bfo:GDC
+                            Alex, Pump_P17          → also classified as bfo:MaterialEntity
+                            PumpVibration_1         → also classified as bfo:Quality
+                            Alex_TechnicianRole     → also classified as bfo:Role
+                          All asserted object-property triples (realizes, has_participant,
+                          has_specified_output, recommends, based_on, requests, bearer_of,
+                          inheres_in, is_about) survived unchanged — no new property assertions
+                          were derived.
+- Unexpected inferences: None. No individuals merged, no unintended reclassification, no class
+                          collapsed into another.
