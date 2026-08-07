@@ -1,0 +1,14 @@
+{
+  "conforms": false,
+  "active_round": 2,
+  "zebra_owner": "Resident_A",
+  "violations": [
+    {
+      "axiom_id": "Z04",
+      "focus_node": "CurrentProposal",
+      "path": null,
+      "message": "Z04: Resident_C must drink Drink_B."
+    }
+  ],
+  "interpretation": "Revise the arrangement to address every reported violation."
+}

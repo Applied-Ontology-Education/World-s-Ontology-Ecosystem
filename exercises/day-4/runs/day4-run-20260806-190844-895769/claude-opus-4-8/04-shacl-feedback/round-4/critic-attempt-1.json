@@ -1,0 +1,19 @@
+{
+  "absent_axiom_ids": [
+    "S06",
+    "S07"
+  ],
+  "unsupported_inferences": [
+    "Step 2 selects the (Color_C=House4, Color_B=House5) branch of Z05 without proving the (House3,House4) branch impossible; the resulting color layout is therefore a choice, not a forced derivation.",
+    "Steps 6, 7, 8 (Resident_C=House2, Drink_D/Brand_D=House4, Resident_E=House5/Resident_B=House4) are described as chosen because they 'resolved cleanly,' not because any cited axiom forces them; these placements are not entailed by the cited axioms as presented."
+  ],
+  "hidden_assumptions": [
+    "Steps 1 and 2 rely on adjacency (S06) and immediatelyRightOf (S07) structural semantics, but these axioms were not cited in supporting_axiom_ids.",
+    "The ranking of Resident_E over Resident_B assumes the unexplored Z05 branch does not yield a conforming model with a different Zebra owner, which was not verified."
+  ],
+  "ontology_conflicts": [],
+  "assessment": "currently_possible",
+  "highest_value_additional_axiom_or_query": "A formal OWL/uniqueness reasoner result, or exhaustive SHACL testing of the (Color_C=House3, Color_B=House4) branch of Z05, to determine whether the House5 Zebra assignment is uniquely entailed rather than merely one conforming model.",
+  "revision_required": true,
+  "summary": "The hypothesis (Resident_E owns Zebra, status 'possible', confidence 70) is supported by a conforming SHACL check (attempt 1, check 3, conforms=true), which correctly establishes possibility for the leading resident; the two earlier failed checks do not erase this. Status and confidence are appropriately calibrated to possibility and no entailment is claimed. Revision is required for two concrete defects: (1) supporting_axiom_ids omits S06 and S07, which underpin the adjacency and immediately-right-of derivations in reasoning steps 1 and 2; and (2) the ranking of Resident_E over the competing Resident_B rests on an admittedly non-exhaustive exploration of the alternate Z05 branch, so several intermediate placements (steps 2, 6, 7, 8) are choices rather than forced derivations. Add the missing structural citations and either soften the ranking justification or supply a uniqueness reasoner / exhaustive branch check. The disclosed non-uniqueness assumptions are commendably transparent."
+}

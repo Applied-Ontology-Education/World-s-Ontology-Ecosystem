@@ -1,0 +1,47 @@
+{
+  "leading_hypothesis": "Resident_E",
+  "confidence": 55,
+  "supporting_axiom_ids": [
+    "S01",
+    "S02",
+    "S03",
+    "S04",
+    "S05",
+    "S06",
+    "S07",
+    "Z01",
+    "Z02",
+    "Z03",
+    "Z04",
+    "Z05",
+    "Z06",
+    "Z07",
+    "Z08",
+    "Z09",
+    "Z10",
+    "Z11",
+    "Z12",
+    "Z13",
+    "Z14"
+  ],
+  "reasoning_steps": [
+    "Z09 fixes Resident_D in House1; A,B,C,E occupy Houses2-5.",
+    "Z14 with S06: House1's neighbor bearing Color_E must be House2, so Color_E=House2.",
+    "Z05 requires Color_C immediately left of Color_B; since House2=Color_E the only viable placements are (C=H3,B=H4) [Case i] or (C=H4,B=H5) [Case ii].",
+    "Z01 places Resident_A in the Color_A house; House1 is Resident_D, so Color_A cannot be House1, forcing Color_A into the remaining slot and Resident_A there; Color_D falls on House1.",
+    "In Case (i) Color_A=H5, Color_D=H1; deriving drinks (Z03,Z08,Z04) and brands (Z07,Z12,Z13) leaves Brand_A only on houses holding Pet_D or Pet_A, contradicting Z06 (Brand_A owner keeps Pet_B). Case (i) fails to close by hand.",
+    "In Case (ii): Color_A=H3 (Resident_A), Color_D=H1. Z03 gives Drink_A=H5, Z08 gives Drink_C=H3; Z04 places Resident_C at House2 with Drink_B; Z12 with Z07 forces Drink_D=House4 and Brand_D there, so Resident_E (Brand_E, Z13) takes House5 and Resident_B House4.",
+    "Z02 puts Pet_A at House4; Z11 puts Pet_D at House2; Z06 forces Brand_A at House3 with Pet_B; Z10 places Pet_C at House1; the only remaining pet slot House5 receives Zebra.",
+    "This complete arrangement satisfies every active clue when hand-checked, yielding Zebra to Resident_E in House5.",
+    "No model-checker/SHACL tool was supplied, so this is an abductive hand-verified consistency argument, not a formal entailment; Case (i) was only informally rejected."
+  ],
+  "unstated_assumptions": [
+    "The by-hand elimination of Case (i) via the Z06/Pet_B conflict is exhaustive; a missed branch could reopen it.",
+    "Each derivation step used standard uniqueness (S03/S04) so that a pet/drink/brand appears exactly once per house across all houses.",
+    "No formal reasoner confirmed uniqueness; other conforming arrangements could in principle assign Zebra elsewhere.",
+    "Treated all unstated assignments as unknown (S08) rather than false."
+  ],
+  "best_competing_hypothesis": "Resident_A",
+  "most_useful_missing_information": "A formal OWL/model-checker or SHACL result confirming whether Case (i) is truly inconsistent and whether the Case (ii) arrangement is the unique solution (i.e., whether Zebra ownership is entailed).",
+  "status": "plausible"
+}

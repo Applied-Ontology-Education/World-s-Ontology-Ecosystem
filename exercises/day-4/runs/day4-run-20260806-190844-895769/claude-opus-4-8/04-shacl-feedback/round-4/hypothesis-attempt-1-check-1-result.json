@@ -1,0 +1,32 @@
+{
+  "conforms": false,
+  "active_round": 4,
+  "zebra_owner": "Resident_E",
+  "violations": [
+    {
+      "axiom_id": "Z12",
+      "focus_node": "CurrentProposal",
+      "path": null,
+      "message": "Z12: The Brand_D smoker must drink Drink_D."
+    },
+    {
+      "axiom_id": "Z10",
+      "focus_node": "CurrentProposal",
+      "path": null,
+      "message": "Z10: The Brand_C smoker must live next to the owner of Pet_C."
+    },
+    {
+      "axiom_id": "Z06",
+      "focus_node": "CurrentProposal",
+      "path": null,
+      "message": "Z06: The Brand_A smoker must own Pet_B."
+    },
+    {
+      "axiom_id": "Z11",
+      "focus_node": "CurrentProposal",
+      "path": null,
+      "message": "Z11: The Brand_B house must be next to the Pet_D house."
+    }
+  ],
+  "interpretation": "Revise the arrangement to address every reported violation."
+}

@@ -1,0 +1,20 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix zebra: <https://ncor-network.org/course/day4/zebra#> .
+
+[] a sh:ValidationReport ;
+    sh:conforms false ;
+    sh:result [ a sh:ValidationResult ;
+            sh:focusNode zebra:CurrentProposal ;
+            sh:resultMessage "Z04: Resident_C must drink Drink_B." ;
+            sh:resultSeverity sh:Violation ;
+            sh:sourceConstraint [ sh:message "Z04: Resident_C must drink Drink_B." ;
+                    sh:select """PREFIX zebra: <https://ncor-network.org/course/day4/zebra#>
+SELECT $this WHERE {
+  $this zebra:activeRound ?round . FILTER(?round >= 1)
+  FILTER NOT EXISTS { ?house zebra:hasResident zebra:Resident_C ; zebra:hasDrink zebra:Drink_B . }
+}""" ] ;
+            sh:sourceConstraintComponent sh:SPARQLConstraintComponent ;
+            sh:sourceShape zebra:Z04Shape ;
+            sh:value zebra:CurrentProposal ] .
+

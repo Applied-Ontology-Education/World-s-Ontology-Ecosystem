@@ -1,0 +1,1 @@
+No ontology snapshot was supplied to the Hypothesis Agent.

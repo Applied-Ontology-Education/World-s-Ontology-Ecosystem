@@ -1,0 +1,36 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix zebra: <https://ncor-network.org/course/day4/zebra#> .
+
+zebra:CurrentProposal a zebra:ProposedArrangement ;
+    zebra:activeRound "3"^^xsd:nonNegativeInteger .
+
+zebra:House1 zebra:hasColor zebra:Color_D ;
+    zebra:hasDrink zebra:Drink_D ;
+    zebra:hasPet zebra:Zebra ;
+    zebra:hasResident zebra:Resident_D ;
+    zebra:hasSmoke zebra:Brand_B .
+
+zebra:House2 zebra:hasColor zebra:Color_E ;
+    zebra:hasDrink zebra:Drink_B ;
+    zebra:hasPet zebra:Pet_C ;
+    zebra:hasResident zebra:Resident_C ;
+    zebra:hasSmoke zebra:Brand_A .
+
+zebra:House3 zebra:hasColor zebra:Color_C ;
+    zebra:hasDrink zebra:Drink_C ;
+    zebra:hasPet zebra:Pet_A ;
+    zebra:hasResident zebra:Resident_B ;
+    zebra:hasSmoke zebra:Brand_C .
+
+zebra:House4 zebra:hasColor zebra:Color_B ;
+    zebra:hasDrink zebra:Drink_A ;
+    zebra:hasPet zebra:Pet_D ;
+    zebra:hasResident zebra:Resident_E ;
+    zebra:hasSmoke zebra:Brand_E .
+
+zebra:House5 zebra:hasColor zebra:Color_A ;
+    zebra:hasDrink zebra:Drink_E ;
+    zebra:hasPet zebra:Pet_B ;
+    zebra:hasResident zebra:Resident_A ;
+    zebra:hasSmoke zebra:Brand_D .
+
