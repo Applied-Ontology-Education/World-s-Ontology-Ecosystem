@@ -1,0 +1,197 @@
+@prefix : <http://example.org/library-loan#> .
+@prefix bfo: <http://purl.obolibrary.org/obo/> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@base <http://example.org/library-loan> .
+
+#################################################################
+#    Ontology declaration
+#################################################################
+
+<http://example.org/library-loan> rdf:type owl:Ontology ;
+    owl:imports <http://purl.obolibrary.org/obo/bfo.owl> ;
+    dc:title "Library Loan Ontology (BFO-Core Extension)"@en ;
+    dc:description "A narrow, illustrative extension of BFO-Core 2020 that classifies library assets (books, sound recordings, recorded moving images, periodical issues), the roles their borrower and lending library bear, the library loan process itself, and the temporal interval over which a loan runs. Every named class is asserted as a direct or indirect subclass of a BFO-Core class, and only BFO-Core object properties are used to relate them. Definitions are grounded in the U.S. Copyright Act (17 U.S.C. §101, a U.S. federal statute and therefore in the public domain), Black's Law Dictionary (bailment/bailor/bailee), and the UNESCO/CONSER bibliographic standards for books, periodicals, and serials, cited in each class's skos:scopeNote."@en ;
+    dc:license <https://creativecommons.org/licenses/by/4.0/> .
+
+#################################################################
+#    Datatype properties
+#################################################################
+
+###  has loan start date
+:hasLoanStartDate rdf:type owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain :LoanPeriod ;
+    rdfs:range xsd:date ;
+    rdfs:label "has loan start date"@en ;
+    skos:definition "The calendar date on which a library loan process began, i.e. the date on which the library asset was delivered into the borrower's possession."@en ;
+    skos:scopeNote "This datatype property is a pragmatic addition on top of BFO-Core, needed to support calendar-based queries (e.g. by date or day of week); it is not itself a BFO relation. The day of the week on which a loan began (e.g. Tuesday) is not asserted separately, since it is computable from this date by a query engine."@en .
+
+
+###  has due date
+:hasDueDate rdf:type owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain :LoanPeriod ;
+    rdfs:range xsd:date ;
+    rdfs:label "has due date"@en ;
+    skos:definition "The calendar date by which the borrower is obliged to return the library asset to the library."@en .
+
+
+###  has return date
+:hasReturnDate rdf:type owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain :LoanPeriod ;
+    rdfs:range xsd:date ;
+    rdfs:label "has return date"@en ;
+    skos:definition "The calendar date on which the library asset was in fact returned to the library's possession, bringing the library loan process to an end."@en .
+
+#################################################################
+#    Classes
+#################################################################
+
+###  Library Asset
+:LibraryAsset rdf:type owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000030 ; # object
+    rdfs:label "library asset"@en ;
+    skos:definition "An object held by a library and made available by the library for circulation, that a library patron may take into temporary possession pursuant to a library loan process."@en ;
+    skos:example "A library's copy of a novel; a library's DVD of a film; a library's compact disc; a library's current issue of a magazine."@en .
+
+
+###  Copy
+:Copy rdf:type owl:Class ;
+    rdfs:subClassOf :LibraryAsset ;
+    owl:disjointWith :Phonorecord ;
+    rdfs:label "copy"@en ;
+    skos:definition "A material object, other than a phonorecord, in which a work is fixed by any method now known or later developed, and from which the work can be perceived, reproduced, or otherwise communicated, either directly or with the aid of a machine or device."@en ;
+    skos:scopeNote "Definition of 'copies' from 17 U.S.C. §101 (U.S. Copyright Act), a U.S. federal statute and public-domain text under 17 U.S.C. §105."@en .
+
+
+###  Phonorecord
+:Phonorecord rdf:type owl:Class ;
+    rdfs:subClassOf :LibraryAsset ;
+    rdfs:label "phonorecord"@en ;
+    skos:definition "A material object in which sounds, other than sounds accompanying a motion picture or other audiovisual work, are fixed by any method now known or later developed, and from which the sounds can be perceived, reproduced, or otherwise communicated, either directly or with the aid of a machine or device."@en ;
+    skos:scopeNote "Definition of 'phonorecords' from 17 U.S.C. §101 (U.S. Copyright Act), a U.S. federal statute and public-domain text under 17 U.S.C. §105."@en .
+
+
+###  Book
+:Book rdf:type owl:Class ;
+    rdfs:subClassOf :Copy ;
+    rdfs:label "book"@en ;
+    skos:definition "A copy that is a non-periodical printed publication of at least forty-nine pages, exclusive of the cover pages."@en ;
+    skos:scopeNote "Based on the definition of 'book' in UNESCO's Revised Recommendation concerning the International Standardization of Statistics on the Production and Distribution of Books, Newspapers and Periodicals (1985), paragraph 11(a)."@en .
+
+
+###  Periodical Issue
+:PeriodicalIssue rdf:type owl:Class ;
+    rdfs:subClassOf :Copy ;
+    rdfs:label "periodical issue"@en ;
+    skos:altLabel "magazine issue"@en ;
+    skos:definition "A copy that constitutes one issue of a serial appearing, without a predetermined conclusion, under a single title at regular stated intervals of less than a year, each issue of which contains a mix of separate articles by more than one contributor."@en ;
+    skos:scopeNote "Based on the definition of 'periodical' in the Library of Congress CONSER Cataloging Manual, Module 2, and on the definition of 'periodic[al]' publication in UNESCO's Revised Recommendation concerning the International Standardization of Statistics on the Production and Distribution of Books, Newspapers and Periodicals (1985), paragraph 4. A magazine is a periodical of general interest, as distinguished from a newspaper or a scholarly journal."@en .
+
+
+###  Recorded Moving Image
+:RecordedMovingImage rdf:type owl:Class ;
+    rdfs:subClassOf :Copy ;
+    rdfs:label "recorded moving image"@en ;
+    skos:altLabel "movie"@en ,
+                  "film"@en ,
+                  "DVD"@en ;
+    skos:definition "A copy in which a motion picture, i.e. an audiovisual work consisting of a series of related images which, when shown in succession, impart an impression of motion, together with accompanying sounds if any, is fixed."@en ;
+    skos:scopeNote "Definition of 'motion pictures' from 17 U.S.C. §101 (U.S. Copyright Act), a U.S. federal statute and public-domain text under 17 U.S.C. §105, combined with the 17 U.S.C. §101 definition of 'copies' given above for the class Copy."@en .
+
+
+###  Sound Recording Asset
+:SoundRecordingAsset rdf:type owl:Class ;
+    rdfs:subClassOf :Phonorecord ;
+    rdfs:label "sound recording asset"@en ;
+    skos:altLabel "CD"@en ,
+                  "compact disc"@en ;
+    skos:definition "A phonorecord in which a sound recording, i.e. a work that results from the fixation of a series of musical, spoken, or other sounds, other than sounds accompanying a motion picture or other audiovisual work, is fixed."@en ;
+    skos:scopeNote "Definition of 'sound recordings' from 17 U.S.C. §101 (U.S. Copyright Act), a U.S. federal statute and public-domain text under 17 U.S.C. §105, combined with the 17 U.S.C. §101 definition of 'phonorecords' given above for the class Phonorecord."@en .
+
+
+###  Borrower Role
+:BorrowerRole rdf:type owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000023 ; # role
+    rdfs:label "borrower role"@en ;
+    skos:altLabel "bailee role"@en ;
+    skos:definition "A role borne by a library patron to whom a library, in a library loan process, delivers possession of a library asset, and who thereby comes under an obligation to exercise due care over the asset and to return it to the library."@en ;
+    skos:scopeNote "Modelled on the legal role of 'bailee' as defined in Black's Law Dictionary: the party to whom personal property is delivered, and who holds it, under a contract of bailment. A library loan is treated here as a bailment of the library asset from the library to the patron."@en .
+
+
+###  Lending Role
+:LendingRole rdf:type owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000023 ; # role
+    owl:disjointWith :BorrowerRole ;
+    rdfs:label "lending role"@en ;
+    skos:altLabel "bailor role"@en ;
+    skos:definition "A role borne by a library, or by a person acting on the library's behalf, that delivers possession of a library asset to a library patron in a library loan process while retaining the entitlement to have the asset returned."@en ;
+    skos:scopeNote "Modelled on the legal role of 'bailor' as defined in Black's Law Dictionary: the party who bails or delivers goods to another under a contract of bailment."@en .
+
+
+###  Loan Period
+:LoanPeriod rdf:type owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000202 ; # temporal interval
+    rdfs:label "loan period"@en ;
+    skos:definition "The temporal interval, beginning on the date a library asset is delivered to a borrower and bounded by the date it is due or returned, that is occupied by a library loan process."@en .
+
+
+###  Library Loan Process
+:LibraryLoanProcess rdf:type owl:Class ;
+    rdfs:subClassOf bfo:BFO_0000015 , # process
+        [ rdf:type owl:Restriction ;
+          owl:onProperty bfo:BFO_0000057 ; # has participant
+          owl:someValuesFrom :LibraryAsset
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty bfo:BFO_0000057 ; # has participant
+          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                owl:onProperty bfo:BFO_0000196 ; # bearer of
+                                owl:someValuesFrom :BorrowerRole
+                              ]
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty bfo:BFO_0000057 ; # has participant
+          owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                owl:onProperty bfo:BFO_0000196 ; # bearer of
+                                owl:someValuesFrom :LendingRole
+                              ]
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty bfo:BFO_0000055 ; # realizes
+          owl:someValuesFrom :BorrowerRole
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty bfo:BFO_0000055 ; # realizes
+          owl:someValuesFrom :LendingRole
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty bfo:BFO_0000199 ; # occupies temporal region
+          owl:someValuesFrom :LoanPeriod
+        ] ;
+    rdfs:label "library loan process"@en ;
+    skos:definition "A process in which a library, bearing a lending role, delivers possession of a library asset to a library patron, bearing a borrower role, for the patron's temporary use, and which occupies a loan period bounded by the date of delivery and the date the asset is due or returned."@en ;
+    skos:scopeNote "Modelled on the legal concept of 'bailment' as defined in Black's Law Dictionary: a delivery of personal property by one person to another, who holds it for a particular purpose, typically under an express or implied contract, and who is bound to return it (or otherwise dispose of it as directed) once that purpose is fulfilled. A library loan is a bailment in which title to the asset never passes, only possession."@en ;
+    skos:example "A patron checking a novel out at the circulation desk on a Tuesday and returning it two weeks later."@en .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Book
+                :PeriodicalIssue
+                :RecordedMovingImage
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :BorrowerRole
+                :LendingRole
+              )
+] .

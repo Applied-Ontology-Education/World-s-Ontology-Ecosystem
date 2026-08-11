@@ -7,44 +7,45 @@
 @prefix dc11: <http://purl.org/dc/elements/1.1/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@base <http://purl.obolibrary.org/obo/bfo> .
+@base <http://purl.obolibrary.org/obo/bfo#> .
 
 <http://purl.obolibrary.org/obo/bfo.owl> rdf:type owl:Ontology ;
-                                      owl:versionIRI <http://purl.obolibrary.org/obo/bfo/2020/bfo-core.ttl> ;
-                                      dc11:contributor "Alan Ruttenberg" ,
-                                                       "Albert Goldfain" ,
-                                                       "Barry Smith" ,
-                                                       "Bill Duncan" ,
-                                                       "Bjoern Peters" ,
-                                                       "Chris Mungall" ,
-                                                       "David Osumi-Sutherland" ,
-                                                       "Fabian Neuhaus" ,
-                                                       "James A. Overton" ,
-                                                       "Janna Hastings" ,
-                                                       "Jie Zheng" ,
-                                                       "John Beverley" ,
-                                                       "Jonathan Bona" ,
-                                                       "Larry Hunter" ,
-                                                       "Leonard Jacuzzo" ,
-                                                       "Ludger Jansen" ,
-                                                       "Mark Jensen" ,
-                                                       "Mark Ressler" ,
-                                                       "Mathias Brochhausen" ,
-                                                       "Mauricio Almeida" ,
-                                                       "Melanie Courtot" ,
-                                                       "Neil Otte" ,
-                                                       "Pierre Grenon" ,
-                                                       "Randall Dipert" ,
-                                                       "Robert Rovetto" ,
-                                                       "Ron Rudnicki" ,
-                                                       "Stefan Schulz" ,
-                                                       "Thomas Bittner" ,
-                                                       "Werner Ceusters" ,
-                                                       "Yongqun \"Oliver\" He" ;
-                                      dc:description "Basic Formal Ontology implemented in the Web Ontology Language (OWL 2) with direct semantics."@en ;
-                                      dc:license <https://creativecommons.org/licenses/by/4.0/> ;
-                                      dc:title "BFO 2020" ;
-                                      rdfs:comment "The most recent version of this file will always be in the GitHub repository https://github.com/bfo-ontology/bfo-2020" .
+                                          owl:versionIRI <http://purl.obolibrary.org/obo/bfo/2020/bfo-core.ttl> ;
+                                          owl:imports <http://purl.obolibrary.org/obo/bfo/2020/bfo-core.ttl> ;
+                                          dc11:contributor "Alan Ruttenberg" ,
+                                                           "Albert Goldfain" ,
+                                                           "Barry Smith" ,
+                                                           "Bill Duncan" ,
+                                                           "Bjoern Peters" ,
+                                                           "Chris Mungall" ,
+                                                           "David Osumi-Sutherland" ,
+                                                           "Fabian Neuhaus" ,
+                                                           "James A. Overton" ,
+                                                           "Janna Hastings" ,
+                                                           "Jie Zheng" ,
+                                                           "John Beverley" ,
+                                                           "Jonathan Bona" ,
+                                                           "Larry Hunter" ,
+                                                           "Leonard Jacuzzo" ,
+                                                           "Ludger Jansen" ,
+                                                           "Mark Jensen" ,
+                                                           "Mark Ressler" ,
+                                                           "Mathias Brochhausen" ,
+                                                           "Mauricio Almeida" ,
+                                                           "Melanie Courtot" ,
+                                                           "Neil Otte" ,
+                                                           "Pierre Grenon" ,
+                                                           "Randall Dipert" ,
+                                                           "Robert Rovetto" ,
+                                                           "Ron Rudnicki" ,
+                                                           "Stefan Schulz" ,
+                                                           "Thomas Bittner" ,
+                                                           "Werner Ceusters" ,
+                                                           "Yongqun \"Oliver\" He" ;
+                                          dc:description "Basic Formal Ontology implemented in the Web Ontology Language (OWL 2) with direct semantics."@en ;
+                                          dc:license <https://creativecommons.org/licenses/by/4.0/> ;
+                                          dc:title "BFO 2020" ;
+                                          rdfs:comment "The most recent version of this file will always be in the GitHub repository https://github.com/bfo-ontology/bfo-2020" .
 
 #################################################################
 #    Annotation properties
@@ -1226,4 +1227,4 @@ skos:scopeNote rdf:type owl:AnnotationProperty .
 ] .
 
 
-###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
