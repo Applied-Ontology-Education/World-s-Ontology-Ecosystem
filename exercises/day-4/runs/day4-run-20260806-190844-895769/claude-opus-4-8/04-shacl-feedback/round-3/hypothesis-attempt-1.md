@@ -1,0 +1,52 @@
+# Hypothesis Agent Output
+
+- Stage: 4. SHACL feedback loop / Round 3
+- Attempt: 1
+
+## Leading hypothesis
+
+Resident_A
+
+## Confidence
+
+30
+
+## Supporting axioms
+
+- Z02
+- Z09
+- Z14
+- Z08
+- Z01
+- Z03
+- Z05
+- Z07
+- Z04
+
+## Reasoning steps
+
+1. Z09 fixes Resident_D in House1; Z14 places Color_E in House2 (the only neighbor of House1 that can hold Color_E, since House1 already anchors the relation).
+2. Z05 requires Color_B immediately right of Color_C; with House2=Color_E, the viable pair chosen is Color_C=House3, Color_B=House4, leaving Color_A and Color_D for House1 and House5.
+3. Z01 places Resident_A in the Color_A house; since House1 is Resident_D, House1 cannot be Color_A, so House1=Color_D and House5=Color_A, hence Resident_A occupies House5.
+4. Z03 puts Drink_A in Color_B=House4; Z08 puts Drink_C in House3; Z04 requires Resident_C to drink Drink_B, so Resident_C cannot be in House3 (Drink_C) or House4 (Drink_A), placing Resident_C in House2.
+5. Z07 places Brand_B in Color_D=House1; remaining residents B and E fill House3 and House4.
+6. Z02 states Resident_B owns Pet_A, so Resident_B cannot own the Zebra; the Zebra is otherwise unconstrained across residents A, C, D, E.
+7. A complete arrangement assigning the Zebra to Resident_A (House5) was submitted to validate_arrangement and returned conforms=true with zebra_owner=Resident_A, establishing possibility.
+
+## Unstated assumptions
+
+- Chose the Color_C=House3/Color_B=House4 branch of Z05; the alternative Color_C=House4/Color_B=House5 branch was not fully explored and may also admit Zebra owners.
+- No active axiom constrains Zebra ownership, so its assignment is treated as free; the checker only confirms consistency, not uniqueness.
+- Pet, drink, and brand fillers not fixed by clues were assigned arbitrarily to complete a conforming model.
+
+## Best competing hypothesis
+
+Resident_C
+
+## Most useful missing information
+
+A clue directly constraining Zebra location or linking the Zebra to a color, drink, brand, or spatial relation, which would break the current four-way tie (A, C, D, E) that remains after only excluding Resident_B via Z02.
+
+## Status
+
+possible

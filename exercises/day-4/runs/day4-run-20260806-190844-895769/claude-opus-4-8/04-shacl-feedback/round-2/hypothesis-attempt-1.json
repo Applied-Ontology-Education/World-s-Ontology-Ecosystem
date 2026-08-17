@@ -1,0 +1,29 @@
+{
+  "leading_hypothesis": "Resident_A",
+  "confidence": 30,
+  "supporting_axiom_ids": [
+    "Z02",
+    "Z04",
+    "Z08",
+    "Z09",
+    "Z14",
+    "Z01"
+  ],
+  "reasoning_steps": [
+    "Z02 states Resident_B owns Pet_A; since pets are pairwise distinct (S02) and Zebra is a separate pet, Resident_B cannot own Zebra. This is the only firm elimination.",
+    "No active clue (Z01, Z02, Z04, Z08, Z09, Z13, Z14) assigns the Zebra pet to any specific resident, so Zebra ownership is unknown under open-world semantics (S08) among Resident_A, Resident_C, Resident_D, Resident_E.",
+    "Derived constraint: Z09 places Resident_D in House1; Z14 (D next to Color_E house) with S06/S07 forces House2 to be the Color_E house.",
+    "Derived constraint: Z08 fixes Drink_C in House3; Z04 requires Resident_C to drink Drink_B, so Resident_C cannot occupy House3.",
+    "Because the clues leave four residents eligible for Zebra, I selected Resident_A as a representative candidate and constructed a full arrangement to test consistency.",
+    "The validate_arrangement SHACL check returned conforms=true with zebra_owner=Resident_A, establishing that Resident_A owning Zebra is possible (not entailed).",
+    "Ranking is essentially an unresolved four-way tie (A, C, D, E); Resident_A is an arbitrary representative whose possibility has been checker-confirmed."
+  ],
+  "unstated_assumptions": [
+    "Each pet including Zebra is owned by exactly one resident via the house mapping (S03/S04), so eliminating Pet_A ownership eliminates Zebra ownership for that resident.",
+    "The absence of a direct Zebra clue means the four non-B residents are treated as equally eligible rather than any being false.",
+    "The SHACL checker faithfully enforces all active axioms."
+  ],
+  "best_competing_hypothesis": "Resident_C",
+  "most_useful_missing_information": "A clue directly linking the Zebra pet (or Pet ownership) to a specific resident, color, drink, brand, or house position, which would break the current four-way tie.",
+  "status": "possible"
+}

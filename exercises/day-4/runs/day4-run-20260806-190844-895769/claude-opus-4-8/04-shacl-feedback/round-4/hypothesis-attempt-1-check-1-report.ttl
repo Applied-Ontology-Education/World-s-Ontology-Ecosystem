@@ -1,0 +1,65 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix zebra: <https://ncor-network.org/course/day4/zebra#> .
+
+[] a sh:ValidationReport ;
+    sh:conforms false ;
+    sh:result [ a sh:ValidationResult ;
+            sh:focusNode zebra:CurrentProposal ;
+            sh:resultMessage "Z10: The Brand_C smoker must live next to the owner of Pet_C." ;
+            sh:resultSeverity sh:Violation ;
+            sh:sourceConstraint [ sh:message "Z10: The Brand_C smoker must live next to the owner of Pet_C." ;
+                    sh:select """PREFIX zebra: <https://ncor-network.org/course/day4/zebra#>
+SELECT $this WHERE {
+  $this zebra:activeRound ?round . FILTER(?round >= 4)
+  FILTER NOT EXISTS {
+    ?brandHouse zebra:hasSmoke zebra:Brand_C ; zebra:nextTo ?petHouse .
+    ?petHouse zebra:hasPet zebra:Pet_C .
+  }
+}""" ] ;
+            sh:sourceConstraintComponent sh:SPARQLConstraintComponent ;
+            sh:sourceShape zebra:Z10Shape ;
+            sh:value zebra:CurrentProposal ],
+        [ a sh:ValidationResult ;
+            sh:focusNode zebra:CurrentProposal ;
+            sh:resultMessage "Z06: The Brand_A smoker must own Pet_B." ;
+            sh:resultSeverity sh:Violation ;
+            sh:sourceConstraint [ sh:message "Z06: The Brand_A smoker must own Pet_B." ;
+                    sh:select """PREFIX zebra: <https://ncor-network.org/course/day4/zebra#>
+SELECT $this WHERE {
+  $this zebra:activeRound ?round . FILTER(?round >= 4)
+  FILTER NOT EXISTS { ?house zebra:hasSmoke zebra:Brand_A ; zebra:hasPet zebra:Pet_B . }
+}""" ] ;
+            sh:sourceConstraintComponent sh:SPARQLConstraintComponent ;
+            sh:sourceShape zebra:Z06Shape ;
+            sh:value zebra:CurrentProposal ],
+        [ a sh:ValidationResult ;
+            sh:focusNode zebra:CurrentProposal ;
+            sh:resultMessage "Z11: The Brand_B house must be next to the Pet_D house." ;
+            sh:resultSeverity sh:Violation ;
+            sh:sourceConstraint [ sh:message "Z11: The Brand_B house must be next to the Pet_D house." ;
+                    sh:select """PREFIX zebra: <https://ncor-network.org/course/day4/zebra#>
+SELECT $this WHERE {
+  $this zebra:activeRound ?round . FILTER(?round >= 4)
+  FILTER NOT EXISTS {
+    ?brandHouse zebra:hasSmoke zebra:Brand_B ; zebra:nextTo ?petHouse .
+    ?petHouse zebra:hasPet zebra:Pet_D .
+  }
+}""" ] ;
+            sh:sourceConstraintComponent sh:SPARQLConstraintComponent ;
+            sh:sourceShape zebra:Z11Shape ;
+            sh:value zebra:CurrentProposal ],
+        [ a sh:ValidationResult ;
+            sh:focusNode zebra:CurrentProposal ;
+            sh:resultMessage "Z12: The Brand_D smoker must drink Drink_D." ;
+            sh:resultSeverity sh:Violation ;
+            sh:sourceConstraint [ sh:message "Z12: The Brand_D smoker must drink Drink_D." ;
+                    sh:select """PREFIX zebra: <https://ncor-network.org/course/day4/zebra#>
+SELECT $this WHERE {
+  $this zebra:activeRound ?round . FILTER(?round >= 4)
+  FILTER NOT EXISTS { ?house zebra:hasSmoke zebra:Brand_D ; zebra:hasDrink zebra:Drink_D . }
+}""" ] ;
+            sh:sourceConstraintComponent sh:SPARQLConstraintComponent ;
+            sh:sourceShape zebra:Z12Shape ;
+            sh:value zebra:CurrentProposal ] .
+

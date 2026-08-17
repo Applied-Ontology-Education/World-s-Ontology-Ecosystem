@@ -1,0 +1,419 @@
+Model,Experiment,Components,Stage,Ontology supplied,Critic enabled,SHACL enabled,Ontology snapshot,Leading hypothesis,Confidence,Supporting axioms,Reasoning steps,Unstated assumptions,Best alternative,Most useful missing information,Status claimed,Model-checker evidence,Critic findings,Revision count
+claude-opus-4.8,1. LLM only,Hypothesis Agent,Round 4,no,no,no,No ontology snapshot was supplied to the Hypothesis Agent.,Resident_A,5,,"1. No ontology snapshot was supplied to the Hypothesis Agent, so there are no axioms (S## or Z##) available to cite or reason from.
+2. No SHACL validation and no model-checker/validate_arrangement tool is available in this experiment, so no conforming arrangement can be constructed or formally verified.
+3. With zero supplied constraints, I cannot eliminate any of Resident_A through Resident_E, nor derive any spatial, color, drink, pet, or brand relations linking a resident to Zebra ownership.
+4. Because the response schema requires a single leading candidate, I select Resident_A purely as an arbitrary representative of a five-way tie, not because of any evidence favoring it.
+5. All five residents remain equally viable; this is an unresolved and total tie among Resident_A, Resident_B, Resident_C, Resident_D, and Resident_E.
+6. Confidence is set very low to reflect that the choice is arbitrary and evidence-free.
+7. Status is 'plausible' because the selection is an unchecked abductive placeholder; it cannot be 'possible' (no conforming arrangement was produced) and cannot be 'entailed' (no formal reasoner result was supplied).","The candidate set is exactly {Resident_A..Resident_E} as given in the request.; Absence of a supplied ontology means those constraints are unknown, not false.; Standard Zebra Puzzle content must not be used as background knowledge, so no default solution is assumed.; Selecting Resident_A carries no semantic preference over the other residents.",Resident_B,"A complete ontology snapshot containing the axiom identifiers (S##/Z##) that constrain house positions, colors, drinks, pets (including Zebra ownership), brands, and spatial adjacency/left-of relations among the five residents. Also useful: access to a validate_arrangement or formal reasoner tool to test candidate arrangements.",plausible,SHACL validation was disabled for this experiment.,Critic Agent not used in this experiment.,0
+claude-opus-4.8,2. Ontology-grounded hypothesis,Hypothesis Agent + ontology,Round 4,yes,no,no,"# Current Zebra Ontology Snapshot
+
+Active round: 4
+
+Only the masked identifiers and active axioms below may be used.
+
+## Structural axioms
+
+- S01: Houses are exactly House1, House2, House3, House4, House5; they are pairwise distinct.
+- S02: Category membership is exhaustive (`owl:oneOf`):
+  - Resident: Resident_A, Resident_B, Resident_C, Resident_D, Resident_E; members are pairwise distinct.
+  - Color: Color_A, Color_B, Color_C, Color_D, Color_E; members are pairwise distinct.
+  - Beverage: Drink_A, Drink_B, Drink_C, Drink_D, Drink_E; members are pairwise distinct.
+  - Pet: Pet_A, Pet_B, Pet_C, Pet_D, Zebra; members are pairwise distinct.
+  - CigaretteBrand: Brand_A, Brand_B, Brand_C, Brand_D, Brand_E; members are pairwise distinct.
+- S03: Every House has exactly one assignment through: hasResident -> Resident, hasColor -> Color, hasDrink -> Beverage, hasPet -> Pet, hasSmoke -> CigaretteBrand.
+- S04: Every category member belongs to exactly one House through: Resident via livesIn, Color via colorOf, Beverage via drinkOf, Pet via petOf, CigaretteBrand via smokeOf.
+- S05: Houses form the fixed left-to-right order House1 < House2 < House3 < House4 < House5.
+- S06: The only nextTo pairs are: House1--House2, House2--House3, House3--House4, House4--House5.
+- S07: The only immediatelyRightOf relations are: House2 immediately right of House1, House3 immediately right of House2, House4 immediately right of House3, House5 immediately right of House4.
+- S08: Under OWL open-world semantics, an assignment not stated or entailed is unknown, not false.
+
+## Active clue axioms
+
+- Z01 (round 1): Resident_A lives in the Color_A house.
+- Z02 (round 1): Resident_B owns Pet_A.
+- Z04 (round 1): Resident_C drinks Drink_B.
+- Z13 (round 1): Resident_E smokes Brand_E.
+- Z08 (round 2): Drink_C is consumed in the middle house (House3).
+- Z09 (round 2): Resident_D lives in the first house (House1).
+- Z14 (round 2): Resident_D lives next to the Color_E house.
+- Z03 (round 3): Drink_A is consumed in the Color_B house.
+- Z05 (round 3): The Color_B house is immediately to the right of the Color_C house.
+- Z07 (round 3): Brand_B is smoked in the Color_D house.
+- Z06 (round 4): The Brand_A smoker owns Pet_B.
+- Z10 (round 4): The Brand_C smoker lives next to the owner of Pet_C.
+- Z11 (round 4): Brand_B is smoked next to the house where Pet_D is kept.
+- Z12 (round 4): The Brand_D smoker drinks Drink_D.
+
+## Query
+
+Which resident is the best current candidate for owning Zebra?
+",Resident_E,55,S02; S03; S04; S05; S06; S07; Z01; Z02; Z03; Z04; Z05; Z06; Z07; Z08; Z09; Z10; Z11; Z12; Z13; Z14,"1. Z09 fixes Resident_D in House1; Z14 forces the Color_E house to House2 (only neighbor of House1 available).
+2. Z05 requires Color_C immediately left of Color_B. House2 is Color_E, so the (Color_C,Color_B) pair must lie in {(H3,H4),(H4,H5)}.
+3. Z01 places Resident_A in the Color_A house; since Resident_A != Resident_D, House1 is not Color_A, and House1 is not Color_E. With Color_B/Color_C confined to H3-H5, House1 must be Color_D (derived).
+4. Two color layouts remain: Case1 (C=H3,B=H4,A=H5) and Case2 (C=H4,B=H5,A=H3). Case1 branches lead to Z06/Z11 pet conflicts (Brand_A owner and Pet_D/Pet_A clashes), so I pursued Case2.
+5. In Case2: H3=Color_A (Resident_A), Z08 gives Drink_C at H3, Z03 gives Drink_A at H5. Z07 puts Brand_B in House1 (Color_D).
+6. Assigning Drink_E to H1, Drink_B to H2 (so Resident_C=H2 via Z04), Drink_D to H4, then Z12 places Brand_D in H4.
+7. Z13 forces Resident_E to a Brand_E house; H4 is Brand_D, so Resident_E=H5, Resident_B=H4. Z02 gives Resident_B(H4) Pet_A.
+8. Z11: Brand_B(H1) is next to Pet_D, so Pet_D=H2. Z06 forbids Brand_A at H2 (Pet_D not Pet_B), giving Brand_A=H3 (owns Pet_B) and Brand_C=H2.
+9. Z10: Brand_C(H2) next to Pet_C owner, and H3 already owns Pet_B, so Pet_C=H1. Remaining Zebra falls to House5 = Resident_E.
+10. Hand-verified all 15 active clues against this full arrangement with no violations; therefore Resident_E owning Zebra is at least plausible/consistent under the supplied axioms.","The choice of Drink_E in House1 (freeing Drink_B/Drink_D across H2/H4) is one consistent selection, not a derived necessity; other drink placements were not exhaustively refuted.; Case1 was set aside after several branches failed rather than by exhaustive proof of impossibility.; No formal reasoner or SHACL validator confirmed uniqueness; the arrangement is a manually checked witness of consistency only.",Resident_A,"A clue directly linking a pet (especially Zebra or Pet_C) to a specific color, drink, or brand, which would collapse the remaining drink/pet freedom and confirm whether Resident_E is uniquely forced to own Zebra.",plausible,SHACL validation was disabled for this experiment.,Critic Agent not used in this experiment.,0
+claude-opus-4.8,3. Critic added,Hypothesis Agent + ontology + Critic Agent,Round 4,yes,yes,no,"# Current Zebra Ontology Snapshot
+
+Active round: 4
+
+Only the masked identifiers and active axioms below may be used.
+
+## Structural axioms
+
+- S01: Houses are exactly House1, House2, House3, House4, House5; they are pairwise distinct.
+- S02: Category membership is exhaustive (`owl:oneOf`):
+  - Resident: Resident_A, Resident_B, Resident_C, Resident_D, Resident_E; members are pairwise distinct.
+  - Color: Color_A, Color_B, Color_C, Color_D, Color_E; members are pairwise distinct.
+  - Beverage: Drink_A, Drink_B, Drink_C, Drink_D, Drink_E; members are pairwise distinct.
+  - Pet: Pet_A, Pet_B, Pet_C, Pet_D, Zebra; members are pairwise distinct.
+  - CigaretteBrand: Brand_A, Brand_B, Brand_C, Brand_D, Brand_E; members are pairwise distinct.
+- S03: Every House has exactly one assignment through: hasResident -> Resident, hasColor -> Color, hasDrink -> Beverage, hasPet -> Pet, hasSmoke -> CigaretteBrand.
+- S04: Every category member belongs to exactly one House through: Resident via livesIn, Color via colorOf, Beverage via drinkOf, Pet via petOf, CigaretteBrand via smokeOf.
+- S05: Houses form the fixed left-to-right order House1 < House2 < House3 < House4 < House5.
+- S06: The only nextTo pairs are: House1--House2, House2--House3, House3--House4, House4--House5.
+- S07: The only immediatelyRightOf relations are: House2 immediately right of House1, House3 immediately right of House2, House4 immediately right of House3, House5 immediately right of House4.
+- S08: Under OWL open-world semantics, an assignment not stated or entailed is unknown, not false.
+
+## Active clue axioms
+
+- Z01 (round 1): Resident_A lives in the Color_A house.
+- Z02 (round 1): Resident_B owns Pet_A.
+- Z04 (round 1): Resident_C drinks Drink_B.
+- Z13 (round 1): Resident_E smokes Brand_E.
+- Z08 (round 2): Drink_C is consumed in the middle house (House3).
+- Z09 (round 2): Resident_D lives in the first house (House1).
+- Z14 (round 2): Resident_D lives next to the Color_E house.
+- Z03 (round 3): Drink_A is consumed in the Color_B house.
+- Z05 (round 3): The Color_B house is immediately to the right of the Color_C house.
+- Z07 (round 3): Brand_B is smoked in the Color_D house.
+- Z06 (round 4): The Brand_A smoker owns Pet_B.
+- Z10 (round 4): The Brand_C smoker lives next to the owner of Pet_C.
+- Z11 (round 4): Brand_B is smoked next to the house where Pet_D is kept.
+- Z12 (round 4): The Brand_D smoker drinks Drink_D.
+
+## Query
+
+Which resident is the best current candidate for owning Zebra?
+",Resident_E,35,S01; S02; S03; S04; S05; S06; S07; S08; Z01; Z03; Z05; Z09; Z14,"1. Derived (firm): Z09 fixes Resident_D in House1, so Resident_A, Resident_B, Resident_C, Resident_E occupy Houses2-5 (S02/S03/S04).
+2. Derived (firm): Z14 with S06 - House1's only neighbor is House2, so the Color_E house is House2.
+3. Derived (firm): Z05 requires Color_C immediately left of Color_B. Since House2=Color_E, the adjacent (C,B) pair must be either (House3,House4) [Case i] or (House4,House5) [Case ii]; pairs involving House1/House2 are blocked because House2=Color_E.
+4. Derived (firm): Z01 places Resident_A in the Color_A house. House1 holds Resident_D (Z09), so Color_A cannot be House1. In both cases the two undetermined color slots are House1 plus one other; therefore Color_D=House1 and Color_A takes the other remaining slot (House5 in Case i, House3 in Case ii). This spells out the exclusion chain the critic flagged.
+5. Correction to prior attempt: the earlier elimination of Case (i) rested on a self-admittedly non-exhaustive by-hand claim that 'Brand_A can only sit on Pet_D/Pet_A houses.' Without a formal reasoner or checker (SHACL disabled, no validate_arrangement tool), I withdraw that elimination. Case (i) is NOT shown inconsistent and remains open.
+6. Case (ii) analysis (consistency sketch, unverified): Color_A=House3 (Resident_A), Color_D=House1. Z03 gives Drink_A=House5; Z08 gives Drink_C=House3; Z04 places Resident_C (Drink_B); Z07 puts Brand_B=House1; Z11 forces Pet_D=House2; Z12/Z13 push Brand_D/Drink_D and Brand_E (Resident_E) toward the upper houses, plausibly seating Resident_E in House5 which is Color_B and receives Zebra. This reproduces the prior route but is explicitly a hand sketch, not a verified conforming arrangement.
+7. Because Case (i) is no longer eliminated, Zebra ownership is not determined by the supplied axioms: House5 (the likely Zebra house in Case ii) could hold Resident_E, but Case (i) could relocate the Zebra house entirely. Resident_E remains the single best abductive candidate only because Case (ii) is the more fully worked branch and repeatedly seats E in House5; this is a weak preference, not a derivation.
+8. No OWL reasoner or model-checker result was supplied and SHACL is disabled, so no full-clue-satisfaction claim is made; the arrangement is consistent only under an unverified hand-check.","Each pet, drink, color, and brand appears exactly once across the five houses (S03/S04 uniqueness) as used in the derivations.; Unstated assignments are treated as unknown, not false (S08).; The Case (ii) drink/brand/pet placements are assumed self-consistent based on a hand sketch; they have not been tool-verified.; No claim of uniqueness is made: other conforming arrangements (including any surviving Case (i) models) could assign Zebra to a different resident.",Resident_A,"A formal OWL reasoner or re-enabled SHACL/model-checker result that (a) tests whether Case (i) [Color_C=House3, Color_B=House4] is genuinely inconsistent, and (b) confirms whether the Case (ii) arrangement conforms and is unique, thereby settling whether Zebra ownership is entailed.",plausible,SHACL validation was disabled for this experiment.,"Assessment: currently possible
+Revision required: yes
+
+Summary: The hypothesis is honestly calibrated: it withdraws a prior unsupported elimination (Step 5), correctly refuses entailment/uniqueness claims, notes SHACL is disabled, and assigns low confidence (35) with 'plausible' status. Steps 1-4 follow validly from the cited axioms (D=House1; Color_E=House2; the Z05 case split; Color_D=House1 with Color_A in the other slot via Z01). The core weaknesses are: (1) a provenance gap - the derivation actually relies on Z04, Z07, Z08, Z11, Z12, and Z13 (all used in the Case ii sketch), yet none are listed in supporting_axiom_ids; and (2) the leading choice of Resident_E rests on an admittedly unverified hand sketch and on 'more fully worked branch' rather than derivable support, while Case (i) remains open. Revision required: add the missing cited axioms to the support list and either downgrade the ranking rationale to a fully symmetric 'undetermined among House5 candidates' statement or obtain reasoner/SHACL evidence. No ontology conflict; assessment is currently_possible, not entailed, since no formal reasoner result was supplied.
+
+Absent axiom IDs: None
+
+Unsupported inferences:
+- Step 6 (Case ii): the seating of Resident_E in House5 with the Zebra is an explicitly unverified hand sketch, not derived from the cited axioms; it must not be presented as even a soft driver of the ranking without a checker or reasoner. The agent discloses this, but the leading-hypothesis choice still rests on it.
+- Step 7: the preference for Resident_E over Resident_A is justified only by 'Case (ii) is the more fully worked branch,' which is an artifact of analysis effort, not evidential support. This is an unsupported ranking rationale.
+
+Hidden assumptions:
+- The Case (ii) drink/brand/pet chain (Z03->Drink_A=House5, Z11->Pet_D=House2, Z12/Z13 pushing Brand_D/Brand_E upward) is assumed mutually consistent without verification; several intermediate steps (e.g., why Pet_D must be House2, why Brand_E lands in House5) are asserted, not derived from cited axioms.
+- The claim that Case (i) 'could relocate the Zebra house entirely' assumes Case (i) admits models, which is itself unverified after the withdrawn elimination.
+
+Ontology conflicts: None
+
+Highest-value additional axiom or query:
+Re-enable SHACL or supply a formal OWL reasoner result to (a) test whether Case (i) [Color_C=House3, Color_B=House4] admits any conforming model, and (b) check whether any conforming arrangement assigns Zebra to a resident other than Resident_E; this would convert the current weak abductive preference into evidence-backed ranking or reveal a tie.",1
+claude-opus-4.8,4. SHACL feedback loop,Hypothesis Agent + ontology + Critic Agent + SHACL checker,Core,yes,yes,yes,"# Current Zebra Ontology Snapshot
+
+Active round: 0
+
+Only the masked identifiers and active axioms below may be used.
+
+## Structural axioms
+
+- S01: Houses are exactly House1, House2, House3, House4, House5; they are pairwise distinct.
+- S02: Category membership is exhaustive (`owl:oneOf`):
+  - Resident: Resident_A, Resident_B, Resident_C, Resident_D, Resident_E; members are pairwise distinct.
+  - Color: Color_A, Color_B, Color_C, Color_D, Color_E; members are pairwise distinct.
+  - Beverage: Drink_A, Drink_B, Drink_C, Drink_D, Drink_E; members are pairwise distinct.
+  - Pet: Pet_A, Pet_B, Pet_C, Pet_D, Zebra; members are pairwise distinct.
+  - CigaretteBrand: Brand_A, Brand_B, Brand_C, Brand_D, Brand_E; members are pairwise distinct.
+- S03: Every House has exactly one assignment through: hasResident -> Resident, hasColor -> Color, hasDrink -> Beverage, hasPet -> Pet, hasSmoke -> CigaretteBrand.
+- S04: Every category member belongs to exactly one House through: Resident via livesIn, Color via colorOf, Beverage via drinkOf, Pet via petOf, CigaretteBrand via smokeOf.
+- S05: Houses form the fixed left-to-right order House1 < House2 < House3 < House4 < House5.
+- S06: The only nextTo pairs are: House1--House2, House2--House3, House3--House4, House4--House5.
+- S07: The only immediatelyRightOf relations are: House2 immediately right of House1, House3 immediately right of House2, House4 immediately right of House3, House5 immediately right of House4.
+- S08: Under OWL open-world semantics, an assignment not stated or entailed is unknown, not false.
+
+## Active clue axioms
+
+- No clue axioms are active.
+
+## Query
+
+Which resident is the best current candidate for owning Zebra?
+",Resident_A,20,S01; S02; S03; S04; S08,"1. Step 1 (derived): Reviewed the ontology snapshot. Only structural axioms S01-S08 are active; the snapshot explicitly states 'No clue axioms are active.'
+2. Step 2 (derived): S02 places Zebra as one of the five pairwise-distinct Pet members, and S03/S04 require each pet (including Zebra) to be assigned to exactly one house and thereby to exactly one resident. So exactly one resident owns the Zebra, but nothing constrains which one.
+3. Step 3 (derived): With no clue axioms, there is no relational, spatial (S05-S07), color, drink, or brand constraint that ties the Zebra to any particular resident. Under open-world semantics (S08), each resident-Zebra pairing is unknown, not false.
+4. Step 4 (assumption/tie): Therefore all five residents are symmetric candidates for owning the Zebra. This is an unresolved five-way tie, not a preference.
+5. Step 5 (checked): Proposed a complete arrangement assigning Zebra to Resident_A (House1). validate_arrangement returned conforms=true with zero violations, establishing possibility only (not uniqueness or entailment).
+6. Step 6 (selection): The response schema requires one leading candidate, so Resident_A is named as an arbitrary representative of the tie; Resident_B is an equally valid competing hypothesis.","The naming of Resident_A as leading is an arbitrary schema-required tie-break, not evidence of preference.; The checker output reflects the current active round (round 0) with no clue axioms; adding clues later could break the symmetry.; Missing/unstated assignments are treated as unknown under open-world semantics (S08), not as false.",Resident_B,"Any active clue axiom that links the Zebra (or a house position, color, drink, or brand) to a specific resident. With zero clues, the identity of the Zebra owner is completely undetermined; even one spatial or attribute clue would begin to break the five-way symmetry.",possible,"- Hypothesis attempt 1, check 1: proposed_zebra_owner=Resident_A; conforms=true; violated axioms=none","Assessment: currently possible
+Revision required: no
+
+Summary: Provenance is clean: all cited axioms (S01, S02, S03, S04, S08) are present in the snapshot, and no absent or invented axioms are referenced. Reasoning is sound and each step follows from the cited axioms: Step 2 correctly derives from S02/S03/S04 that exactly one resident owns the Zebra; Step 3 correctly invokes S08 (open-world) to hold each pairing unknown rather than false given the absence of active clue axioms; Step 4 correctly characterizes the situation as a fully symmetric five-way tie. SHACL evidence is present (attempt 1, check 1: proposed_zebra_owner=Resident_A, conforms=true, zero violations), and it matches the leading resident Resident_A, so conforming evidence supports the leading candidate. The hypothesis correctly limits the claim to possibility only and does not assert uniqueness or entailment, which is appropriate since no formal OWL reasoner result was supplied. Status 'possible' and confidence 20 are well calibrated to an undisclosed-clue five-way tie. The tie is fully disclosed and Resident_A is transparently named as an arbitrary schema-required representative with Resident_B as an equally valid competitor; per instructions, a disclosed tie with one required leading resident is not itself grounds for revision. Assumptions are properly disclosed and accurate. No revision required.
+
+Absent axiom IDs: None
+
+Unsupported inferences: None
+
+Hidden assumptions: None
+
+Ontology conflicts: None
+
+Highest-value additional axiom or query:
+Activate at least one clue axiom linking the Zebra (or a house position/color/drink/brand chain resolving to it) to a specific resident; with zero clues the owner is fully undetermined and any single spatial or attribute clue would begin breaking the five-way symmetry.",0
+claude-opus-4.8,4. SHACL feedback loop,Hypothesis Agent + ontology + Critic Agent + SHACL checker,Round 1,yes,yes,yes,"# Current Zebra Ontology Snapshot
+
+Active round: 1
+
+Only the masked identifiers and active axioms below may be used.
+
+## Structural axioms
+
+- S01: Houses are exactly House1, House2, House3, House4, House5; they are pairwise distinct.
+- S02: Category membership is exhaustive (`owl:oneOf`):
+  - Resident: Resident_A, Resident_B, Resident_C, Resident_D, Resident_E; members are pairwise distinct.
+  - Color: Color_A, Color_B, Color_C, Color_D, Color_E; members are pairwise distinct.
+  - Beverage: Drink_A, Drink_B, Drink_C, Drink_D, Drink_E; members are pairwise distinct.
+  - Pet: Pet_A, Pet_B, Pet_C, Pet_D, Zebra; members are pairwise distinct.
+  - CigaretteBrand: Brand_A, Brand_B, Brand_C, Brand_D, Brand_E; members are pairwise distinct.
+- S03: Every House has exactly one assignment through: hasResident -> Resident, hasColor -> Color, hasDrink -> Beverage, hasPet -> Pet, hasSmoke -> CigaretteBrand.
+- S04: Every category member belongs to exactly one House through: Resident via livesIn, Color via colorOf, Beverage via drinkOf, Pet via petOf, CigaretteBrand via smokeOf.
+- S05: Houses form the fixed left-to-right order House1 < House2 < House3 < House4 < House5.
+- S06: The only nextTo pairs are: House1--House2, House2--House3, House3--House4, House4--House5.
+- S07: The only immediatelyRightOf relations are: House2 immediately right of House1, House3 immediately right of House2, House4 immediately right of House3, House5 immediately right of House4.
+- S08: Under OWL open-world semantics, an assignment not stated or entailed is unknown, not false.
+
+## Active clue axioms
+
+- Z01 (round 1): Resident_A lives in the Color_A house.
+- Z02 (round 1): Resident_B owns Pet_A.
+- Z04 (round 1): Resident_C drinks Drink_B.
+- Z13 (round 1): Resident_E smokes Brand_E.
+
+## Query
+
+Which resident is the best current candidate for owning Zebra?
+",Resident_A,25,Z02; S02; S03; S04,"1. S02 establishes the Pet category as exactly {Pet_A, Pet_B, Pet_C, Pet_D, Zebra}, pairwise distinct, so exactly one resident owns the Zebra.
+2. Z02 asserts Resident_B owns Pet_A. By S03/S04 each house/resident has exactly one pet, so Resident_B cannot also own the Zebra; Resident_B is eliminated as a Zebra candidate.
+3. Clues Z01 (Resident_A -> Color_A), Z04 (Resident_C -> Drink_B), and Z13 (Resident_E -> Brand_E) constrain color, drink, and brand attributes respectively but impose no constraint on Zebra ownership and do not eliminate any resident from owning the Zebra.
+4. Therefore Residents A, C, D, and E all remain viable Zebra owners under the active axioms; no supplied axiom distinguishes among them, leaving a four-way unresolved tie.
+5. To confirm at least possibility, I proposed a complete arrangement assigning the Zebra to Resident_A (as an arbitrary tie representative); validate_arrangement returned conforms=true with no violations, establishing possibility (not entailment or uniqueness).","The four active clues (Z01, Z02, Z04, Z13) are the complete set of clue axioms for round 1; no additional hidden constraints apply.; Resident_A is chosen only as an arbitrary representative of the A/C/D/E tie because the schema requires a single leading candidate.; Open-world semantics (S08): unassigned facts are unknown, so remaining candidates are treated as possible, not proven.",Resident_C,"Any clue linking a pet (especially the Zebra) to a color, drink, brand, or spatial position, or a clue tying an already-constrained resident (A via Color_A, C via Drink_B, E via Brand_E) to a specific non-Zebra pet, which would break the current four-way tie.",possible,"- Hypothesis attempt 1, check 1: proposed_zebra_owner=Resident_A; conforms=true; violated axioms=none","Assessment: currently possible
+Revision required: no
+
+Summary: All cited axioms (Z02, S02, S03, S04) plus the referenced clues (Z01, Z04, Z13) are present in the round-1 snapshot. Every reasoning step follows: S02+S03+S04 yield exactly one Zebra owner; Z02 with pet-uniqueness correctly eliminates Resident_B; Z01/Z04/Z13 impose no pet constraint and correctly eliminate no one, leaving a fully disclosed four-way A/C/D/E tie. The SHACL evidence (conforms=true for proposed_zebra_owner=Resident_A) supports the leading resident and establishes possibility only, matching the ""possible"" status; entailment and uniqueness are correctly disclaimed with no formal reasoner result claimed. Confidence of 25% is well-calibrated to a symmetric four-way tie. Resident_A is legitimately named as an arbitrary tie representative, and choosing one required leading resident from a disclosed tie is not grounds for revision. No absent citation, unsupported inference, hidden assumption, ontology conflict, or unsupported ranking found.
+
+Absent axiom IDs: None
+
+Unsupported inferences: None
+
+Hidden assumptions: None
+
+Ontology conflicts: None
+
+Highest-value additional axiom or query:
+A clue tying the Zebra (or a specific non-Zebra pet) to a resident, color, drink, brand, or house position — e.g., linking Resident_A/C/D/E to a specific non-Zebra pet — would break the disclosed four-way A/C/D/E tie and move the analysis beyond mere possibility.",0
+claude-opus-4.8,4. SHACL feedback loop,Hypothesis Agent + ontology + Critic Agent + SHACL checker,Round 2,yes,yes,yes,"# Current Zebra Ontology Snapshot
+
+Active round: 2
+
+Only the masked identifiers and active axioms below may be used.
+
+## Structural axioms
+
+- S01: Houses are exactly House1, House2, House3, House4, House5; they are pairwise distinct.
+- S02: Category membership is exhaustive (`owl:oneOf`):
+  - Resident: Resident_A, Resident_B, Resident_C, Resident_D, Resident_E; members are pairwise distinct.
+  - Color: Color_A, Color_B, Color_C, Color_D, Color_E; members are pairwise distinct.
+  - Beverage: Drink_A, Drink_B, Drink_C, Drink_D, Drink_E; members are pairwise distinct.
+  - Pet: Pet_A, Pet_B, Pet_C, Pet_D, Zebra; members are pairwise distinct.
+  - CigaretteBrand: Brand_A, Brand_B, Brand_C, Brand_D, Brand_E; members are pairwise distinct.
+- S03: Every House has exactly one assignment through: hasResident -> Resident, hasColor -> Color, hasDrink -> Beverage, hasPet -> Pet, hasSmoke -> CigaretteBrand.
+- S04: Every category member belongs to exactly one House through: Resident via livesIn, Color via colorOf, Beverage via drinkOf, Pet via petOf, CigaretteBrand via smokeOf.
+- S05: Houses form the fixed left-to-right order House1 < House2 < House3 < House4 < House5.
+- S06: The only nextTo pairs are: House1--House2, House2--House3, House3--House4, House4--House5.
+- S07: The only immediatelyRightOf relations are: House2 immediately right of House1, House3 immediately right of House2, House4 immediately right of House3, House5 immediately right of House4.
+- S08: Under OWL open-world semantics, an assignment not stated or entailed is unknown, not false.
+
+## Active clue axioms
+
+- Z01 (round 1): Resident_A lives in the Color_A house.
+- Z02 (round 1): Resident_B owns Pet_A.
+- Z04 (round 1): Resident_C drinks Drink_B.
+- Z13 (round 1): Resident_E smokes Brand_E.
+- Z08 (round 2): Drink_C is consumed in the middle house (House3).
+- Z09 (round 2): Resident_D lives in the first house (House1).
+- Z14 (round 2): Resident_D lives next to the Color_E house.
+
+## Query
+
+Which resident is the best current candidate for owning Zebra?
+",Resident_A,30,Z02; Z04; Z08; Z09; Z14; Z01,"1. Z02 states Resident_B owns Pet_A; since pets are pairwise distinct (S02) and Zebra is a separate pet, Resident_B cannot own Zebra. This is the only firm elimination.
+2. No active clue (Z01, Z02, Z04, Z08, Z09, Z13, Z14) assigns the Zebra pet to any specific resident, so Zebra ownership is unknown under open-world semantics (S08) among Resident_A, Resident_C, Resident_D, Resident_E.
+3. Derived constraint: Z09 places Resident_D in House1; Z14 (D next to Color_E house) with S06/S07 forces House2 to be the Color_E house.
+4. Derived constraint: Z08 fixes Drink_C in House3; Z04 requires Resident_C to drink Drink_B, so Resident_C cannot occupy House3.
+5. Because the clues leave four residents eligible for Zebra, I selected Resident_A as a representative candidate and constructed a full arrangement to test consistency.
+6. The validate_arrangement SHACL check returned conforms=true with zebra_owner=Resident_A, establishing that Resident_A owning Zebra is possible (not entailed).
+7. Ranking is essentially an unresolved four-way tie (A, C, D, E); Resident_A is an arbitrary representative whose possibility has been checker-confirmed.","Each pet including Zebra is owned by exactly one resident via the house mapping (S03/S04), so eliminating Pet_A ownership eliminates Zebra ownership for that resident.; The absence of a direct Zebra clue means the four non-B residents are treated as equally eligible rather than any being false.; The SHACL checker faithfully enforces all active axioms.",Resident_C,"A clue directly linking the Zebra pet (or Pet ownership) to a specific resident, color, drink, brand, or house position, which would break the current four-way tie.",possible,"- Hypothesis attempt 1, check 1: proposed_zebra_owner=Resident_A; conforms=false; violated axioms=Z04
+- Hypothesis attempt 1, check 2: proposed_zebra_owner=Resident_A; conforms=true; violated axioms=none","Assessment: currently possible
+Revision required: no
+
+Summary: All cited axioms (Z01, Z02, Z04, Z08, Z09, Z14) are present in the snapshot. The elimination of Resident_B via Z02/S02/S03-S04 is valid, and the open-world 'unknown' framing (S08) is correct. The leading resident Resident_A is supported by a conforming SHACL check (attempt 1, check 2: conforms=true, zebra_owner=Resident_A); the earlier failed check (violated Z04) does not erase this. Status 'possible' and confidence 30 are well calibrated, and the four-way tie with an arbitrary representative is fully disclosed, so no revision is required on that basis. The derived constraints in steps 3-4 are correctly reasoned but inert for the Zebra query and should not be portrayed as narrowing the candidate set. The hypothesis appropriately avoids any entailment claim, consistent with the absence of a formal OWL reasoner result.
+
+Absent axiom IDs: None
+
+Unsupported inferences:
+- Steps 3 and 4 derive positional/color constraints (House2=Color_E; Resident_C not in House3) that are correctly derived but are inert for the Zebra query; they do not narrow the four-way tie and should not be presented as supporting the Resident_A selection.
+
+Hidden assumptions:
+- Assumption that the SHACL checker faithfully enforces all active axioms is disclosed but unverifiable from the snapshot; the leading resident's support rests entirely on trusting this checker.
+- Treating the four non-B residents as equally eligible assumes no further entailments exist that a formal reasoner might surface; only SHACL possibility, not reasoner-checked non-elimination, was performed.
+
+Ontology conflicts: None
+
+Highest-value additional axiom or query:
+A clue (or formal reasoner run) that links Zebra ownership to a specific house position, color, drink, or brand—e.g., tying Pet placement to an already-constrained house—to break the disclosed four-way tie among A, C, D, E.",0
+claude-opus-4.8,4. SHACL feedback loop,Hypothesis Agent + ontology + Critic Agent + SHACL checker,Round 3,yes,yes,yes,"# Current Zebra Ontology Snapshot
+
+Active round: 3
+
+Only the masked identifiers and active axioms below may be used.
+
+## Structural axioms
+
+- S01: Houses are exactly House1, House2, House3, House4, House5; they are pairwise distinct.
+- S02: Category membership is exhaustive (`owl:oneOf`):
+  - Resident: Resident_A, Resident_B, Resident_C, Resident_D, Resident_E; members are pairwise distinct.
+  - Color: Color_A, Color_B, Color_C, Color_D, Color_E; members are pairwise distinct.
+  - Beverage: Drink_A, Drink_B, Drink_C, Drink_D, Drink_E; members are pairwise distinct.
+  - Pet: Pet_A, Pet_B, Pet_C, Pet_D, Zebra; members are pairwise distinct.
+  - CigaretteBrand: Brand_A, Brand_B, Brand_C, Brand_D, Brand_E; members are pairwise distinct.
+- S03: Every House has exactly one assignment through: hasResident -> Resident, hasColor -> Color, hasDrink -> Beverage, hasPet -> Pet, hasSmoke -> CigaretteBrand.
+- S04: Every category member belongs to exactly one House through: Resident via livesIn, Color via colorOf, Beverage via drinkOf, Pet via petOf, CigaretteBrand via smokeOf.
+- S05: Houses form the fixed left-to-right order House1 < House2 < House3 < House4 < House5.
+- S06: The only nextTo pairs are: House1--House2, House2--House3, House3--House4, House4--House5.
+- S07: The only immediatelyRightOf relations are: House2 immediately right of House1, House3 immediately right of House2, House4 immediately right of House3, House5 immediately right of House4.
+- S08: Under OWL open-world semantics, an assignment not stated or entailed is unknown, not false.
+
+## Active clue axioms
+
+- Z01 (round 1): Resident_A lives in the Color_A house.
+- Z02 (round 1): Resident_B owns Pet_A.
+- Z04 (round 1): Resident_C drinks Drink_B.
+- Z13 (round 1): Resident_E smokes Brand_E.
+- Z08 (round 2): Drink_C is consumed in the middle house (House3).
+- Z09 (round 2): Resident_D lives in the first house (House1).
+- Z14 (round 2): Resident_D lives next to the Color_E house.
+- Z03 (round 3): Drink_A is consumed in the Color_B house.
+- Z05 (round 3): The Color_B house is immediately to the right of the Color_C house.
+- Z07 (round 3): Brand_B is smoked in the Color_D house.
+
+## Query
+
+Which resident is the best current candidate for owning Zebra?
+",Resident_A,25,Z02; Z09; Z14; Z08; Z01; Z03; Z05; Z07; Z04,"1. Derived constraint (Z02): Resident_B owns Pet_A, and by S02/S04 pets are pairwise distinct and each belongs to exactly one house, so Resident_B cannot own the Zebra. This is the only elimination the active axioms force.
+2. Derived constraint (Z09): Resident_D is fixed in House1. Derived constraint (Z14): the Color_E house is a neighbor of House1, and by S06 the only neighbor of House1 is House2, so Color_E = House2.
+3. Branch note on Z05: Z05 requires Color_B immediately right of Color_C (S07). With House2 = Color_E, two branches remain: (a) Color_C = House3, Color_B = House4; (b) Color_C = House4, Color_B = House5. The previous submission committed to branch (a) without exploring (b). I now treat the specific house/color layout as branch-local and NOT entailed, per critic feedback.
+4. No active axiom (Z-series) links the Zebra to any color, drink, brand, resident, or spatial relation. Therefore, after excluding Resident_B via Z02, no further Zebra elimination is derivable; Zebra ownership among A, C, D, E is unconstrained (S08: unstated assignments are unknown, not false).
+5. Comparative test (this attempt): I ran validate_arrangement with the Zebra assigned in turn to Resident_D, Resident_C, and Resident_E. All three returned conforms=true (zebra_owner = D, C, E respectively). Combined with the preserved conforming model for Resident_A, this demonstrates that each of A, C, D, E admits at least one conforming arrangement as Zebra owner.
+6. Conclusion: A, C, D, E form a genuine, checker-substantiated four-way tie for possibility. No axiom ranks them. Resident_A is reported as the leading hypothesis only as an arbitrary representative of the tie (schema requires a single leader); it is NOT better supported than C, D, or E.
+7. Status is 'possible' (not 'plausible' or 'entailed'): each candidate has a conforming model establishing consistency, but no supplied OWL reasoner result establishes uniqueness or entailment for any of them.","The four checker calls (one preserved for A, three new for C/D/E) used arbitrary fillers for pet, drink, brand, and unconstrained color slots; each pass confirms only that at least one consistent completion exists for that Zebra owner, not that all completions are consistent.; Both Z05 branches were exercised implicitly through conforming models but no exhaustive branch enumeration was performed; possibility for A/C/D/E is confirmed, but I do not claim to have mapped every conforming model.; Resident_A as 'leading' is an arbitrary tie-representative forced by the single-leader schema, not a ranking claim over C/D/E.",Resident_C,"A clue directly constraining Zebra ownership (e.g., linking the Zebra to a specific color, drink, brand, resident, or spatial relation). Such an axiom would break the checker-confirmed four-way tie among A, C, D, and E that remains after only Resident_B is excluded via Z02.",possible,"- Hypothesis attempt 1, check 1: proposed_zebra_owner=Resident_A; conforms=true; violated axioms=none
+- Hypothesis attempt 2, check 1: proposed_zebra_owner=Resident_D; conforms=true; violated axioms=none
+- Hypothesis attempt 2, check 2: proposed_zebra_owner=Resident_C; conforms=true; violated axioms=none
+- Hypothesis attempt 2, check 3: proposed_zebra_owner=Resident_E; conforms=true; violated axioms=none","Assessment: currently possible
+Revision required: no
+
+Summary: The hypothesis passes audit. Provenance: all cited axioms (Z01–Z14 subset, S02/S04/S06/S07/S08) are present in the snapshot; no absent citations. Reasoning is sound: Step 1 correctly eliminates only Resident_B via Z02 + S02/S04; Step 2 correctly derives Color_E = House2 from Z09 + Z14 + S06; Step 3 properly enumerates both Z05/S07 color-layout branches and treats them as branch-local rather than entailed; Step 4 correctly invokes S08 to leave A/C/D/E unknown-not-false since no Z-axiom links the Zebra to any attribute. SHACL evidence is present and matches: Resident_A (the leading resident) conforms (attempt 1, check 1), and C, D, E each also conform, substantiating the disclosed four-way tie. Confidence (25) and status ('possible') are well calibrated — no entailment is claimed and no OWL reasoner result is cited, consistent with the requirement that conformance establishes possibility, not uniqueness. The single-leader schema forces Resident_A as an arbitrary tie-representative, which is fully disclosed and therefore not grounds for revision. Assumptions (arbitrary fillers, non-exhaustive model enumeration, arbitrary leader) are honest and appropriate. No hidden assumptions, ontology conflicts, unsupported inferences, or unsupported rankings found.
+
+Absent axiom IDs: None
+
+Unsupported inferences: None
+
+Hidden assumptions: None
+
+Ontology conflicts: None
+
+Highest-value additional axiom or query:
+A clue directly constraining Zebra ownership (linking Zebra to a specific color, drink, brand, resident, or spatial relation) to break the disclosed four-way tie among A, C, D, E after Resident_B's elimination via Z02.",1
+claude-opus-4.8,4. SHACL feedback loop,Hypothesis Agent + ontology + Critic Agent + SHACL checker,Round 4,yes,yes,yes,"# Current Zebra Ontology Snapshot
+
+Active round: 4
+
+Only the masked identifiers and active axioms below may be used.
+
+## Structural axioms
+
+- S01: Houses are exactly House1, House2, House3, House4, House5; they are pairwise distinct.
+- S02: Category membership is exhaustive (`owl:oneOf`):
+  - Resident: Resident_A, Resident_B, Resident_C, Resident_D, Resident_E; members are pairwise distinct.
+  - Color: Color_A, Color_B, Color_C, Color_D, Color_E; members are pairwise distinct.
+  - Beverage: Drink_A, Drink_B, Drink_C, Drink_D, Drink_E; members are pairwise distinct.
+  - Pet: Pet_A, Pet_B, Pet_C, Pet_D, Zebra; members are pairwise distinct.
+  - CigaretteBrand: Brand_A, Brand_B, Brand_C, Brand_D, Brand_E; members are pairwise distinct.
+- S03: Every House has exactly one assignment through: hasResident -> Resident, hasColor -> Color, hasDrink -> Beverage, hasPet -> Pet, hasSmoke -> CigaretteBrand.
+- S04: Every category member belongs to exactly one House through: Resident via livesIn, Color via colorOf, Beverage via drinkOf, Pet via petOf, CigaretteBrand via smokeOf.
+- S05: Houses form the fixed left-to-right order House1 < House2 < House3 < House4 < House5.
+- S06: The only nextTo pairs are: House1--House2, House2--House3, House3--House4, House4--House5.
+- S07: The only immediatelyRightOf relations are: House2 immediately right of House1, House3 immediately right of House2, House4 immediately right of House3, House5 immediately right of House4.
+- S08: Under OWL open-world semantics, an assignment not stated or entailed is unknown, not false.
+
+## Active clue axioms
+
+- Z01 (round 1): Resident_A lives in the Color_A house.
+- Z02 (round 1): Resident_B owns Pet_A.
+- Z04 (round 1): Resident_C drinks Drink_B.
+- Z13 (round 1): Resident_E smokes Brand_E.
+- Z08 (round 2): Drink_C is consumed in the middle house (House3).
+- Z09 (round 2): Resident_D lives in the first house (House1).
+- Z14 (round 2): Resident_D lives next to the Color_E house.
+- Z03 (round 3): Drink_A is consumed in the Color_B house.
+- Z05 (round 3): The Color_B house is immediately to the right of the Color_C house.
+- Z07 (round 3): Brand_B is smoked in the Color_D house.
+- Z06 (round 4): The Brand_A smoker owns Pet_B.
+- Z10 (round 4): The Brand_C smoker lives next to the owner of Pet_C.
+- Z11 (round 4): Brand_B is smoked next to the house where Pet_D is kept.
+- Z12 (round 4): The Brand_D smoker drinks Drink_D.
+
+## Query
+
+Which resident is the best current candidate for owning Zebra?
+",Resident_E,55,S02; S03; S04; S06; S07; Z01; Z02; Z03; Z04; Z05; Z06; Z07; Z08; Z09; Z10; Z11; Z12; Z13; Z14,"1. DERIVED: Z09 places Resident_D in House1. Z14 says Resident_D lives next to the Color_E house; by the nextTo semantics of S06, the only neighbor of House1 is House2, so Color_E = House2 is forced.
+2. CHOICE (not forced): Z05 with S07 requires Color_B immediately right of Color_C. With Color_E fixed at House2, the (Color_C, Color_B) pair can be either (House3, House4) or (House4, House5). I pursued the (House4, House5) branch; the (House3, House4) branch was NOT exhaustively refuted, so the subsequent color layout is a selected model, not a deduction.
+3. DERIVED within the chosen branch: remaining colors Color_A and Color_D occupy House1 and House3. Z01 puts Resident_A in the Color_A house; Resident_D already occupies House1, so within this branch Color_A = House3 and Color_D = House1.
+4. DERIVED within branch: Z07 places Brand_B in Color_D = House1. Z11 with S06 requires Brand_B next to Pet_D; House1's only neighbor is House2, so Pet_D = House2.
+5. DERIVED within branch: Z03 puts Drink_A in Color_B = House5; Z08 fixes Drink_C in House3.
+6. CHOICE (not forced): Z04 makes Resident_C drink Drink_B. In the preserved conforming model Resident_C sits in House2 (Drink_B = House2); the cited axioms leave other Drink_B placements open, so this is a resolving choice, not a forced step.
+7. CHOICE (not forced): Z12 forces the Brand_D smoker to drink Drink_D. In the preserved model Brand_D and Drink_D are placed in House4; this is one consistent assignment among those the axioms permit, not a uniquely entailed one.
+8. CHOICE (not forced): Z13 keeps Resident_E on Brand_E. The preserved model assigns Resident_E to House5 (Brand_E) and Resident_B to House4, and Z02 then gives Pet_A to House4. These resident placements were selected because they resolve cleanly, not because a cited axiom forces them.
+9. DERIVED within branch: Z06 requires the Brand_A smoker to own Pet_B; with Pet_D at House2, the preserved model places Brand_A and Pet_B at House3 and Brand_C at House2.
+10. DERIVED within branch: Z10 with S06 requires Brand_C (House2) adjacent to Pet_C's owner; the preserved model puts Pet_C in House1, leaving Zebra for House5, i.e. Resident_E.
+11. VERIFICATION: The validate_arrangement checker (attempt 1, call 3) confirmed the full arrangement conforms with Zebra owned by Resident_E. This establishes POSSIBILITY only. Because Step 2 and Steps 6-8 involve unforced choices and the alternate Z05 branch was not refuted, uniqueness/entailment is NOT established.","Steps 1 and 4 and 10 rely on the nextTo adjacency semantics of S06 (House1 has only House2 as a neighbor), now explicitly cited.; Step 2 relies on the immediatelyRightOf semantics of S07, now explicitly cited; only one of its two admissible branches was explored.; The preserved checker confirms consistency of a single model, not uniqueness; other conforming models (including under the unexplored Z05 branch) could assign the Zebra to a different resident.; The ranking of Resident_E over Resident_B is model-relative: both appear in the conforming model with Resident_E holding the Zebra, but no cited axiom forbids a conforming model in which the House4/House5 resident assignment is swapped.",Resident_B,"A formal OWL/uniqueness reasoner result, or exhaustive SHACL testing of the unexplored Z05 branch (Color_C=House3, Color_B=House4) and of swapping House4/House5 residents, to determine whether the House5 Zebra assignment is uniquely entailed rather than merely one conforming model.",possible,"- Hypothesis attempt 1, check 1: proposed_zebra_owner=Resident_E; conforms=false; violated axioms=Z12, Z10, Z06, Z11
+- Hypothesis attempt 1, check 2: proposed_zebra_owner=Resident_E; conforms=false; violated axioms=Z12, Z10, Z06, Z07, Z04, Z11, Z01
+- Hypothesis attempt 1, check 3: proposed_zebra_owner=Resident_E; conforms=true; violated axioms=none","Assessment: currently possible
+Revision required: no
+
+Summary: Provenance is complete: every cited axiom (S02–S04, S06, S07, Z01–Z14) appears in the round-4 snapshot. The forced steps (Step 1: Color_E=House2 via Z09+Z14+S06; branch-internal derivations in Steps 3–5, 9–10) follow from cited axioms, and every non-forced step (Steps 2, 6–8) is explicitly and correctly labeled as an unrefuted choice. SHACL evidence supports the leading resident: attempt 1 check 3 conforms=true with proposed_zebra_owner=Resident_E, establishing possibility for one concrete arrangement; the earlier failed checks 1–2 do not erase this conforming result. The agent correctly claims only POSSIBILITY, not uniqueness or entailment, consistent with the absence of a formal OWL reasoner result. Confidence 55 and status ""possible"" are well-calibrated given the unexplored Z05 branch and disclosed unforced resident placements. The competing hypothesis (Resident_B) and the missing-information request are appropriate. No absent citations, unsupported inferences, hidden assumptions, ontology conflicts, or unsupported rankings found; the single required leading resident amid a disclosed model-relative tie is not grounds for revision. No revision required.
+
+Absent axiom IDs: None
+
+Unsupported inferences: None
+
+Hidden assumptions: None
+
+Ontology conflicts: None
+
+Highest-value additional axiom or query:
+Run exhaustive SHACL testing of the unexplored Z05 branch (Color_C=House3, Color_B=House4) and of a House4/House5 resident swap, or obtain a formal OWL uniqueness reasoner result, to determine whether the House5 Zebra assignment (Resident_E) is uniquely entailed rather than merely one conforming model.",1
