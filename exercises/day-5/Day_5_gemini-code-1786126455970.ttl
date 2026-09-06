@@ -1,0 +1,81 @@
+@prefix : <http://example.org/maintenance#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://example.org/maintenance> .
+
+<http://example.org/maintenance> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+:identifies_need_for rdf:type owl:ObjectProperty .
+:performs rdf:type owl:ObjectProperty .
+:produces rdf:type owl:ObjectProperty .
+:records rdf:type owl:ObjectProperty .
+:requests rdf:type owl:ObjectProperty .
+:targets_equipment rdf:type owl:ObjectProperty .
+
+#################################################################
+#    Data Properties
+#################################################################
+
+:has_interval_days rdf:type owl:DatatypeProperty ;
+                   rdfs:range xsd:integer .
+:has_unit rdf:type owl:DatatypeProperty ;
+          rdfs:range xsd:string .
+:has_value rdf:type owl:DatatypeProperty ;
+           rdfs:range xsd:decimal .
+
+#################################################################
+#    Classes
+#################################################################
+
+:InspectionEvent rdf:type owl:Class .
+:MaintenanceAction rdf:type owl:Class .
+:MaintenanceProcedure rdf:type owl:Class .
+:MaintenanceReport rdf:type owl:Class .
+:Measurement rdf:type owl:Class .
+:Pump rdf:type owl:Class .
+:Technician rdf:type owl:Class .
+:WorkOrder rdf:type owl:Class .
+
+#################################################################
+#    Individuals
+#################################################################
+
+:Alex rdf:type owl:NamedIndividual ,
+               :Technician ;
+      :performs :Inspection_17 .
+
+:Bearing_Replacement_P17 rdf:type owl:NamedIndividual ,
+                                  :MaintenanceAction ;
+                         :targets_equipment :P_17 .
+
+:Inspection_17 rdf:type owl:NamedIndividual ,
+                        :InspectionEvent ;
+               :produces :R_17 ;
+               :targets_equipment :P_17 .
+
+:P_17 rdf:type owl:NamedIndividual ,
+               :Pump .
+
+:Pump_Inspection_Rule_1 rdf:type owl:NamedIndividual ,
+                                 :MaintenanceProcedure ;
+                        :has_interval_days 30 .
+
+:R_17 rdf:type owl:NamedIndividual ,
+               :MaintenanceReport ;
+      :identifies_need_for :Bearing_Replacement_P17 ;
+      :records :Vibration_Reading_4_2 .
+
+:Vibration_Reading_4_2 rdf:type owl:NamedIndividual ,
+                                :Measurement ;
+                       :has_unit "mm/s" ;
+                       :has_value 4.2 .
+
+:W_22 rdf:type owl:NamedIndividual ,
+               :WorkOrder ;
+      :requests :Bearing_Replacement_P17 .

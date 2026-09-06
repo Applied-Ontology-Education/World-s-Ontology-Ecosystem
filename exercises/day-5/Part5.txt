@@ -1,0 +1,24 @@
+| Application field | Ontology source |
+|---|---|
+| Pump | `:Pump_P17 rdf:type :Pump` — the individual's identity/label |
+| Last inspection | `:Inspection_17 rdf:type :Inspection` — reached via `:Inspection_17 has_participant :Pump_P17` |
+| Measured vibration | `:VibrationMeasurementDatum_1 has_decimal_value "4.2"^^xsd:decimal ; has_measurement_unit "mm/s"` — reached via `:Inspection_17 has_specified_output :VibrationMeasurementDatum_1` |
+| Maintenance action | `:Report_R17 recommends :BearingReplacement` (the class, not an individual — see below) |
+| Work order | `:WorkOrder_W22 rdf:type :WorkOrder` — reached via `:WorkOrder_W22 requests :BearingReplacement` and/or `:WorkOrder_W22 based_on :Report_R17` |
+
+## What information was omitted
+
+- **Who performed the inspection** — `Inspection_17 has_participant Alex`, plus `Alex bearer_of Alex_TechnicianRole`, is dropped entirely. The view shows *that* an inspection happened, not *who* carried it out.
+- **The governing procedure** — `Inspection_17 realizes MaintenanceProcedure_1` (the 30-day rule) never surfaces. The app shows the event, not the rule it's satisfying.
+- **The inspection report as a distinct artifact** — `Report_R17` is the actual bearer of `recommends`, and the actual `is_about VibrationMeasurementDatum_1` link. The app's "Measured vibration" and "Maintenance action" fields both silently pass through the report without ever showing the report itself. A user has no way to know these two facts came from one document.
+- **The recommendation/future-repair distinction** — this is the sharpest omission. `Report_R17 recommends :BearingReplacement` and `WorkOrder_W22 requests :BearingReplacement` both point at the **class** `BearingReplacement`, never an individual. Nothing has been asserted to have happened. The app's field label "Maintenance action" reads as if it's naming a concrete, scheduled, or completed thing — it isn't.
+- **The measurement process itself** — the model distinguishes the `Vibration` quality (inhering in the pump) from the `VibrationMeasurementDatum` (the recorded number). The app collapses both into one line, "4.2 mm/s," with no trace of the quality/datum split.
+- **Provenance chain** — the app shows five flat facts with no visible edges. It can't reconstruct that the vibration reading and the recommendation both trace back to the *same* inspection event, or that the work order's authority comes specifically from that report (`based_on`) rather than being independently issued.
+
+## Is the operational view lossy?
+
+**YES.** It drops real, asserted information (agent, procedure, report identity, quality/datum distinction, provenance edges) that exists in the ontology and isn't recoverable from the five displayed fields alone. Lossy is expected and fine for a UI — the question that actually matters is the next one.
+
+## Is the operational view divergent?
+
+**NO** — with one caveat worth naming precisely. Every value shown is a faithful projection of an ontology assertion; nothing is asserted, invented, or contradicted. The one place it comes close to diverging is the "Maintenance action: Replace bearing" label — it's built from a *class* (`BearingReplacement`), not an individual, so the field is technically displaying a recommendation, not a fact-in-progress. As long as the app's UI doesn't imply (through phrasing, a status badge, a checkbox, etc.) that the replacement is scheduled or underway, the projection stays true to the model — it's compressing scope, not changing meaning. If the app ever added a "status: in progress" affordance next to that field, *that* would cross into divergence, because it would be asserting something the ontology deliberately never asserts.

@@ -1,0 +1,34 @@
+I compared both files line by line. Three disagreements, one of each verdict — this isn't a sweep in favor of either model.
+
+---
+
+**Gemini suggestion:**
+`:Alex rdf:type owl:NamedIndividual, :Technician` — Alex is typed directly as `:Technician`, with `:Technician` declared as a bare class (no `Person` class, no role individual, no `subClassOf` link at all).
+
+**Decision:**
+MODIFY
+
+**Reason:**
+This is the same role/bearer conflation the earlier example flagged, just in a slightly different shape — instead of `Technician subClassOf Person`, Gemini skips `Person` entirely and types Alex straight to `Technician`. That makes "being a technician" indistinguishable from "being a person," and if Alex ever stopped being a technician, you'd have no way to represent that without deleting Alex's type entirely. Rather than reject the term outright, I'd reinterpret `:Technician` as a `Role` class (matching our `TechnicianRole`), keep a separate `Person` class, and connect Alex to the role via `bearer_of` and a role individual — Gemini's naming survives, the conflation doesn't.
+
+---
+
+**Gemini suggestion:**
+`:Bearing_Replacement_P17 rdf:type owl:NamedIndividual, :MaintenanceAction` — the recommended/requested bearing replacement is instantiated as a concrete individual, with `:targets_equipment :P_17`, and both `R_17 identifies_need_for` and `W_22 requests` point at that same individual.
+
+**Decision:**
+REJECT
+
+**Reason:**
+`MaintenanceAction` reads as a process/action type, and instantiating it as a real individual asserts that a specific, particular action-entity now exists — which quietly treats a recommendation and a request as though they refer to something that has already happened or is at least concretely underway, rather than to a process type that has merely been proposed. This is exactly the prescription-as-fact confusion we built the whole `recommends`/`requests`-point-at-a-class pattern to avoid: nothing in the scenario says the bearing replacement occurred, or even that a single particular replacement-plan exists yet — only that it was identified and requested. Our model keeps `BearingReplacement` as a class only, referenced but never instantiated, for exactly this reason.
+
+---
+
+**Gemini suggestion:**
+`:has_interval_days rdf:type owl:DatatypeProperty ; rdfs:range xsd:integer .` with `Pump_Inspection_Rule_1 :has_interval_days 30` — the inspection interval is a typed integer with a self-documenting property name, versus our `:has_inspection_interval "30 days"` (a plain string).
+
+**Decision:**
+ACCEPT
+
+**Reason:**
+This is a genuine improvement, not just a stylistic difference. Our string literal `"30 days"` is opaque to a reasoner or query — you can't do arithmetic on it, compare it to another procedure's interval, or validate it's actually a number without string parsing. Gemini's `xsd:integer` value plus a unit-bearing property name (`has_interval_days`) gets the same information across in a machine-usable form. I'd fold this into our model directly: replace `has_inspection_interval` (string) with something like `has_interval_days` (`xsd:integer`), keeping the unit in the property name rather than the literal — same trick we already used correctly for the vibration reading's `has_decimal_value`/`has_measurement_unit` split, just missed here.
