@@ -1,0 +1,272 @@
+@prefix :     <http://example.org/day2/case4#> .
+@prefix obo:  <http://purl.obolibrary.org/obo/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/day2/case4>
+    a owl:Ontology ;
+    owl:versionInfo "1.1" ;
+    rdfs:label "Day 2 Case 4 - Occupational Employment Estimate Pattern"@en ;
+    rdfs:comment """Reusable pattern for occupational employment estimate records in employment_wage_May_2024.xlsx (sheet national_M2024_dl), instantiated for the three rows whose OCC_TITLE mentions "Aerospace Engineer" (rows 179, 180, 220), modeling only columns A (AREA), H (OWN_CODE), I (OCC_CODE), K (O_GROUP) and L (TOT_EMP). OCC_TITLE (column J) is used only to select the rows, as the case statement directs, and is not modeled.
+Modeling commitments:
+(1) Occupation categories are distinct from the codes that identify them. Rows 179 and 180 are distinct categories because their codes and group levels differ.
+(2) An employment estimate is a measurement datum, not a feature of an occupation category. Two estimates with the same value (68440) remain distinct because they concern different categories.
+(3) The existential runs from estimate to category (EmploymentEstimate SubClassOf isEstimateFor some OccupationCategory). The ontology does not claim that every occupation category has an estimate. isEstimateFor is not declared functional, because three records do not establish that an estimate can concern only one category.
+(4) AREA and OWN_CODE are identifiers (xsd:string) that give the context of an estimate, not quantities and not features of the category. Their meanings are taken from the workbook's Field Descriptions sheet and recorded with :sourceCodeMeaning.
+(5) O_GROUP values are group-level individuals attached to the occupation category. Per Field Descriptions, OEWS can publish an aggregated occupation at both the broad and detailed levels; for these three rows the level matches the SOC level of the code.
+(6) isEstimateFor is a shortcut relation, annotated with :shortcutFor and drawn as a double line. All other relations are direct.
+(7) Disjointness is asserted only where it is defended: an employment estimate is not an occupation category.
+Scope note: an estimate's full context also includes industry (NAICS 000000, cross-industry) and reference period (May 2024). These fall outside the assigned columns and are not modeled. The workbook's Field Descriptions sheet is cited only to annotate the meanings of values in columns A, H and K."""@en .
+
+#################################################################
+# Annotation properties
+#################################################################
+
+obo:IAO_0000115 a owl:AnnotationProperty ; rdfs:label "definition"@en .
+
+:identifyingDescription a owl:AnnotationProperty ;
+    rdfs:label "identifying description"@en ;
+    obo:IAO_0000115 "An annotation that states what type of entity a named individual is, which source element it represents, and what distinguishes it from other individuals in the ontology."@en .
+
+:shortcutFor a owl:AnnotationProperty ;
+    rdfs:label "shortcut for"@en ;
+    obo:IAO_0000115 "An annotation that states the chain of relations, not encoded in this ontology, that a shortcut relation abbreviates."@en .
+
+:sourceCodeMeaning a owl:AnnotationProperty ;
+    rdfs:label "source code meaning"@en ;
+    obo:IAO_0000115 "An annotation that records the meaning a source document assigns to a code value, quoted or paraphrased from that document."@en .
+
+#################################################################
+# Imported parent classes (declared by IRI; not locally created)
+#################################################################
+
+obo:IAO_0000030 a owl:Class ; rdfs:label "information content entity"@en .
+obo:IAO_0000109 a owl:Class ; rdfs:label "measurement datum"@en ; rdfs:subClassOf obo:IAO_0000030 .
+obo:IAO_0020000 a owl:Class ; rdfs:label "identifier"@en ; rdfs:subClassOf obo:IAO_0000030 .
+
+#################################################################
+# Local classes
+#################################################################
+
+:ClassificationCategory a owl:Class ;
+    rdfs:label "classification category"@en ;
+    rdfs:subClassOf obo:IAO_0000030 ;
+    obo:IAO_0000115 "An information content entity that is one of the units of a classification scheme and is assigned to items that meet its criterion."@en .
+
+:OccupationCategory a owl:Class ;
+    rdfs:label "occupation category"@en ;
+    rdfs:subClassOf :ClassificationCategory ;
+    obo:IAO_0000115 "A classification category in the Standard Occupational Classification or an OEWS-specific classification under which jobs are grouped by the work performed."@en .
+
+:OccupationCode a owl:Class ;
+    rdfs:label "occupation code"@en ;
+    rdfs:subClassOf obo:IAO_0020000 ;
+    obo:IAO_0000115 "An identifier that the Standard Occupational Classification or OEWS assigns to an occupation category."@en .
+
+
+:OccupationGroupLevel a owl:Class ;
+    rdfs:label "occupation group level"@en ;
+    rdfs:subClassOf obo:IAO_0000030 ;
+    obo:IAO_0000115 "An information content entity that indicates the hierarchical level of the occupation classification to which an occupation category belongs."@en .
+
+:EmploymentEstimate a owl:Class ;
+    rdfs:label "employment estimate"@en ;
+    rdfs:subClassOf obo:IAO_0000109 ;
+    obo:IAO_0000115 "A measurement datum that states the survey-estimated total employment, rounded to the nearest 10 and excluding the self-employed, in an occupation category within a given area and ownership type."@en .
+
+:AreaCode a owl:Class ;
+    rdfs:label "area code"@en ;
+    rdfs:subClassOf obo:IAO_0020000 ;
+    obo:IAO_0000115 "An identifier that OEWS uses to designate the geographic area to which an employment estimate applies."@en .
+
+:OwnershipTypeCode a owl:Class ;
+    rdfs:label "ownership type code"@en ;
+    rdfs:subClassOf obo:IAO_0020000 ;
+    obo:IAO_0000115 "An identifier that OEWS uses to designate the combination of ownership sectors whose employers are covered by an employment estimate."@en .
+
+:EmploymentEstimate owl:disjointWith :OccupationCategory .
+
+#################################################################
+# Object properties
+#################################################################
+
+:hasOccupationCode a owl:ObjectProperty ;
+    rdfs:label "has occupation code"@en ;
+    rdfs:domain :OccupationCategory ;
+    rdfs:range :OccupationCode ;
+    obo:IAO_0000115 "A relation that holds between an occupation category and an occupation code when the classification that contains the category assigns that code to identify it."@en .
+
+
+:hasGroupLevel a owl:ObjectProperty ;
+    rdfs:label "has group level"@en ;
+    rdfs:domain :OccupationCategory ;
+    rdfs:range :OccupationGroupLevel ;
+    obo:IAO_0000115 "A relation that holds between an occupation category and an occupation group level when the category is published at that level of the occupation classification hierarchy."@en .
+
+:isEstimateFor a owl:ObjectProperty ;
+    rdfs:label "is estimate for"@en ;
+    rdfs:domain :EmploymentEstimate ;
+    rdfs:range :OccupationCategory ;
+    :shortcutFor "employment estimate - is about -> aggregate of employed persons - each has role -> job - classified under -> occupation category"@en ;
+    obo:IAO_0000115 "A relation that holds between an employment estimate and an occupation category when the estimate states the employment in jobs classified under that category."@en .
+
+:hasAreaCode a owl:ObjectProperty ;
+    rdfs:label "has area code"@en ;
+    rdfs:domain :EmploymentEstimate ;
+    rdfs:range :AreaCode ;
+    obo:IAO_0000115 "A relation that holds between an employment estimate and an area code when the estimate is restricted to the geographic area that the code designates."@en .
+
+:hasOwnershipTypeCode a owl:ObjectProperty ;
+    rdfs:label "has ownership type code"@en ;
+    rdfs:domain :EmploymentEstimate ;
+    rdfs:range :OwnershipTypeCode ;
+    obo:IAO_0000115 "A relation that holds between an employment estimate and an ownership type code when the estimate covers only employers in the ownership sectors that the code designates."@en .
+
+#################################################################
+# Data properties
+#################################################################
+
+:hasEstimatedCount a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "has estimated count"@en ;
+    rdfs:domain :EmploymentEstimate ;
+    rdfs:range xsd:nonNegativeInteger ;
+    obo:IAO_0000115 "A relation that holds between an employment estimate and a non-negative integer when the integer is the number of employed persons that the estimate states."@en .
+
+:hasCodeValue a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "has code value"@en ;
+    rdfs:range xsd:string ;
+    obo:IAO_0000115 "A relation that holds between an identifier and a string literal when the string is the exact character sequence that the assigning source uses for that identifier."@en ;
+    rdfs:comment "No domain is asserted, so the property can be reused by any identifier class."@en .
+
+:hasTextValue a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "has text value"@en ;
+    rdfs:range xsd:string ;
+    obo:IAO_0000115 "A relation that holds between a non-identifier information content entity and a string literal when the string is the exact character sequence that the source uses to express that entity."@en ;
+    rdfs:comment "No domain is asserted, so the property can be reused by other non-identifier classes."@en .
+
+#################################################################
+# Class-level pattern (one axiom per diagram arrow)
+#################################################################
+
+:OccupationCategory rdfs:subClassOf
+    [ a owl:Restriction ; owl:onProperty :hasOccupationCode  ; owl:someValuesFrom :OccupationCode ] ,
+    [ a owl:Restriction ; owl:onProperty :hasGroupLevel      ; owl:someValuesFrom :OccupationGroupLevel ] .
+
+:EmploymentEstimate rdfs:subClassOf
+    [ a owl:Restriction ; owl:onProperty :isEstimateFor        ; owl:someValuesFrom :OccupationCategory ] ,
+    [ a owl:Restriction ; owl:onProperty :hasAreaCode          ; owl:someValuesFrom :AreaCode ] ,
+    [ a owl:Restriction ; owl:onProperty :hasOwnershipTypeCode ; owl:someValuesFrom :OwnershipTypeCode ] ,
+    [ a owl:Restriction ; owl:onProperty :hasEstimatedCount    ; owl:someValuesFrom xsd:nonNegativeInteger ] .
+
+:OccupationCode       rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :hasCodeValue ; owl:someValuesFrom xsd:string ] .
+:AreaCode             rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :hasCodeValue ; owl:someValuesFrom xsd:string ] .
+:OwnershipTypeCode    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :hasCodeValue ; owl:someValuesFrom xsd:string ] .
+:OccupationGroupLevel rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :hasTextValue ; owl:someValuesFrom xsd:string ] .
+
+#################################################################
+# Named individuals (source: employment_wage_May_2024.xlsx, sheet national_M2024_dl)
+#################################################################
+
+# --- occupation categories ---
+
+:occ_17_2010 a owl:NamedIndividual , :OccupationCategory ;
+    rdfs:label "occupation category 17-2010"@en ;
+    :identifyingDescription "The broad-level occupation category recorded in row 179 of national_M2024_dl; distinguished from occ_17_2011 by its code 17-2010 and its broad group level."@en ;
+    :hasOccupationCode :occupationCode_17_2010 ;
+    :hasGroupLevel :broadLevel .
+
+:occ_17_2011 a owl:NamedIndividual , :OccupationCategory ;
+    rdfs:label "occupation category 17-2011"@en ;
+    :identifyingDescription "The detailed-level occupation category recorded in row 180 of national_M2024_dl; distinguished from occ_17_2010 by its code 17-2011 and its detailed group level."@en ;
+    :hasOccupationCode :occupationCode_17_2011 ;
+    :hasGroupLevel :detailedLevel .
+
+:occ_17_3021 a owl:NamedIndividual , :OccupationCategory ;
+    rdfs:label "occupation category 17-3021"@en ;
+    :identifyingDescription "The detailed-level occupation category recorded in row 220 of national_M2024_dl; distinguished from occ_17_2011, which has the same group level, by its code 17-3021."@en ;
+    :hasOccupationCode :occupationCode_17_3021 ;
+    :hasGroupLevel :detailedLevel .
+
+# --- occupation codes ---
+
+:occupationCode_17_2010 a owl:NamedIndividual , :OccupationCode ;
+    rdfs:label "occupation code 17-2010"@en ;
+    :identifyingDescription "The occupation code in column I (OCC_CODE) of row 179; identifies occ_17_2010."@en ;
+    :hasCodeValue "17-2010"^^xsd:string .
+
+:occupationCode_17_2011 a owl:NamedIndividual , :OccupationCode ;
+    rdfs:label "occupation code 17-2011"@en ;
+    :identifyingDescription "The occupation code in column I (OCC_CODE) of row 180; identifies occ_17_2011."@en ;
+    :hasCodeValue "17-2011"^^xsd:string .
+
+:occupationCode_17_3021 a owl:NamedIndividual , :OccupationCode ;
+    rdfs:label "occupation code 17-3021"@en ;
+    :identifyingDescription "The occupation code in column I (OCC_CODE) of row 220; identifies occ_17_3021."@en ;
+    :hasCodeValue "17-3021"^^xsd:string .
+
+# --- group levels ---
+
+:broadLevel a owl:NamedIndividual , :OccupationGroupLevel ;
+    rdfs:label "broad level"@en ;
+    :identifyingDescription "The occupation group level recorded as broad in column K (O_GROUP); used here by row 179 only."@en ;
+    :sourceCodeMeaning "Field Descriptions: o_group is the SOC occupation level; broad is one of the standard SOC levels (major, minor, broad, detailed)."@en ;
+    :hasTextValue "broad"^^xsd:string .
+
+:detailedLevel a owl:NamedIndividual , :OccupationGroupLevel ;
+    rdfs:label "detailed level"@en ;
+    :identifyingDescription "The occupation group level recorded as detailed in column K (O_GROUP); used here by rows 180 and 220."@en ;
+    :sourceCodeMeaning "Field Descriptions: o_group is the SOC occupation level; detailed is the most detailed data available, either a standard SOC detailed occupation or an OEWS aggregation."@en ;
+    :hasTextValue "detailed"^^xsd:string .
+
+# --- estimate context codes ---
+
+:areaCode_99 a owl:NamedIndividual , :AreaCode ;
+    rdfs:label "area code 99"@en ;
+    :identifyingDescription "The area code in column A (AREA) of rows 179, 180 and 220; the only area code in this ontology."@en ;
+    :sourceCodeMeaning "Field Descriptions: 99 = U.S."@en ;
+    :hasCodeValue "99"^^xsd:string .
+
+:ownershipTypeCode_1235 a owl:NamedIndividual , :OwnershipTypeCode ;
+    rdfs:label "ownership type code 1235"@en ;
+    :identifyingDescription "The ownership type code in column H (OWN_CODE) of rows 179, 180 and 220; the only ownership type code in this ontology."@en ;
+    :sourceCodeMeaning "Field Descriptions: 1235 = Federal, State, and Local Government and Private Sector."@en ;
+    :hasCodeValue "1235"^^xsd:string .
+
+# --- employment estimates ---
+
+:estimate_17_2010 a owl:NamedIndividual , :EmploymentEstimate ;
+    rdfs:label "employment estimate for 17-2010"@en ;
+    :identifyingDescription "The employment estimate in column L (TOT_EMP) of row 179; distinguished from estimate_17_2011, which has the same value, by being an estimate for occ_17_2010."@en ;
+    :isEstimateFor :occ_17_2010 ;
+    :hasAreaCode :areaCode_99 ;
+    :hasOwnershipTypeCode :ownershipTypeCode_1235 ;
+    :hasEstimatedCount "68440"^^xsd:nonNegativeInteger .
+
+:estimate_17_2011 a owl:NamedIndividual , :EmploymentEstimate ;
+    rdfs:label "employment estimate for 17-2011"@en ;
+    :identifyingDescription "The employment estimate in column L (TOT_EMP) of row 180; distinguished from estimate_17_2010, which has the same value, by being an estimate for occ_17_2011."@en ;
+    :isEstimateFor :occ_17_2011 ;
+    :hasAreaCode :areaCode_99 ;
+    :hasOwnershipTypeCode :ownershipTypeCode_1235 ;
+    :hasEstimatedCount "68440"^^xsd:nonNegativeInteger .
+
+:estimate_17_3021 a owl:NamedIndividual , :EmploymentEstimate ;
+    rdfs:label "employment estimate for 17-3021"@en ;
+    :identifyingDescription "The employment estimate in column L (TOT_EMP) of row 220; the only estimate here with the value 9060."@en ;
+    :isEstimateFor :occ_17_3021 ;
+    :hasAreaCode :areaCode_99 ;
+    :hasOwnershipTypeCode :ownershipTypeCode_1235 ;
+    :hasEstimatedCount "9060"^^xsd:nonNegativeInteger .
+
+#################################################################
+# Distinct individuals
+#################################################################
+
+[] a owl:AllDifferent ;
+   owl:distinctMembers ( :occ_17_2010 :occ_17_2011 :occ_17_3021
+                         :occupationCode_17_2010 :occupationCode_17_2011 :occupationCode_17_3021
+                         :broadLevel :detailedLevel
+                         :areaCode_99 :ownershipTypeCode_1235
+                         :estimate_17_2010 :estimate_17_2011 :estimate_17_3021 ) .

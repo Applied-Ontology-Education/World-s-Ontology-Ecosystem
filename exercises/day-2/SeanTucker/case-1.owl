@@ -1,0 +1,301 @@
+@prefix : <http://example.org/day2/case1#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/day2/case1>
+    a owl:Ontology ;
+    rdfs:label "Day 2 Case 1 - Aircraft Data Ontology Pattern"@en ;
+    rdfs:comment
+        "A reusable ontology design pattern representing selected aircraft model, classification, designation, count, and measurement information from the Airbus A320 Neo source record."@en .
+
+#################################################################
+# Annotation properties
+#################################################################
+
+:definition
+    a owl:AnnotationProperty ;
+    rdfs:label "definition"@en .
+
+:identifyingDescription
+    a owl:AnnotationProperty ;
+    rdfs:label "identifying description"@en .
+
+#################################################################
+# Classes
+#################################################################
+
+:AircraftModel
+    a owl:Class ;
+    rdfs:label "aircraft model"@en ;
+    :definition
+        "An aircraft model specification that characterizes a repeatable aircraft design represented in the source data."@en .
+
+:Manufacturer
+    a owl:Class ;
+    rdfs:label "manufacturer"@en ;
+    :definition
+        "An organization that produces aircraft conforming to an aircraft model."@en .
+
+:EngineClass
+    a owl:Class ;
+    rdfs:label "engine class"@en ;
+    :definition
+        "A classification that categorizes an aircraft model according to its engine type."@en .
+
+:AircraftClass
+    a owl:Class ;
+    rdfs:label "aircraft class"@en ;
+    :definition
+        "A classification that categorizes an aircraft model according to its general aircraft configuration."@en .
+
+:ModelDesignation
+    a owl:Class ;
+    rdfs:label "model designation"@en ;
+    :definition
+        "An information entity that designates an aircraft model within a specified source system."@en .
+
+:MeasurementDatum
+    a owl:Class ;
+    rdfs:label "measurement datum"@en ;
+    :definition
+        "An information entity that records a measured or specified quantitative characteristic of an aircraft model."@en .
+
+:AircraftLengthMeasurement
+    a owl:Class ;
+    rdfs:label "aircraft length measurement"@en ;
+    rdfs:subClassOf :MeasurementDatum ;
+    :definition
+        "A measurement datum that records the longitudinal extent of an aircraft model."@en .
+
+:AircraftTailHeightMeasurement
+    a owl:Class ;
+    rdfs:label "aircraft tail height measurement"@en ;
+    rdfs:subClassOf :MeasurementDatum ;
+    :definition
+        "A measurement datum that records the vertical extent of an aircraft model at the tail under the stated operating condition."@en .
+
+:MeasurementUnit
+    a owl:Class ;
+    rdfs:label "measurement unit"@en ;
+    :definition
+        "An information entity that specifies a standard unit used to express a measurement value."@en .
+
+#################################################################
+# Object properties
+#################################################################
+
+:hasManufacturer
+    a owl:ObjectProperty ;
+    rdfs:label "has manufacturer"@en ;
+    rdfs:domain :AircraftModel ;
+    rdfs:range :Manufacturer ;
+    :definition
+        "A relation that holds between an aircraft model and a manufacturer when the manufacturer produces aircraft conforming to that model."@en .
+
+:hasEngineClass
+    a owl:ObjectProperty ;
+    rdfs:label "has engine class"@en ;
+    rdfs:domain :AircraftModel ;
+    rdfs:range :EngineClass ;
+    :definition
+        "A relation that holds between an aircraft model and an engine class when the engine class categorizes the engine type associated with that model."@en .
+
+:hasAircraftClass
+    a owl:ObjectProperty ;
+    rdfs:label "has aircraft class"@en ;
+    rdfs:domain :AircraftModel ;
+    rdfs:range :AircraftClass ;
+    :definition
+        "A relation that holds between an aircraft model and an aircraft class when that class categorizes the general configuration of the model."@en .
+
+:hasDesignation
+    a owl:ObjectProperty ;
+    rdfs:label "has designation"@en ;
+    rdfs:domain :AircraftModel ;
+    rdfs:range :ModelDesignation ;
+    :definition
+        "A relation that holds between an aircraft model and a model designation when the designation identifies that model within a source system."@en .
+
+:hasMeasurement
+    a owl:ObjectProperty ;
+    rdfs:label "has measurement"@en ;
+    rdfs:domain :AircraftModel ;
+    rdfs:range :MeasurementDatum ;
+    :definition
+        "A relation that holds between an aircraft model and a measurement datum when the datum records a quantitative characteristic of that model."@en .
+
+:hasMeasurementUnit
+    a owl:ObjectProperty ;
+    rdfs:label "has measurement unit"@en ;
+    rdfs:domain :MeasurementDatum ;
+    rdfs:range :MeasurementUnit ;
+    :definition
+        "A relation that holds between a measurement datum and a measurement unit when the value recorded by the datum is expressed using that unit."@en .
+
+#################################################################
+# Data properties
+#################################################################
+
+:hasEngineCount
+    a owl:DatatypeProperty ;
+    rdfs:label "has engine count"@en ;
+    rdfs:domain :AircraftModel ;
+    rdfs:range xsd:integer ;
+    :definition
+        "A data relation that holds between an aircraft model and an integer when the integer records the number of engines specified for that model."@en .
+
+:hasDecimalValue
+    a owl:DatatypeProperty ;
+    rdfs:label "has decimal value"@en ;
+    rdfs:domain :MeasurementDatum ;
+    rdfs:range xsd:decimal ;
+    :definition
+        "A data relation that holds between a measurement datum and a decimal literal when the literal records the quantitative value of that datum."@en .
+
+:hasTextValue
+    a owl:DatatypeProperty ;
+    rdfs:label "has text value"@en ;
+    rdfs:domain :ModelDesignation ;
+    rdfs:range xsd:string ;
+    :definition
+        "A data relation that holds between a model designation and a string literal when the string records the textual content of that designation."@en .
+
+#################################################################
+# Reusable class-level pattern
+#################################################################
+
+:AircraftModel
+    rdfs:subClassOf
+        [
+            a owl:Restriction ;
+            owl:onProperty :hasManufacturer ;
+            owl:someValuesFrom :Manufacturer
+        ] ,
+        [
+            a owl:Restriction ;
+            owl:onProperty :hasEngineClass ;
+            owl:someValuesFrom :EngineClass
+        ] ,
+        [
+            a owl:Restriction ;
+            owl:onProperty :hasAircraftClass ;
+            owl:someValuesFrom :AircraftClass
+        ] ,
+        [
+            a owl:Restriction ;
+            owl:onProperty :hasDesignation ;
+            owl:someValuesFrom :ModelDesignation
+        ] ,
+        [
+            a owl:Restriction ;
+            owl:onProperty :hasMeasurement ;
+            owl:someValuesFrom :MeasurementDatum
+        ] .
+
+:MeasurementDatum
+    rdfs:subClassOf
+        [
+            a owl:Restriction ;
+            owl:onProperty :hasMeasurementUnit ;
+            owl:someValuesFrom :MeasurementUnit
+        ] .
+
+#################################################################
+# Named individuals
+#################################################################
+
+:a320Neo
+    a owl:NamedIndividual ,
+      :AircraftModel ;
+    rdfs:label "Airbus A320 Neo aircraft model"@en ;
+    :identifyingDescription
+        "The aircraft model individual representing the Airbus A320 Neo source row in aircraft_data.xlsx."@en ;
+    :hasManufacturer :airbus ;
+    :hasEngineClass :jet ;
+    :hasAircraftClass :fixedWing ;
+    :hasDesignation :faaDesignation_A320Neo ,
+                    :badaDesignation_A320271N ;
+    :hasEngineCount 2 ;
+    :hasMeasurement :length_A320Neo ,
+                    :tailHeight_A320Neo .
+
+:airbus
+    a owl:NamedIndividual ,
+      :Manufacturer ;
+    rdfs:label "AIRBUS"@en ;
+    :identifyingDescription
+        "The manufacturer individual representing AIRBUS in the Airbus A320 Neo source record."@en .
+
+:jet
+    a owl:NamedIndividual ,
+      :EngineClass ;
+    rdfs:label "Jet"@en ;
+    :identifyingDescription
+        "The engine-class individual representing the Jet classification in the Airbus A320 Neo source record."@en .
+
+:fixedWing
+    a owl:NamedIndividual ,
+      :AircraftClass ;
+    rdfs:label "Fixed-wing"@en ;
+    :identifyingDescription
+        "The aircraft-class individual representing the Fixed-wing classification in the Airbus A320 Neo source record."@en .
+
+:faaDesignation_A320Neo
+    a owl:NamedIndividual ,
+      :ModelDesignation ;
+    rdfs:label "FAA designation for Airbus A320 Neo"@en ;
+    :identifyingDescription
+        "The model designation individual representing the FAA model value for the Airbus A320 Neo source record."@en ;
+    :hasTextValue "Airbus A320 Neo" .
+
+:badaDesignation_A320271N
+    a owl:NamedIndividual ,
+      :ModelDesignation ;
+    rdfs:label "BADA designation for Airbus A320-271N"@en ;
+    :identifyingDescription
+        "The model designation individual representing the BADA model value for the Airbus A320 Neo source record."@en ;
+    :hasTextValue "Airbus A320-271N" .
+
+:length_A320Neo
+    a owl:NamedIndividual ,
+      :AircraftLengthMeasurement ;
+    rdfs:label "A320 Neo length measurement"@en ;
+    :identifyingDescription
+        "The aircraft length measurement individual representing the 123.3 foot full-length value in the Airbus A320 Neo source record."@en ;
+    :hasDecimalValue "123.3"^^xsd:decimal ;
+    :hasMeasurementUnit :foot .
+
+:tailHeight_A320Neo
+    a owl:NamedIndividual ,
+      :AircraftTailHeightMeasurement ;
+    rdfs:label "A320 Neo tail height measurement"@en ;
+    :identifyingDescription
+        "The aircraft tail-height measurement individual representing the 39.6 foot tail-height-at-operating-empty-weight value in the Airbus A320 Neo source record."@en ;
+    :hasDecimalValue "39.6"^^xsd:decimal ;
+    :hasMeasurementUnit :foot .
+
+:foot
+    a owl:NamedIndividual ,
+      :MeasurementUnit ;
+    rdfs:label "foot"@en ;
+    :identifyingDescription
+        "The measurement unit individual used for the aircraft length and tail-height values in the Airbus A320 Neo source record."@en .
+
+#################################################################
+# Distinct individuals
+#################################################################
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers (
+        :a320Neo
+        :airbus
+        :jet
+        :fixedWing
+        :faaDesignation_A320Neo
+        :badaDesignation_A320271N
+        :length_A320Neo
+        :tailHeight_A320Neo
+        :foot
+    ) .

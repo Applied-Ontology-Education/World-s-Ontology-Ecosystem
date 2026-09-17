@@ -1,0 +1,184 @@
+@prefix : <http://example.org/capstone#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/capstone>
+    a owl:Ontology ;
+    rdfs:label "Day 5 Maintenance Capstone Ontology"@en ;
+    rdfs:comment "A small ontology design pattern for the pump inspection scenario."@en .
+
+#################################################################
+# Classes
+#################################################################
+
+:Pump
+    a owl:Class ;
+    rdfs:label "pump"@en ;
+    rdfs:comment "A material entity that functions to move fluid."@en .
+
+:Person
+    a owl:Class ;
+    rdfs:label "person"@en .
+
+:TechnicianRole
+    a owl:Class ;
+    rdfs:label "technician role"@en ;
+    rdfs:comment "A role borne by a person that is realized when the person performs maintenance or inspection work."@en .
+
+:InspectionProcedure
+    a owl:Class ;
+    rdfs:label "inspection procedure"@en ;
+    rdfs:comment "An information artifact that specifies how and when an inspection is to be performed."@en .
+
+:Inspection
+    a owl:Class ;
+    rdfs:label "inspection"@en ;
+    rdfs:comment "A process in which an entity is examined according to an inspection procedure."@en .
+
+:InspectionReport
+    a owl:Class ;
+    rdfs:label "inspection report"@en ;
+    rdfs:comment "An information artifact that records information resulting from an inspection."@en .
+
+:VibrationMeasurementDatum
+    a owl:Class ;
+    rdfs:label "vibration measurement datum"@en ;
+    rdfs:comment "An information artifact that records a measured vibration value."@en .
+
+:MaintenanceActionSpecification
+    a owl:Class ;
+    rdfs:label "maintenance action specification"@en ;
+    rdfs:comment "An information artifact that specifies a maintenance action to be performed."@en .
+
+:WorkOrder
+    a owl:Class ;
+    rdfs:label "work order"@en ;
+    rdfs:comment "An information artifact that requests one or more maintenance actions."@en .
+
+#################################################################
+# Object Properties
+#################################################################
+
+:bearerOf
+    a owl:ObjectProperty ;
+    rdfs:label "bearer of"@en ;
+    rdfs:domain :Person ;
+    rdfs:range :TechnicianRole .
+
+:participatesIn
+    a owl:ObjectProperty ;
+    rdfs:label "participates in"@en ;
+    rdfs:range :Inspection .
+
+:conformsTo
+    a owl:ObjectProperty ;
+    rdfs:label "conforms to"@en ;
+    rdfs:domain :Inspection ;
+    rdfs:range :InspectionProcedure .
+
+:hasOutput
+    a owl:ObjectProperty ;
+    rdfs:label "has output"@en ;
+    rdfs:domain :Inspection ;
+    rdfs:range :InspectionReport .
+
+:isAbout
+    a owl:ObjectProperty ;
+    rdfs:label "is about"@en .
+
+:hasPart
+    a owl:ObjectProperty ;
+    rdfs:label "has part"@en .
+
+:requests
+    a owl:ObjectProperty ;
+    rdfs:label "requests"@en ;
+    rdfs:domain :WorkOrder ;
+    rdfs:range :MaintenanceActionSpecification .
+
+#################################################################
+# Data Properties
+#################################################################
+
+:hasIntervalDays
+    a owl:DatatypeProperty ;
+    rdfs:label "has interval days"@en ;
+    rdfs:domain :InspectionProcedure ;
+    rdfs:range xsd:integer .
+
+:hasDecimalValue
+    a owl:DatatypeProperty ;
+    rdfs:label "has decimal value"@en ;
+    rdfs:domain :VibrationMeasurementDatum ;
+    rdfs:range xsd:decimal .
+
+:hasUnitLabel
+    a owl:DatatypeProperty ;
+    rdfs:label "has unit label"@en ;
+    rdfs:domain :VibrationMeasurementDatum ;
+    rdfs:range xsd:string .
+
+#################################################################
+# Named Individuals
+#################################################################
+
+:pump_P17
+    a owl:NamedIndividual ,
+      :Pump ;
+    rdfs:label "Pump P-17"@en ;
+    :participatesIn :inspection_17 .
+
+:alex
+    a owl:NamedIndividual ,
+      :Person ;
+    rdfs:label "Alex"@en ;
+    :bearerOf :technicianRole_Alex ;
+    :participatesIn :inspection_17 .
+
+:technicianRole_Alex
+    a owl:NamedIndividual ,
+      :TechnicianRole ;
+    rdfs:label "technician role borne by Alex"@en .
+
+:inspectionProcedure_30Day
+    a owl:NamedIndividual ,
+      :InspectionProcedure ;
+    rdfs:label "30-day pump inspection procedure"@en ;
+    :hasIntervalDays 30 .
+
+:inspection_17
+    a owl:NamedIndividual ,
+      :Inspection ;
+    rdfs:label "Inspection 17"@en ;
+    :conformsTo :inspectionProcedure_30Day ;
+    :hasOutput :report_R17 .
+
+:report_R17
+    a owl:NamedIndividual ,
+      :InspectionReport ;
+    rdfs:label "Report R-17"@en ;
+    :isAbout :inspection_17 ;
+    :hasPart :vibrationMeasurement_17 ;
+    :hasPart :bearingReplacementAction .
+
+:vibrationMeasurement_17
+    a owl:NamedIndividual ,
+      :VibrationMeasurementDatum ;
+    rdfs:label "vibration measurement from Inspection 17"@en ;
+    :isAbout :pump_P17 ;
+    :hasDecimalValue "4.2"^^xsd:decimal ;
+    :hasUnitLabel "mm/s" .
+
+:bearingReplacementAction
+    a owl:NamedIndividual ,
+      :MaintenanceActionSpecification ;
+    rdfs:label "bearing replacement action"@en ;
+    :isAbout :pump_P17 .
+
+:workOrder_W22
+    a owl:NamedIndividual ,
+      :WorkOrder ;
+    rdfs:label "Work Order W-22"@en ;
+    :requests :bearingReplacementAction .

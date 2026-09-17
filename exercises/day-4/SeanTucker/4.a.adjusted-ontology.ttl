@@ -1,0 +1,682 @@
+@prefix : <http://example.org/zebra#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix bfo: <http://purl.obolibrary.org/obo/> .
+
+<http://example.org/zebra>
+    a owl:Ontology ;
+    rdfs:label "Zebra Puzzle Ontology - Day 4 Part 1"@en ;
+    rdfs:comment "Initial ontology containing only the first group of Zebra Puzzle clues. Later clues are intentionally omitted."@en .
+
+#################################################################
+# BFO categories used
+#################################################################
+
+bfo:BFO_0000001 a owl:Class ;
+    rdfs:label "entity"@en .
+
+bfo:BFO_0000002 a owl:Class ;
+    rdfs:label "continuant"@en ;
+    rdfs:subClassOf bfo:BFO_0000001 .
+
+bfo:BFO_0000003 a owl:Class ;
+    rdfs:label "occurrent"@en ;
+    rdfs:subClassOf bfo:BFO_0000001 ;
+    owl:disjointWith bfo:BFO_0000002 .
+
+bfo:BFO_0000004 a owl:Class ;
+    rdfs:label "independent continuant"@en ;
+    rdfs:subClassOf bfo:BFO_0000002 .
+
+bfo:BFO_0000040 a owl:Class ;
+    rdfs:label "material entity"@en ;
+    rdfs:subClassOf bfo:BFO_0000004 .
+
+bfo:BFO_0000030 a owl:Class ;
+    rdfs:label "object"@en ;
+    rdfs:subClassOf bfo:BFO_0000040 .
+
+bfo:BFO_0000020 a owl:Class ;
+    rdfs:label "specifically dependent continuant"@en ;
+    rdfs:subClassOf bfo:BFO_0000002 .
+
+bfo:BFO_0000019 a owl:Class ;
+    rdfs:label "quality"@en ;
+    rdfs:subClassOf bfo:BFO_0000020 .
+
+bfo:BFO_0000017 a owl:Class ;
+    rdfs:label "realizable entity"@en ;
+    rdfs:subClassOf bfo:BFO_0000020 .
+
+bfo:BFO_0000023 a owl:Class ;
+    rdfs:label "role"@en ;
+    rdfs:subClassOf bfo:BFO_0000017 .
+
+bfo:BFO_0000015 a owl:Class ;
+    rdfs:label "process"@en ;
+    rdfs:subClassOf bfo:BFO_0000003 .
+
+#################################################################
+# Core classes
+#################################################################
+
+:House a owl:Class ;
+    rdfs:label "house"@en ;
+    rdfs:subClassOf bfo:BFO_0000030 .
+
+:Person a owl:Class ;
+    rdfs:label "person"@en ;
+    rdfs:subClassOf bfo:BFO_0000030 .
+
+:Dog a owl:Class ;
+    rdfs:label "dog"@en ;
+    rdfs:subClassOf bfo:BFO_0000030 .
+
+:Beverage a owl:Class ;
+    rdfs:label "beverage"@en ;
+    rdfs:subClassOf bfo:BFO_0000040 .
+
+:Coffee a owl:Class ;
+    rdfs:label "coffee"@en ;
+    rdfs:subClassOf :Beverage .
+
+:Tea a owl:Class ;
+    rdfs:label "tea"@en ;
+    rdfs:subClassOf :Beverage .
+
+#################################################################
+# Color qualities
+#################################################################
+
+:Color a owl:Class ;
+    rdfs:label "color"@en ;
+    rdfs:subClassOf bfo:BFO_0000019 .
+
+:Red a owl:Class ;
+    rdfs:label "red"@en ;
+    rdfs:subClassOf :Color .
+
+:Green a owl:Class ;
+    rdfs:label "green"@en ;
+    rdfs:subClassOf :Color .
+
+:Red owl:disjointWith :Green .
+
+#################################################################
+# Nationality roles
+#################################################################
+
+:NationalityRole a owl:Class ;
+    rdfs:label "nationality role"@en ;
+    rdfs:subClassOf bfo:BFO_0000023 .
+
+:EnglishNationalityRole a owl:Class ;
+    rdfs:label "English nationality role"@en ;
+    rdfs:subClassOf :NationalityRole .
+
+:SpanishNationalityRole a owl:Class ;
+    rdfs:label "Spanish nationality role"@en ;
+    rdfs:subClassOf :NationalityRole .
+
+:UkrainianNationalityRole a owl:Class ;
+    rdfs:label "Ukrainian nationality role"@en ;
+    rdfs:subClassOf :NationalityRole .
+
+#################################################################
+# Processes
+#################################################################
+
+:Drinking a owl:Class ;
+    rdfs:label "drinking"@en ;
+    rdfs:subClassOf bfo:BFO_0000015 .
+
+#################################################################
+# Object properties
+#################################################################
+
+:hasColor a owl:ObjectProperty ;
+    rdfs:label "has color"@en ;
+    rdfs:domain :House ;
+    rdfs:range :Color .
+
+:colorOf a owl:ObjectProperty ;
+    rdfs:label "color of"@en ;
+    owl:inverseOf :hasColor .
+
+:bearerOf a owl:ObjectProperty ;
+    rdfs:label "bearer of"@en ;
+    rdfs:domain :Person ;
+    rdfs:range :NationalityRole .
+
+:roleOf a owl:ObjectProperty ;
+    rdfs:label "role of"@en ;
+    owl:inverseOf :bearerOf .
+
+:livesIn a owl:ObjectProperty ;
+    rdfs:label "lives in"@en ;
+    rdfs:domain :Person ;
+    rdfs:range :House .
+
+:hasResident a owl:ObjectProperty ;
+    rdfs:label "has resident"@en ;
+    owl:inverseOf :livesIn .
+
+:owns a owl:ObjectProperty ;
+    rdfs:label "owns"@en ;
+    rdfs:domain :Person ;
+    rdfs:range :Dog .
+
+:ownedBy a owl:ObjectProperty ;
+    rdfs:label "owned by"@en ;
+    owl:inverseOf :owns .
+
+:hasDrinker a owl:ObjectProperty ;
+    rdfs:label "has drinker"@en ;
+    rdfs:domain :Drinking ;
+    rdfs:range :Person .
+
+:drinksIn a owl:ObjectProperty ;
+    rdfs:label "drinks in"@en ;
+    rdfs:domain :Drinking ;
+    rdfs:range :House .
+
+:hasBeverage a owl:ObjectProperty ;
+    rdfs:label "has beverage"@en ;
+    rdfs:domain :Drinking ;
+    rdfs:range :Beverage .
+
+#################################################################
+# Defined classes
+#################################################################
+
+:RedHouse a owl:Class ;
+    rdfs:label "red house"@en ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :House
+            [
+                a owl:Restriction ;
+                owl:onProperty :hasColor ;
+                owl:someValuesFrom :Red
+            ]
+        )
+    ] .
+
+:GreenHouse a owl:Class ;
+    rdfs:label "green house"@en ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :House
+            [
+                a owl:Restriction ;
+                owl:onProperty :hasColor ;
+                owl:someValuesFrom :Green
+            ]
+        )
+    ] .
+
+:EnglishPerson a owl:Class ;
+    rdfs:label "English person"@en ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Person
+            [
+                a owl:Restriction ;
+                owl:onProperty :bearerOf ;
+                owl:someValuesFrom :EnglishNationalityRole
+            ]
+        )
+    ] .
+
+:SpanishPerson a owl:Class ;
+    rdfs:label "Spanish person"@en ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Person
+            [
+                a owl:Restriction ;
+                owl:onProperty :bearerOf ;
+                owl:someValuesFrom :SpanishNationalityRole
+            ]
+        )
+    ] .
+
+:UkrainianPerson a owl:Class ;
+    rdfs:label "Ukrainian person"@en ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Person
+            [
+                a owl:Restriction ;
+                owl:onProperty :bearerOf ;
+                owl:someValuesFrom :UkrainianNationalityRole
+            ]
+        )
+    ] .
+
+#################################################################
+# Clue 2
+# The Englishman lives in the red house.
+#################################################################
+
+:EnglishPerson rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty :livesIn ;
+    owl:someValuesFrom :RedHouse
+] .
+
+#################################################################
+# Clue 3
+# The Spaniard owns the dog.
+#################################################################
+
+:SpanishPerson rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty :owns ;
+    owl:someValuesFrom :Dog
+] .
+
+#################################################################
+# Clue 4
+# Coffee is drunk in the green house.
+#################################################################
+
+:CoffeeDrinking a owl:Class ;
+    rdfs:label "coffee drinking"@en ;
+    rdfs:subClassOf :Drinking ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Drinking
+            [
+                a owl:Restriction ;
+                owl:onProperty :hasBeverage ;
+                owl:someValuesFrom :Coffee
+            ]
+        )
+    ] ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty :drinksIn ;
+        owl:someValuesFrom :GreenHouse
+    ] .
+
+#################################################################
+# Clue 5
+# The Ukrainian drinks tea.
+#################################################################
+
+:TeaDrinking a owl:Class ;
+    rdfs:label "tea drinking"@en ;
+    rdfs:subClassOf :Drinking ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Drinking
+            [
+                a owl:Restriction ;
+                owl:onProperty :hasBeverage ;
+                owl:someValuesFrom :Tea
+            ]
+        )
+    ] .
+
+:UkrainianPerson rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty [
+        owl:inverseOf :hasDrinker
+    ] ;
+    owl:someValuesFrom :TeaDrinking
+] .
+
+#################################################################
+# Five houses
+#################################################################
+
+:house1 a owl:NamedIndividual , :House ;
+    rdfs:label "house 1"@en .
+
+:house2 a owl:NamedIndividual , :House ;
+    rdfs:label "house 2"@en .
+
+:house3 a owl:NamedIndividual , :House ;
+    rdfs:label "house 3"@en .
+
+:house4 a owl:NamedIndividual , :House ;
+    rdfs:label "house 4"@en .
+
+:house5 a owl:NamedIndividual , :House ;
+    rdfs:label "house 5"@en .
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers (
+        :house1
+        :house2
+        :house3
+        :house4
+        :house5
+    ) .
+
+#################################################################
+# House cardinality
+#################################################################
+
+:House rdfs:subClassOf
+    [
+        a owl:Restriction ;
+        owl:onProperty :hasColor ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onClass :Color
+    ],
+    [
+        a owl:Restriction ;
+        owl:onProperty :hasResident ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onClass :Person
+    ] .
+#################################################################
+# Additional classes for clues 6-8
+#################################################################
+
+:Ivory a owl:Class ;
+    rdfs:label "ivory"@en ;
+    rdfs:subClassOf :Color .
+
+:Yellow a owl:Class ;
+    rdfs:label "yellow"@en ;
+    rdfs:subClassOf :Color .
+
+:Snail a owl:Class ;
+    rdfs:label "snail"@en ;
+    rdfs:subClassOf bfo:BFO_0000030 .
+
+:Cigarette a owl:Class ;
+    rdfs:label "cigarette"@en ;
+    rdfs:subClassOf bfo:BFO_0000040 .
+
+:OldGold a owl:Class ;
+    rdfs:label "Old Gold"@en ;
+    rdfs:subClassOf :Cigarette .
+
+:Kools a owl:Class ;
+    rdfs:label "Kools"@en ;
+    rdfs:subClassOf :Cigarette .
+
+#################################################################
+# Additional object properties
+#################################################################
+
+:smokes a owl:ObjectProperty ;
+    rdfs:label "smokes"@en ;
+    rdfs:domain :Person ;
+    rdfs:range :Cigarette .
+
+:immediatelyRightOf a owl:ObjectProperty ;
+    rdfs:label "immediately to the right of"@en ;
+    rdfs:domain :House ;
+    rdfs:range :House .
+
+:immediatelyLeftOf a owl:ObjectProperty ;
+    rdfs:label "immediately to the left of"@en ;
+    owl:inverseOf :immediatelyRightOf ;
+    rdfs:domain :House ;
+    rdfs:range :House .
+
+#################################################################
+# Defined house classes
+#################################################################
+
+:IvoryHouse a owl:Class ;
+    rdfs:label "ivory house"@en ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :House
+            [
+                a owl:Restriction ;
+                owl:onProperty :hasColor ;
+                owl:someValuesFrom :Ivory
+            ]
+        )
+    ] .
+
+:YellowHouse a owl:Class ;
+    rdfs:label "yellow house"@en ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :House
+            [
+                a owl:Restriction ;
+                owl:onProperty :hasColor ;
+                owl:someValuesFrom :Yellow
+            ]
+        )
+    ] .
+
+#################################################################
+# Defined smoker classes
+#################################################################
+
+:OldGoldSmoker a owl:Class ;
+    rdfs:label "Old Gold smoker"@en ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Person
+            [
+                a owl:Restriction ;
+                owl:onProperty :smokes ;
+                owl:someValuesFrom :OldGold
+            ]
+        )
+    ] .
+
+:KoolsSmoker a owl:Class ;
+    rdfs:label "Kools smoker"@en ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Person
+            [
+                a owl:Restriction ;
+                owl:onProperty :smokes ;
+                owl:someValuesFrom :Kools
+            ]
+        )
+    ] .
+
+#################################################################
+# Clue 6
+# The green house is immediately to the right of the ivory house.
+#################################################################
+
+:GreenHouse rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty :immediatelyRightOf ;
+    owl:someValuesFrom :IvoryHouse
+] .
+
+#################################################################
+# Clue 7
+# The Old Gold smoker owns snails.
+#################################################################
+
+:OldGoldSmoker rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty :owns ;
+    owl:someValuesFrom :Snail
+] .
+
+#################################################################
+# Clue 8
+# Kools are smoked in the yellow house.
+#################################################################
+
+:KoolsSmoker rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty :livesIn ;
+    owl:someValuesFrom :YellowHouse
+] .
+
+
+
+
+#################################################################
+# Additional classes for clues 9-11
+#################################################################
+
+:Milk a owl:Class ;
+    rdfs:label "milk"@en ;
+    rdfs:subClassOf :Beverage .
+
+:Chesterfields a owl:Class ;
+    rdfs:label "Chesterfields"@en ;
+    rdfs:subClassOf :Cigarette .
+
+:Fox a owl:Class ;
+    rdfs:label "fox"@en ;
+    rdfs:subClassOf bfo:BFO_0000030 .
+
+:NorwegianNationalityRole a owl:Class ;
+    rdfs:label "Norwegian nationality role"@en ;
+    rdfs:subClassOf :NationalityRole .
+
+#################################################################
+# Defined classes
+#################################################################
+
+:NorwegianPerson a owl:Class ;
+    rdfs:label "Norwegian person"@en ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Person
+            [
+                a owl:Restriction ;
+                owl:onProperty :bearerOf ;
+                owl:someValuesFrom :NorwegianNationalityRole
+            ]
+        )
+    ] .
+
+:MilkDrinking a owl:Class ;
+    rdfs:label "milk drinking"@en ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Drinking
+            [
+                a owl:Restriction ;
+                owl:onProperty :hasBeverage ;
+                owl:someValuesFrom :Milk
+            ]
+        )
+    ] .
+
+:ChesterfieldsSmoker a owl:Class ;
+    rdfs:label "Chesterfields smoker"@en ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Person
+            [
+                a owl:Restriction ;
+                owl:onProperty :smokes ;
+                owl:someValuesFrom :Chesterfields
+            ]
+        )
+    ] .
+
+:FoxOwner a owl:Class ;
+    rdfs:label "fox owner"@en ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Person
+            [
+                a owl:Restriction ;
+                owl:onProperty :owns ;
+                owl:someValuesFrom :Fox
+            ]
+        )
+    ] .
+
+#################################################################
+# Next-to relation
+#################################################################
+
+:nextTo a owl:ObjectProperty , owl:SymmetricProperty ;
+    rdfs:label "next to"@en ;
+    rdfs:domain :House ;
+    rdfs:range :House .
+
+#################################################################
+# House order assertions
+#################################################################
+
+:house1 :nextTo :house2 .
+:house2 :nextTo :house3 .
+:house3 :nextTo :house4 .
+:house4 :nextTo :house5 .
+
+#################################################################
+# Clue 9
+# Milk is drunk in the middle house.
+#################################################################
+
+:MilkDrinking rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty :drinksIn ;
+    owl:hasValue :house3
+] .
+
+#################################################################
+# Clue 10
+# The Norwegian lives in the first house.
+#################################################################
+
+:NorwegianPerson rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty :livesIn ;
+    owl:hasValue :house1
+] .
+
+#################################################################
+# Clue 11
+# The person who smokes Chesterfields lives next to
+# the person who owns the fox.
+#################################################################
+
+:ChesterfieldsSmoker rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty :livesIn ;
+    owl:someValuesFrom [
+        a owl:Class ;
+        owl:intersectionOf (
+            :House
+            [
+                a owl:Restriction ;
+                owl:onProperty :nextTo ;
+                owl:someValuesFrom [
+                    a owl:Class ;
+                    owl:intersectionOf (
+                        :House
+                        [
+                            a owl:Restriction ;
+                            owl:onProperty :hasResident ;
+                            owl:someValuesFrom :FoxOwner
+                        ]
+                    )
+                ]
+            ]
+        )
+    ]
+] .

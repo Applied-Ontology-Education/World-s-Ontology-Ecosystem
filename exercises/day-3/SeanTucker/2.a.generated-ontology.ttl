@@ -1,0 +1,605 @@
+@prefix :      <http://example.org/ontology/vmpr#> .
+@prefix vmpr:  <http://example.org/ontology/vmpr#> .
+@prefix obo:   <http://purl.obolibrary.org/obo/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@base          <http://example.org/ontology/vmpr> .
+
+#################################################################
+#  Ontology header
+#################################################################
+
+<http://example.org/ontology/vmpr>
+    a owl:Ontology ;
+    owl:versionIRI <http://example.org/ontology/vmpr/0.1.0> ;
+    dcterms:title "Vehicle Maintenance Problem Reporting Ontology (VMPR)"@en ;
+    dcterms:creator "Sean Tucker" ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    rdfs:comment """BFO-aligned OWL 2 DL ontology for a vehicle-maintenance problem-reporting scenario.
+BFO 2020 (OBO IRIs), RO, and IAO terms are declared locally (MIREOT-style), so no owl:imports is required to open the file in Protege.
+Modeling pattern: vehicle and components are objects; the problem is a disposition (fault) inhering in a vehicle or component; the observed condition is a quality; observation, reporting, and maintenance are processes; the report, its parts, and the problem code are information content entities (generically dependent continuants).
+Several data properties (VIN value, start/end time) are pragmatic shortcuts for patterns that a full BFO/IAO model would express with identifier ICEs and temporal regions."""@en ;
+    rdfs:comment """Lay summary: This file describes a truck with worn brakes. A driver notices a grinding noise and records it. That record becomes a problem report with an assigned code. A technician then replaces the brake pads in response. The ontology separates the physical things (the truck, the pads, the people), what happens (noticing, reporting, repairing), and the information about them (the report, the code, the notes). This separation lets a query engine trace from the truck to the problem, the report, the repair, and the technician."""@en ;
+    rdfs:comment """Competency questions:
+CQ1 What problem was reported for vehicle V?  ?r vmpr:reportsProblem ?p . ?p vmpr:problemAffectsVehicle V .
+CQ2 What observation led to report R?  R vmpr:derivesFromObservation ?o .
+CQ3 What problem code was assigned to R?  R vmpr:hasAssignedProblemCode ?c . ?c vmpr:hasCodeValue ?v .
+CQ4 What maintenance activity responded to R?  ?m vmpr:isInResponseTo R .
+CQ5 Which technician participated in M?  M vmpr:hasTechnicianParticipant ?t .
+CQ6 What information in R is about the observed condition?  R obo:BFO_0000051 ?d . ?d obo:IAO_0000136 ?q . ?q a vmpr:ObservableVehicleCondition ."""@en .
+
+#################################################################
+#  Annotation properties
+#################################################################
+
+obo:IAO_0000115 a owl:AnnotationProperty ;
+    rdfs:label "definition"@en .
+
+obo:IAO_0000112 a owl:AnnotationProperty ;
+    rdfs:label "example of usage"@en .
+
+dcterms:title   a owl:AnnotationProperty .
+dcterms:creator a owl:AnnotationProperty .
+dcterms:license a owl:AnnotationProperty .
+
+#################################################################
+#  Upper-level classes (BFO 2020, IAO) — declared locally
+#################################################################
+
+obo:BFO_0000001 a owl:Class ;
+    rdfs:label "entity"@en .
+
+obo:BFO_0000002 a owl:Class ;
+    rdfs:label "continuant"@en ;
+    rdfs:subClassOf obo:BFO_0000001 ;
+    owl:disjointWith obo:BFO_0000003 .
+
+obo:BFO_0000003 a owl:Class ;
+    rdfs:label "occurrent"@en ;
+    rdfs:subClassOf obo:BFO_0000001 .
+
+obo:BFO_0000004 a owl:Class ;
+    rdfs:label "independent continuant"@en ;
+    rdfs:subClassOf obo:BFO_0000002 .
+
+obo:BFO_0000040 a owl:Class ;
+    rdfs:label "material entity"@en ;
+    rdfs:subClassOf obo:BFO_0000004 .
+
+obo:BFO_0000030 a owl:Class ;
+    rdfs:label "object"@en ;
+    rdfs:subClassOf obo:BFO_0000040 .
+
+obo:BFO_0000020 a owl:Class ;
+    rdfs:label "specifically dependent continuant"@en ;
+    rdfs:subClassOf obo:BFO_0000002 .
+
+obo:BFO_0000019 a owl:Class ;
+    rdfs:label "quality"@en ;
+    rdfs:subClassOf obo:BFO_0000020 .
+
+obo:BFO_0000017 a owl:Class ;
+    rdfs:label "realizable entity"@en ;
+    rdfs:subClassOf obo:BFO_0000020 ;
+    owl:disjointWith obo:BFO_0000019 .
+
+obo:BFO_0000016 a owl:Class ;
+    rdfs:label "disposition"@en ;
+    rdfs:subClassOf obo:BFO_0000017 .
+
+obo:BFO_0000023 a owl:Class ;
+    rdfs:label "role"@en ;
+    rdfs:subClassOf obo:BFO_0000017 ;
+    owl:disjointWith obo:BFO_0000016 .
+
+obo:BFO_0000031 a owl:Class ;
+    rdfs:label "generically dependent continuant"@en ;
+    rdfs:subClassOf obo:BFO_0000002 .
+
+obo:BFO_0000015 a owl:Class ;
+    rdfs:label "process"@en ;
+    rdfs:subClassOf obo:BFO_0000003 .
+
+obo:IAO_0000030 a owl:Class ;
+    rdfs:label "information content entity"@en ;
+    rdfs:subClassOf obo:BFO_0000031 ;
+    obo:IAO_0000115 "A generically dependent continuant that is about some thing."@en .
+
+[] a owl:AllDisjointClasses ;
+   owl:members ( obo:BFO_0000004 obo:BFO_0000020 obo:BFO_0000031 ) .
+
+#################################################################
+#  Upper-level object properties (BFO 2020, RO, IAO)
+#################################################################
+
+obo:BFO_0000050 a owl:ObjectProperty , owl:TransitiveProperty ;
+    rdfs:label "part of"@en ;
+    owl:inverseOf obo:BFO_0000051 ;
+    obo:IAO_0000115 "A relation between two entities such that the first is a part of the second."@en .
+
+obo:BFO_0000051 a owl:ObjectProperty , owl:TransitiveProperty ;
+    rdfs:label "has part"@en ;
+    obo:IAO_0000115 "Inverse of part of."@en .
+
+obo:RO_0000052 a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:label "inheres in"@en ;
+    owl:inverseOf obo:RO_0000053 ;
+    rdfs:domain obo:BFO_0000020 ;
+    rdfs:range obo:BFO_0000004 ;
+    obo:IAO_0000115 "A relation between a specifically dependent continuant and the independent continuant on which it depends."@en .
+
+obo:RO_0000053 a owl:ObjectProperty ;
+    rdfs:label "bearer of"@en ;
+    rdfs:domain obo:BFO_0000004 ;
+    rdfs:range obo:BFO_0000020 ;
+    obo:IAO_0000115 "Inverse of inheres in."@en .
+
+obo:RO_0000057 a owl:ObjectProperty ;
+    rdfs:label "has participant"@en ;
+    owl:inverseOf obo:RO_0000056 ;
+    rdfs:domain obo:BFO_0000003 ;
+    rdfs:range obo:BFO_0000002 ;
+    obo:IAO_0000115 "A relation between an occurrent and a continuant that participates in it."@en .
+
+obo:RO_0000056 a owl:ObjectProperty ;
+    rdfs:label "participates in"@en ;
+    obo:IAO_0000115 "Inverse of has participant."@en .
+
+obo:RO_0002233 a owl:ObjectProperty ;
+    rdfs:label "has input"@en ;
+    rdfs:subPropertyOf obo:RO_0000057 ;
+    owl:inverseOf obo:RO_0002352 ;
+    obo:IAO_0000115 "A relation between a process and a continuant that is present at the start of the process and is consumed, transformed, or used by it."@en .
+
+obo:RO_0002352 a owl:ObjectProperty ;
+    rdfs:label "input of"@en ;
+    obo:IAO_0000115 "Inverse of has input."@en .
+
+obo:RO_0002234 a owl:ObjectProperty ;
+    rdfs:label "has output"@en ;
+    rdfs:subPropertyOf obo:RO_0000057 ;
+    owl:inverseOf obo:RO_0002353 ;
+    obo:IAO_0000115 "A relation between a process and a continuant that is produced by the process and present at its end."@en .
+
+obo:RO_0002353 a owl:ObjectProperty ;
+    rdfs:label "output of"@en ;
+    obo:IAO_0000115 "Inverse of has output."@en .
+
+obo:BFO_0000055 a owl:ObjectProperty ;
+    rdfs:label "realizes"@en ;
+    rdfs:domain obo:BFO_0000015 ;
+    rdfs:range obo:BFO_0000017 ;
+    obo:IAO_0000115 "A relation between a process and a realizable entity such that the process is the exercise or manifestation of that realizable entity."@en .
+
+obo:IAO_0000136 a owl:ObjectProperty ;
+    rdfs:label "is about"@en ;
+    rdfs:domain obo:IAO_0000030 ;
+    obo:IAO_0000115 "A relation between an information content entity and the entity it refers to or describes."@en .
+
+#################################################################
+#  Domain object properties
+#################################################################
+
+:reportsProblem a owl:ObjectProperty ;
+    rdfs:label "reports problem"@en ;
+    rdfs:subPropertyOf obo:IAO_0000136 ;
+    rdfs:domain :ProblemReport ;
+    rdfs:range :VehicleProblem ;
+    obo:IAO_0000115 "A relation between a maintenance problem report and the vehicle problem that the report asserts to exist."@en .
+
+:hasAssignedProblemCode a owl:ObjectProperty ;
+    rdfs:label "has assigned problem code"@en ;
+    rdfs:domain :ProblemReport ;
+    rdfs:range :ProblemCode ;
+    obo:IAO_0000115 "A relation between a maintenance problem report and the problem code designated for it within a coding scheme. The code is not a part of the report, since the same code can be assigned to many reports."@en .
+
+:isInResponseTo a owl:ObjectProperty ;
+    rdfs:label "is in response to"@en ;
+    rdfs:domain :MaintenanceActivity ;
+    rdfs:range :ProblemReport ;
+    obo:IAO_0000115 "A relation between a maintenance activity and the maintenance problem report whose content prompted and directed that activity."@en .
+
+:derivesFromObservation a owl:ObjectProperty ;
+    rdfs:label "derives from observation"@en ;
+    rdfs:domain :ProblemReport ;
+    rdfs:range :Observation ;
+    owl:propertyChainAxiom ( obo:RO_0002353 obo:RO_0002233 obo:RO_0002353 ) ;
+    obo:IAO_0000115 "A relation between a maintenance problem report and an observation such that the report is the output of a reporting process that has as input a record that is the output of that observation."@en .
+
+:problemAffectsVehicle a owl:ObjectProperty ;
+    rdfs:label "problem affects vehicle"@en ;
+    rdfs:domain :VehicleProblem ;
+    rdfs:range :Vehicle ;
+    owl:propertyChainAxiom ( obo:RO_0000052 obo:BFO_0000050 ) ;
+    obo:IAO_0000115 "A relation between a vehicle problem and a vehicle such that the problem inheres in the vehicle or in a component that is part of the vehicle."@en .
+
+:hasTechnicianParticipant a owl:ObjectProperty ;
+    rdfs:label "has technician participant"@en ;
+    rdfs:subPropertyOf obo:RO_0000057 ;
+    rdfs:domain :MaintenanceActivity ;
+    rdfs:range :Technician ;
+    obo:IAO_0000115 "A relation between a maintenance activity and a technician who participates in it by carrying out maintenance work."@en .
+
+#################################################################
+#  Data properties
+#################################################################
+
+:hasTextValue a owl:DatatypeProperty ;
+    rdfs:label "has text value"@en ;
+    rdfs:domain obo:IAO_0000030 ;
+    rdfs:range xsd:string ;
+    obo:IAO_0000115 "A relation between an information content entity and a string literal that concretely expresses its content."@en .
+
+:hasCodeValue a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "has code value"@en ;
+    rdfs:subPropertyOf :hasTextValue ;
+    rdfs:domain :ProblemCode ;
+    rdfs:range xsd:string ;
+    obo:IAO_0000115 "A relation between a problem code and the literal string by which it is written in the coding scheme."@en .
+
+:hasReportIdentifier a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "has report identifier"@en ;
+    rdfs:domain :ProblemReport ;
+    rdfs:range xsd:string ;
+    obo:IAO_0000115 "A relation between a maintenance problem report and the literal identifier under which it is registered."@en .
+
+:hasNumericValue a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "has numeric value"@en ;
+    rdfs:domain :OdometerReading ;
+    rdfs:range xsd:decimal ;
+    obo:IAO_0000115 "A relation between a measurement information entity and the number it records."@en .
+
+:hasUnitLabel a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "has unit label"@en ;
+    rdfs:domain :OdometerReading ;
+    rdfs:range xsd:string ;
+    obo:IAO_0000115 "A relation between a measurement information entity and the literal label of the unit in which its numeric value is expressed."@en .
+
+:hasVINValue a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "has VIN value"@en ;
+    rdfs:domain :Vehicle ;
+    rdfs:range xsd:string ;
+    obo:IAO_0000115 "A relation between a vehicle and the literal Vehicle Identification Number that denotes it. This is a shortcut for an identifier information content entity that is about the vehicle."@en .
+
+:hasPersonName a owl:DatatypeProperty ;
+    rdfs:label "has person name"@en ;
+    rdfs:domain :Person ;
+    rdfs:range xsd:string ;
+    obo:IAO_0000115 "A relation between a person and a literal name by which the person is designated."@en .
+
+:hasStartTime a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "has start time"@en ;
+    rdfs:domain obo:BFO_0000015 ;
+    rdfs:range xsd:dateTime ;
+    obo:IAO_0000115 "A relation between a process and the timestamp of the first instant of the temporal region it occupies. This is a shortcut for the BFO occupies-temporal-region pattern."@en .
+
+:hasEndTime a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "has end time"@en ;
+    rdfs:domain obo:BFO_0000015 ;
+    rdfs:range xsd:dateTime ;
+    obo:IAO_0000115 "A relation between a process and the timestamp of the last instant of the temporal region it occupies. This is a shortcut for the BFO occupies-temporal-region pattern."@en .
+
+#################################################################
+#  Domain classes — independent continuants
+#################################################################
+
+:Vehicle a owl:Class ;
+    rdfs:label "vehicle"@en ;
+    rdfs:subClassOf obo:BFO_0000030 ;
+    obo:IAO_0000115 "An object that is engineered to transport persons or cargo and that bears a function of conveyance."@en .
+
+:VehicleComponent a owl:Class ;
+    rdfs:label "vehicle component"@en ;
+    rdfs:subClassOf obo:BFO_0000030 ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:BFO_0000050 ;
+          owl:someValuesFromvalues :Vehicle ] ;
+    obo:IAO_0000115 "An object that is a separately identifiable, replaceable part of some vehicle."@en .
+
+:BrakePad a owl:Class ;
+    rdfs:label "brake pad"@en ;
+    rdfs:subClassOf :VehicleComponent ;
+    obo:IAO_0000115 "A vehicle component that presses against a brake rotor to generate friction during braking."@en .
+
+:Person a owl:Class ;
+    rdfs:label "person"@en ;
+    rdfs:subClassOf obo:BFO_0000030 ;
+    obo:IAO_0000115 "An object that is a human being."@en .
+
+[] a owl:AllDisjointClasses ;
+   owl:members ( :Vehicle :VehicleComponent :Person ) .
+
+#################################################################
+#  Domain classes — specifically dependent continuants
+#################################################################
+
+:VehicleProblem a owl:Class ;
+    rdfs:label "vehicle problem"@en ;
+    rdfs:subClassOf obo:BFO_0000016 ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:RO_0000052 ;
+          owl:someValuesFrom [ a owl:Class ; owl:unionOf ( :Vehicle :VehicleComponent ) ] ] ;
+    obo:IAO_0000115 "A disposition that inheres in a vehicle or vehicle component, arises from a departure of its physical make-up from its design specification, and is realized in processes of degraded or failed vehicle performance."@en .
+
+:ObservableVehicleCondition a owl:Class ;
+    rdfs:label "observable vehicle condition"@en ;
+    rdfs:subClassOf obo:BFO_0000019 ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:RO_0000052 ;
+          owl:someValuesFrom [ a owl:Class ; owl:unionOf ( :Vehicle :VehicleComponent ) ] ] ;
+    obo:IAO_0000115 "A quality of a vehicle or vehicle component that can be detected by inspection or measurement and that may indicate the presence of a vehicle problem."@en .
+
+:TechnicianRole a owl:Class ;
+    rdfs:label "technician role"@en ;
+    rdfs:subClassOf obo:BFO_0000023 ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:RO_0000052 ;
+          owl:someValuesFrom :Person ] ;
+    obo:IAO_0000115 "A role borne by a person that is realized in maintenance activities in which that person inspects, repairs, or replaces vehicle components."@en .
+
+:VehicleOperatorRole a owl:Class ;
+    rdfs:label "vehicle operator role"@en ;
+    rdfs:subClassOf obo:BFO_0000023 ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:RO_0000052 ;
+          owl:someValuesFrom :Person ] ;
+    obo:IAO_0000115 "A role borne by a person that is realized in processes in which that person drives or operates a vehicle."@en .
+
+#################################################################
+#  Defined class — Technician
+#################################################################
+
+:Technician a owl:Class ;
+    rdfs:label "technician"@en ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Person
+            [ a owl:Restriction ;
+              owl:onProperty obo:RO_0000053 ;
+              owl:someValuesFrom :TechnicianRole ]
+        )
+    ] ;
+    obo:IAO_0000115 "A person who is the bearer of a technician role."@en .
+
+#################################################################
+#  Domain classes — processes
+#################################################################
+
+:ProblemManifestation a owl:Class ;
+    rdfs:label "problem manifestation"@en ;
+    rdfs:subClassOf obo:BFO_0000015 ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:BFO_0000055 ;
+          owl:someValuesFrom :VehicleProblem ] ;
+    obo:IAO_0000115 "A process that realizes a vehicle problem, such as an abnormal noise, vibration, or loss of performance during vehicle operation."@en .
+
+:Observation a owl:Class ;
+    rdfs:label "observation"@en ;
+    rdfs:subClassOf obo:BFO_0000015 ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:RO_0000057 ;
+          owl:someValuesFrom :Vehicle ] ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:RO_0000057 ;
+          owl:someValuesFrom :Person ] ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:RO_0002234 ;
+          owl:someValuesFrom :ObservationRecord ] ;
+    obo:IAO_0000115 "A process in which a person perceives a vehicle or its components and that has as output an observation record about an observable vehicle condition."@en .
+
+:ProblemReportingProcess a owl:Class ;
+    rdfs:label "problem reporting process"@en ;
+    rdfs:subClassOf obo:BFO_0000015 ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:RO_0002233 ;
+          owl:someValuesFrom :ObservationRecord ] ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:RO_0002234 ;
+          owl:someValuesFrom :ProblemReport ] ;
+    obo:IAO_0000115 "A process that has as input one or more observation records and has as output a maintenance problem report."@en .
+
+:MaintenanceActivity a owl:Class ;
+    rdfs:label "maintenance activity"@en ;
+    rdfs:subClassOf obo:BFO_0000015 ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:RO_0000057 ;
+          owl:someValuesFrom :Vehicle ] ,
+        [ a owl:Restriction ;
+          owl:onProperty :hasTechnicianParticipant ;
+          owl:someValuesFrom :Technician ] ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:BFO_0000055 ;
+          owl:someValuesFrom :TechnicianRole ] ,
+        [ a owl:Restriction ;
+          owl:onProperty :isInResponseTo ;
+          owl:someValuesFrom :ProblemReport ] ;
+    obo:IAO_0000115 "A process, carried out by at least one technician in response to a maintenance problem report, in which a vehicle or its components are inspected, repaired, adjusted, or replaced."@en .
+
+:BrakePadReplacement a owl:Class ;
+    rdfs:label "brake pad replacement"@en ;
+    rdfs:subClassOf :MaintenanceActivity ;
+    obo:IAO_0000115 "A maintenance activity in which one or more brake pads of a vehicle are removed and replaced with new brake pads."@en .
+
+[] a owl:AllDisjointClasses ;
+   owl:members ( :ProblemManifestation :Observation :ProblemReportingProcess :MaintenanceActivity ) .
+
+#################################################################
+#  Domain classes — information content entities
+#################################################################
+
+:ObservationRecord a owl:Class ;
+    rdfs:label "observation record"@en ;
+    rdfs:subClassOf obo:IAO_0000030 ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:RO_0002353 ;
+          owl:someValuesFrom :Observation ] ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:IAO_0000136 ;
+          owl:someValuesFrom :ObservableVehicleCondition ] ;
+    obo:IAO_0000115 "An information content entity that is the output of an observation and is about an observable vehicle condition."@en .
+
+:ProblemReport a owl:Class ;
+    rdfs:label "maintenance problem report"@en ;
+    rdfs:subClassOf obo:IAO_0000030 ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:RO_0002353 ;
+          owl:someValuesFrom :ProblemReportingProcess ] ,
+        [ a owl:Restriction ;
+          owl:onProperty :reportsProblem ;
+          owl:someValuesFrom :VehicleProblem ] ,
+        [ a owl:Restriction ;
+          owl:onProperty :hasAssignedProblemCode ;
+          owl:someValuesFrom :ProblemCode ] ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:BFO_0000051 ;
+          owl:someValuesFrom :ObservedConditionDescription ] ,
+        [ a owl:Restriction ;
+          owl:onProperty :derivesFromObservation ;
+          owl:someValuesFrom :Observation ] ;
+    obo:IAO_0000115 "An information content entity that is the output of a problem reporting process, asserts the existence of a vehicle problem, is assigned a problem code, and has as part a description of the observed vehicle condition."@en .
+
+:ObservedConditionDescription a owl:Class ;
+    rdfs:label "observed condition description"@en ;
+    rdfs:subClassOf obo:IAO_0000030 ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:BFO_0000050 ;
+          owl:someValuesFrom :ProblemReport ] ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:IAO_0000136 ;
+          owl:someValuesFrom :ObservableVehicleCondition ] ;
+    obo:IAO_0000115 "An information content entity that is part of a maintenance problem report and is about an observable vehicle condition."@en .
+
+:OdometerReading a owl:Class ;
+    rdfs:label "odometer reading"@en ;
+    rdfs:subClassOf obo:IAO_0000030 ,
+        [ a owl:Restriction ;
+          owl:onProperty obo:IAO_0000136 ;
+          owl:someValuesFrom :Vehicle ] ;
+    obo:IAO_0000115 "An information content entity that records the cumulative distance a vehicle has traveled, as indicated by its odometer at a given time."@en .
+
+:ProblemCode a owl:Class ;
+    rdfs:label "problem code"@en ;
+    rdfs:subClassOf obo:IAO_0000030 ;
+    obo:IAO_0000115 "An information content entity, drawn from a controlled maintenance coding scheme, that designates a category of vehicle problem and is assigned to maintenance problem reports."@en .
+
+[] a owl:AllDisjointClasses ;
+   owl:members ( :ObservationRecord :ProblemReport :ObservedConditionDescription :OdometerReading :ProblemCode ) .
+
+#################################################################
+#  Named individuals — example maintenance case
+#################################################################
+
+# --- Material entities ---------------------------------------
+
+:vehicle_T0417 a owl:NamedIndividual , :Vehicle ;
+    rdfs:label "service truck T-0417"@en ;
+    :hasVINValue "1FTBW3XM5KKA00417" .
+
+:brakePad_T0417_FL a owl:NamedIndividual , :BrakePad ;
+    rdfs:label "front-left brake pad of truck T-0417"@en ;
+    obo:BFO_0000050 :vehicle_T0417 .
+
+:person_driver_01 a owl:NamedIndividual , :Person ;
+    rdfs:label "driver 01"@en ;
+    :hasPersonName "Dana Morales" ;
+    obo:RO_0000053 :role_operator_01 .
+
+:person_tech_01 a owl:NamedIndividual , :Person , :Technician ;
+    rdfs:label "technician 01"@en ;
+    :hasPersonName "Luis Chen" ;
+    obo:RO_0000053 :role_technician_01 .
+
+# --- Roles, dispositions, qualities --------------------------
+
+:role_operator_01 a owl:NamedIndividual , :VehicleOperatorRole ;
+    rdfs:label "vehicle operator role of driver 01"@en ;
+    obo:RO_0000052 :person_driver_01 .
+
+:role_technician_01 a owl:NamedIndividual , :TechnicianRole ;
+    rdfs:label "technician role of technician 01"@en ;
+    obo:RO_0000052 :person_tech_01 .
+
+:problem_brakeWear_01 a owl:NamedIndividual , :VehicleProblem ;
+    rdfs:label "degraded braking fault of front-left brake pad"@en ;
+    obo:RO_0000052 :brakePad_T0417_FL ;
+    :problemAffectsVehicle :vehicle_T0417 .
+
+:condition_padThin_01 a owl:NamedIndividual , :ObservableVehicleCondition ;
+    rdfs:label "worn-thin condition of front-left brake pad"@en ;
+    obo:RO_0000052 :brakePad_T0417_FL .
+
+# --- Processes -----------------------------------------------
+
+:manifestation_grinding_01 a owl:NamedIndividual , :ProblemManifestation ;
+    rdfs:label "grinding noise during braking, truck T-0417"@en ;
+    obo:BFO_0000055 :problem_brakeWear_01 ;
+    obo:RO_0000057 :vehicle_T0417 , :brakePad_T0417_FL ;
+    :hasStartTime "2026-03-09T16:40:00-05:00"^^xsd:dateTime .
+
+:observation_01 a owl:NamedIndividual , :Observation ;
+    rdfs:label "driver observation of brake grinding and pad wear"@en ;
+    obo:RO_0000057 :vehicle_T0417 , :brakePad_T0417_FL , :person_driver_01 ;
+    obo:RO_0002234 :observationRecord_01 ;
+    :hasStartTime "2026-03-09T17:05:00-05:00"^^xsd:dateTime ;
+    :hasEndTime   "2026-03-09T17:15:00-05:00"^^xsd:dateTime .
+
+:reporting_01 a owl:NamedIndividual , :ProblemReportingProcess ;
+    rdfs:label "filing of problem report MPR-2026-00873"@en ;
+    obo:RO_0000057 :person_driver_01 ;
+    obo:RO_0002233 :observationRecord_01 ;
+    obo:RO_0002234 :report_MPR_2026_00873 ;
+    :hasStartTime "2026-03-09T17:20:00-05:00"^^xsd:dateTime ;
+    :hasEndTime   "2026-03-09T17:32:00-05:00"^^xsd:dateTime .
+
+:maintenance_01 a owl:NamedIndividual , :BrakePadReplacement ;
+    rdfs:label "front brake pad replacement on truck T-0417"@en ;
+    :isInResponseTo :report_MPR_2026_00873 ;
+    obo:RO_0000057 :vehicle_T0417 , :brakePad_T0417_FL ;
+    :hasTechnicianParticipant :person_tech_01 ;
+    obo:BFO_0000055 :role_technician_01 ;
+    :hasStartTime "2026-03-10T08:15:00-05:00"^^xsd:dateTime ;
+    :hasEndTime   "2026-03-10T09:40:00-05:00"^^xsd:dateTime .
+
+# --- Information content entities ----------------------------
+
+:observationRecord_01 a owl:NamedIndividual , :ObservationRecord ;
+    rdfs:label "observation record 01"@en ;
+    obo:IAO_0000136 :condition_padThin_01 ;
+    :hasTextValue "Grinding noise when braking; front-left pad visibly thin." .
+
+:report_MPR_2026_00873 a owl:NamedIndividual , :ProblemReport ;
+    rdfs:label "maintenance problem report MPR-2026-00873"@en ;
+    :hasReportIdentifier "MPR-2026-00873" ;
+    :reportsProblem :problem_brakeWear_01 ;
+    :hasAssignedProblemCode :problemCode_BRK_042 ;
+    :derivesFromObservation :observation_01 ;
+    obo:BFO_0000051 :conditionDescription_01 , :odometerReading_01 .
+
+:conditionDescription_01 a owl:NamedIndividual , :ObservedConditionDescription ;
+    rdfs:label "observed condition description in MPR-2026-00873"@en ;
+    obo:BFO_0000050 :report_MPR_2026_00873 ;
+    obo:IAO_0000136 :condition_padThin_01 ;
+    :hasTextValue "Front-left brake pad worn below 3 mm; metal-on-metal grinding audible under braking." .
+
+:odometerReading_01 a owl:NamedIndividual , :OdometerReading ;
+    rdfs:label "odometer reading in MPR-2026-00873"@en ;
+    obo:BFO_0000050 :report_MPR_2026_00873 ;
+    obo:IAO_0000136 :vehicle_T0417 ;
+    :hasNumericValue "48210"^^xsd:decimal ;
+    :hasUnitLabel "mile" .
+
+:problemCode_BRK_042 a owl:NamedIndividual , :ProblemCode ;
+    rdfs:label "problem code BRK-042 (brake pad wear beyond limit)"@en ;
+    :hasCodeValue "BRK-042" ;
+    :hasTextValue "Brake pad wear beyond service limit" .
+
+#################################################################
+#  Individual distinctness
+#################################################################
+
+[] a owl:AllDifferent ;
+   owl:distinctMembers ( :person_driver_01 :person_tech_01 ) .

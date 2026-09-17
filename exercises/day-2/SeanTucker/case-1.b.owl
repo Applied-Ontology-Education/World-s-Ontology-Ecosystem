@@ -1,0 +1,289 @@
+@prefix :     <http://example.org/day2/case1#> .
+@prefix obo:  <http://purl.obolibrary.org/obo/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+
+<http://example.org/day2/case1>
+    a owl:Ontology ;
+    owl:versionInfo "2.4" ;
+    rdfs:label "Day 2 Case 1 - Aircraft Model Data Pattern"@en ;
+    rdfs:comment """Reusable pattern for aircraft model records in aircraft_data.xlsx (sheet ACD_Data), instantiated for ACD_Data row 5 (Airbus A320 Neo).
+Modeling commitments:
+(1) An aircraft model is a directive information entity (a specification), not an aircraft. Physical values are values specified for conforming aircraft.
+(2) Engine class and aircraft class values are named individuals of classification-category classes, not subclasses of engine or aircraft.
+(3) Each designation is a separate information entity typed by its issuing authority (FAA, EUROCONTROL BADA), so designations with identical strings remain distinct.
+(4) Quantities are measurement data carrying a decimal value and a measurement unit label. Following IAO, the ontology represents the label that denotes a unit, not the unit itself. Engine count is a plain positive-integer literal on the model because it has no unit.
+(5) hasManufacturer, hasEngineClass, hasAircraftClass and hasEngineCount are shortcut relations; each is annotated with the chain it abbreviates and drawn as a double line in the pattern diagram. The remaining relations are direct.
+(6) Tail height is fixed at operating empty weight (OEW) in the class definition rather than modeled as a separate condition."""@en .
+
+#################################################################
+# Annotation properties
+#################################################################
+
+obo:IAO_0000115 a owl:AnnotationProperty ;
+    rdfs:label "definition"@en .
+
+:shortcutFor a owl:AnnotationProperty ;
+    rdfs:label "shortcut for"@en ;
+    obo:IAO_0000115 "An annotation that states the chain of relations, not encoded in this ontology, that a shortcut relation abbreviates."@en .
+
+:identifyingDescription a owl:AnnotationProperty ;
+    rdfs:label "identifying description"@en ;
+    obo:IAO_0000115 "An annotation that states what type of entity a named individual is, which source element it represents, and what distinguishes it from other individuals in the ontology."@en .
+
+#################################################################
+# Imported parent classes (declared by IRI; not locally created)
+#################################################################
+
+obo:BFO_0000040 a owl:Class ; rdfs:label "material entity"@en .
+obo:IAO_0000030 a owl:Class ; rdfs:label "information content entity"@en .
+obo:IAO_0000033 a owl:Class ; rdfs:label "directive information entity"@en ;
+    rdfs:subClassOf obo:IAO_0000030 .
+obo:IAO_0000109 a owl:Class ; rdfs:label "measurement datum"@en ;
+    rdfs:subClassOf obo:IAO_0000030 .
+obo:IAO_0000003 a owl:Class ; rdfs:label "measurement unit label"@en ;
+    rdfs:subClassOf obo:IAO_0000030 .
+
+obo:IAO_0000030 owl:disjointWith obo:BFO_0000040 .
+
+obo:IAO_0000039 a owl:ObjectProperty ;
+    rdfs:label "has measurement unit label"@en .
+
+#################################################################
+# Local classes
+#################################################################
+
+:AircraftModel a owl:Class ;
+    rdfs:label "aircraft model"@en ;
+    rdfs:subClassOf obo:IAO_0000033 ;
+    obo:IAO_0000115 "A directive information entity that prescribes the design features that aircraft must have to be produced as instances of a single aircraft type."@en .
+
+:Organization a owl:Class ;
+    rdfs:label "organization"@en ;
+    rdfs:subClassOf obo:BFO_0000040 ;
+    obo:IAO_0000115 "A material entity that consists of persons bound together by roles and rules so that it can act as a single agent."@en ;
+    rdfs:comment "Local stand-in for a reference-ontology organization class (e.g. CCO Organization)."@en .
+
+:AircraftManufacturer a owl:Class ;
+    rdfs:label "aircraft manufacturer"@en ;
+    rdfs:subClassOf :Organization ;
+    obo:IAO_0000115 "An organization that produces aircraft built to one or more aircraft models."@en .
+
+:ClassificationCategory a owl:Class ;
+    rdfs:label "classification category"@en ;
+    rdfs:subClassOf obo:IAO_0000030 ;
+    obo:IAO_0000115 "An information content entity that is one of the mutually exclusive values of a classification scheme and is assigned to items that meet its criterion."@en .
+
+:EngineClass a owl:Class ;
+    rdfs:label "engine class"@en ;
+    rdfs:subClassOf :ClassificationCategory ;
+    obo:IAO_0000115 "A classification category whose criterion is the means by which an aircraft engine produces propulsive power."@en .
+
+:AircraftClass a owl:Class ;
+    rdfs:label "aircraft class"@en ;
+    rdfs:subClassOf :ClassificationCategory ;
+    obo:IAO_0000115 "A classification category whose criterion is the general airframe configuration by which an aircraft generates lift and operates."@en .
+
+:ModelDesignation a owl:Class ;
+    rdfs:label "model designation"@en ;
+    rdfs:subClassOf obo:IAO_0000030 ;
+    obo:IAO_0000115 "An information content entity that an authority assigns to an aircraft model so that the model can be referred to in that authority's records."@en .
+
+:FAAModelName a owl:Class ;
+    rdfs:label "FAA model name"@en ;
+    rdfs:subClassOf :ModelDesignation ;
+    obo:IAO_0000115 "A model designation that the Federal Aviation Administration assigns as the descriptive name of an aircraft model."@en .
+
+:BADAModelName a owl:Class ;
+    rdfs:label "BADA model name"@en ;
+    rdfs:subClassOf :ModelDesignation ;
+    obo:IAO_0000115 "A model designation that EUROCONTROL assigns to an aircraft model in its Base of Aircraft Data performance database."@en .
+
+
+
+:MeasurementDatum a owl:Class ;
+    rdfs:label "aircraft model measurement datum"@en ;
+    rdfs:subClassOf obo:IAO_0000109 ;
+    obo:IAO_0000115 "A measurement datum that records a quantity specified for aircraft built to an aircraft model, expressed as a decimal value together with a measurement unit label that denotes its unit."@en .
+
+:AircraftLengthMeasurement a owl:Class ;
+    rdfs:label "aircraft length measurement"@en ;
+    rdfs:subClassOf :MeasurementDatum ;
+    obo:IAO_0000115 "An aircraft model measurement datum whose quantity is the overall distance from nose to tail specified for aircraft built to the model."@en .
+
+:AircraftTailHeightMeasurement a owl:Class ;
+    rdfs:label "aircraft tail height measurement"@en ;
+    rdfs:subClassOf :MeasurementDatum ;
+    obo:IAO_0000115 "An aircraft model measurement datum whose quantity is the vertical distance from the ground to the top of the tail specified for aircraft built to the model when at operating empty weight."@en .
+
+:MeasurementUnitLabel a owl:Class ;
+    rdfs:label "aircraft model measurement unit label"@en ;
+    rdfs:subClassOf obo:IAO_0000003 ;
+    obo:IAO_0000115 "A measurement unit label that denotes the unit in which the decimal value of an aircraft model measurement datum is expressed."@en ;
+    rdfs:comment "Represents the label denoting a unit, not the unit itself; the unit is identified by rdfs:seeAlso on each individual."@en .
+
+#################################################################
+# Disjointness
+#################################################################
+
+[] a owl:AllDisjointClasses ;
+   owl:members ( :AircraftModel :ClassificationCategory :ModelDesignation
+                 :MeasurementDatum :MeasurementUnitLabel ) .
+
+:EngineClass owl:disjointWith :AircraftClass .
+:AircraftLengthMeasurement owl:disjointWith :AircraftTailHeightMeasurement .
+
+:FAAModelName owl:disjointWith :BADAModelName .
+
+#################################################################
+# Object properties
+#################################################################
+
+:hasManufacturer a owl:ObjectProperty ;
+    :shortcutFor "aircraft model <- is built to - aircraft - output of - manufacturing process - has agent -> aircraft manufacturer"@en ;
+    rdfs:label "has manufacturer"@en ;
+    rdfs:domain :AircraftModel ;
+    rdfs:range :AircraftManufacturer ;
+    obo:IAO_0000115 "A relation that holds between an aircraft model and an aircraft manufacturer when the manufacturer produces aircraft built to that model."@en .
+
+:hasEngineClass a owl:ObjectProperty ;
+    :shortcutFor "aircraft model - prescribes -> aircraft engine - is classified by -> engine class"@en ;
+    rdfs:label "has engine class"@en ;
+    rdfs:domain :AircraftModel ;
+    rdfs:range :EngineClass ;
+    obo:IAO_0000115 "A relation that holds between an aircraft model and an engine class when the model prescribes engines that meet the criterion of that class."@en .
+
+:hasAircraftClass a owl:ObjectProperty ;
+    :shortcutFor "aircraft model <- is built to - aircraft - is classified by -> aircraft class"@en ;
+    rdfs:label "has aircraft class"@en ;
+    rdfs:domain :AircraftModel ;
+    rdfs:range :AircraftClass ;
+    obo:IAO_0000115 "A relation that holds between an aircraft model and an aircraft class when aircraft built to the model meet the criterion of that class."@en .
+
+:hasDesignation a owl:ObjectProperty ;
+    rdfs:label "has designation"@en ;
+    rdfs:domain :AircraftModel ;
+    rdfs:range :ModelDesignation ;
+    obo:IAO_0000115 "A relation that holds between an aircraft model and a model designation when an authority has assigned that designation to refer to the model."@en .
+
+:hasMeasurement a owl:ObjectProperty ;
+    rdfs:label "has measurement"@en ;
+    rdfs:domain :AircraftModel ;
+    rdfs:range :MeasurementDatum ;
+    obo:IAO_0000115 "A relation that holds between an aircraft model and an aircraft model measurement datum when the datum records a quantity that the model specifies for its aircraft."@en .
+
+:hasMeasurementUnitLabel a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:label "has measurement unit label"@en ;
+    rdfs:subPropertyOf obo:IAO_0000039 ;
+    rdfs:domain :MeasurementDatum ;
+    rdfs:range :MeasurementUnitLabel ;
+    obo:IAO_0000115 "A relation that holds between an aircraft model measurement datum and an aircraft model measurement unit label when the datum's decimal value counts multiples of the unit that the label denotes."@en .
+
+#################################################################
+# Data properties
+#################################################################
+
+:hasEngineCount a owl:DatatypeProperty , owl:FunctionalProperty ;
+    :shortcutFor "aircraft model - prescribes -> aircraft engine (aggregate) - has count -> positive integer"@en ;
+    rdfs:label "has engine count"@en ;
+    rdfs:domain :AircraftModel ;
+    rdfs:range xsd:positiveInteger ;
+    obo:IAO_0000115 "A relation that holds between an aircraft model and a positive integer when the integer equals the number of engines the model prescribes for each aircraft."@en .
+
+:hasDecimalValue a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "has decimal value"@en ;
+    rdfs:domain :MeasurementDatum ;
+    rdfs:range xsd:decimal ;
+    obo:IAO_0000115 "A relation that holds between an aircraft model measurement datum and a decimal literal when the literal is the number of units that the datum reports."@en .
+
+:hasTextValue a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:label "has text value"@en ;
+    rdfs:domain :ModelDesignation ;
+    rdfs:range xsd:string ;
+    obo:IAO_0000115 "A relation that holds between a model designation and a string literal when the string is the exact character sequence the assigning authority uses for that designation."@en .
+
+#################################################################
+# Class-level pattern (one axiom per diagram arrow)
+#################################################################
+
+:AircraftModel rdfs:subClassOf
+    [ a owl:Restriction ; owl:onProperty :hasManufacturer  ; owl:someValuesFrom :AircraftManufacturer ] ,
+    [ a owl:Restriction ; owl:onProperty :hasEngineClass   ; owl:someValuesFrom :EngineClass ] ,
+    [ a owl:Restriction ; owl:onProperty :hasAircraftClass ; owl:someValuesFrom :AircraftClass ] ,
+    [ a owl:Restriction ; owl:onProperty :hasDesignation   ; owl:someValuesFrom :ModelDesignation ] ,
+    [ a owl:Restriction ; owl:onProperty :hasMeasurement   ; owl:someValuesFrom :MeasurementDatum ] ,
+    [ a owl:Restriction ; owl:onProperty :hasEngineCount   ; owl:someValuesFrom xsd:positiveInteger ] .
+
+:MeasurementDatum rdfs:subClassOf
+    [ a owl:Restriction ; owl:onProperty :hasMeasurementUnitLabel ; owl:someValuesFrom :MeasurementUnitLabel ] ,
+    [ a owl:Restriction ; owl:onProperty :hasDecimalValue    ; owl:someValuesFrom xsd:decimal ] .
+
+:ModelDesignation rdfs:subClassOf
+    [ a owl:Restriction ; owl:onProperty :hasTextValue ; owl:someValuesFrom xsd:string ] .
+
+#################################################################
+# Named individuals (source: aircraft_data.xlsx, sheet ACD_Data, row 5)
+#################################################################
+
+:a320Neo a owl:NamedIndividual , :AircraftModel ;
+    rdfs:label "Airbus A320neo aircraft model"@en ;
+    :identifyingDescription "The aircraft model recorded in ACD_Data row 5; the only aircraft model in this ontology, distinguished by its designations Airbus A320 Neo and Airbus A320-271N."@en ;
+    :hasManufacturer :airbus ;
+    :hasEngineClass :jet ;
+    :hasAircraftClass :fixedWing ;
+    :hasDesignation :faaModelName_A320Neo , :badaModelName_A320Neo ;
+    :hasMeasurement :length_A320Neo , :tailHeight_A320Neo ;
+    :hasEngineCount "2"^^xsd:positiveInteger .
+
+:airbus a owl:NamedIndividual , :AircraftManufacturer ;
+    rdfs:label "Airbus"@en ;
+    :identifyingDescription "The aircraft manufacturer recorded as AIRBUS in the Manufacturer column of ACD_Data; the only organization in this ontology."@en .
+
+:jet a owl:NamedIndividual , :EngineClass ;
+    rdfs:label "jet"@en ;
+    :identifyingDescription "The engine class recorded as Jet in the Physical_Class_Engine column of ACD_Data; distinguished from the other engine classes in that column (Electric, Turboprop, Piston, Turboshaft, Rocket)."@en .
+
+:fixedWing a owl:NamedIndividual , :AircraftClass ;
+    rdfs:label "fixed-wing"@en ;
+    :identifyingDescription "The aircraft class recorded as Fixed-wing in the Class column of ACD_Data; distinguished from the other aircraft classes in that column (Amphibian, Gyrocopter, Helicopter, Tiltrotor)."@en .
+
+:faaModelName_A320Neo a owl:NamedIndividual , :FAAModelName ;
+    rdfs:label "FAA model name of Airbus A320 Neo"@en ;
+    :identifyingDescription "The FAA model name in the Model_FAA column of ACD_Data row 5; distinguished from the other designations of the same model by its issuing authority and its text."@en ;
+    :hasTextValue "Airbus A320 Neo"^^xsd:string .
+
+:badaModelName_A320Neo a owl:NamedIndividual , :BADAModelName ;
+    rdfs:label "BADA model name of Airbus A320 Neo"@en ;
+    :identifyingDescription "The EUROCONTROL BADA model name in the Model_BADA column of ACD_Data row 5; the only BADA designation in this ontology."@en ;
+    :hasTextValue "Airbus A320-271N"^^xsd:string .
+
+
+
+:length_A320Neo a owl:NamedIndividual , :AircraftLengthMeasurement ;
+    rdfs:label "length of Airbus A320 Neo"@en ;
+    :identifyingDescription "The aircraft length measurement in the Length_ft column of ACD_Data row 5 (123.3 ft); distinguished from the tail height measurement by its class and value."@en ;
+    :hasDecimalValue "123.3"^^xsd:decimal ;
+    :hasMeasurementUnitLabel :footUnitLabel .
+
+:tailHeight_A320Neo a owl:NamedIndividual , :AircraftTailHeightMeasurement ;
+    rdfs:label "tail height of Airbus A320 Neo"@en ;
+    :identifyingDescription "The aircraft tail height measurement at operating empty weight in the Tail_Height_at_OEW_ft column of ACD_Data row 5 (39.6 ft); distinguished from the length measurement by its class and value."@en ;
+    :hasDecimalValue "39.6"^^xsd:decimal ;
+    :hasMeasurementUnitLabel :footUnitLabel .
+
+:footUnitLabel a owl:NamedIndividual , :MeasurementUnitLabel ;
+    rdfs:label "foot (unit label)"@en ;
+    rdfs:seeAlso unit:FT ;
+    :identifyingDescription "The measurement unit label denoting the foot, recorded as Feet in the Unit column of the Data_Dictionary sheet for the length and tail height columns; the only unit label in this ontology."@en .
+
+#################################################################
+# Distinct individuals
+#################################################################
+
+[] a owl:AllDifferent ;
+   owl:distinctMembers ( :a320Neo :airbus :jet :fixedWing
+                         :faaModelName_A320Neo :badaModelName_A320Neo
+                         :length_A320Neo :tailHeight_A320Neo :footUnitLabel ) .

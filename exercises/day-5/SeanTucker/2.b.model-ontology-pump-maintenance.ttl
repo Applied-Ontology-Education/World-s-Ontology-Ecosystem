@@ -1,0 +1,129 @@
+@prefix :     <http://example.org/maint#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix obo:  <http://purl.obolibrary.org/obo/> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<http://example.org/maint> a owl:Ontology ;
+    rdfs:label "Pump maintenance scenario (BFO/IAO/OBI/RO aligned)"@en .
+
+#################################################################
+# Upper-level terms (declared locally for self-containment)
+#################################################################
+obo:BFO_0000015 a owl:Class ; rdfs:label "process"@en .
+obo:BFO_0000030 a owl:Class ; rdfs:label "object"@en .
+obo:BFO_0000023 a owl:Class ; rdfs:label "role"@en .
+obo:IAO_0000030 a owl:Class ; rdfs:label "information content entity"@en .
+obo:IAO_0000104 a owl:Class ; rdfs:label "plan specification"@en ; rdfs:subClassOf obo:IAO_0000030 .
+obo:IAO_0000007 a owl:Class ; rdfs:label "action specification"@en ; rdfs:subClassOf obo:IAO_0000030 .
+obo:IAO_0000109 a owl:Class ; rdfs:label "measurement datum"@en ; rdfs:subClassOf obo:IAO_0000030 .
+obo:IAO_0000088 a owl:Class ; rdfs:label "report"@en ; rdfs:subClassOf obo:IAO_0000030 .
+obo:OBI_0000011 a owl:Class ; rdfs:label "planned process"@en ; rdfs:subClassOf obo:BFO_0000015 .
+obo:OBI_0000260 a owl:Class ; rdfs:label "plan"@en .
+
+obo:BFO_0000051 a owl:ObjectProperty ; rdfs:label "has part"@en .
+obo:BFO_0000055 a owl:ObjectProperty ; rdfs:label "realizes"@en .
+obo:RO_0000053  a owl:ObjectProperty ; rdfs:label "bearer of"@en .
+obo:RO_0000057  a owl:ObjectProperty ; rdfs:label "has participant"@en .
+obo:RO_0000059  a owl:ObjectProperty ; rdfs:label "concretizes"@en .
+obo:IAO_0000136 a owl:ObjectProperty ; rdfs:label "is about"@en .
+obo:OBI_0000293 a owl:ObjectProperty ; rdfs:label "has specified input"@en ; rdfs:subPropertyOf obo:RO_0000057 .
+obo:OBI_0000299 a owl:ObjectProperty ; rdfs:label "has specified output"@en ; rdfs:subPropertyOf obo:RO_0000057 .
+obo:IAO_0000004 a owl:DatatypeProperty ; rdfs:label "has measurement value"@en .
+:hasUnit a owl:ObjectProperty ; rdfs:label "has unit"@en ;
+    rdfs:comment "Points to a QUDT unit individual."@en .
+:hasAgent a owl:ObjectProperty ; rdfs:label "has agent"@en ;
+    rdfs:subPropertyOf obo:RO_0000057 ; rdfs:range :Person .
+
+#################################################################
+# Domain classes
+#################################################################
+:Person a owl:Class ; rdfs:label "person"@en ; rdfs:subClassOf obo:BFO_0000030 .
+:TechnicianRole a owl:Class ; rdfs:label "technician role"@en ; rdfs:subClassOf obo:BFO_0000023 .
+:Pump a owl:Class ; rdfs:label "pump"@en ; rdfs:subClassOf obo:BFO_0000030 .
+:Bearing a owl:Class ; rdfs:label "bearing"@en ; rdfs:subClassOf obo:BFO_0000030 .
+:Vibration a owl:Class ; rdfs:label "vibration"@en ; rdfs:subClassOf obo:BFO_0000015 ;
+    rdfs:comment "Oscillatory motion of a material entity. Modeled as a process, not a quality."@en .
+
+:MaintenanceProcedure a owl:Class ; rdfs:label "maintenance procedure"@en ; rdfs:subClassOf obo:IAO_0000104 .
+:IntervalSpecification a owl:Class ; rdfs:label "interval specification"@en ; rdfs:subClassOf obo:IAO_0000030 ;
+    rdfs:comment "Prescribed time between successive realizations of a plan. Not a temporal region."@en .
+:PumpInspection a owl:Class ; rdfs:label "pump inspection"@en ; rdfs:subClassOf obo:OBI_0000011 .
+:InspectionReport a owl:Class ; rdfs:label "inspection report"@en ; rdfs:subClassOf obo:IAO_0000088 .
+:VibrationVelocityDatum a owl:Class ; rdfs:label "vibration velocity datum"@en ; rdfs:subClassOf obo:IAO_0000109 .
+:BearingReplacementNeedFinding a owl:Class ; rdfs:label "bearing replacement need finding"@en ;
+    rdfs:subClassOf obo:IAO_0000030 ;
+    rdfs:comment "An assertion that a bearing should be replaced. The need is recorded as information, not as a property of the pump."@en .
+:WorkOrder a owl:Class ; rdfs:label "work order"@en ; rdfs:subClassOf obo:IAO_0000104 .
+:BearingReplacementSpecification a owl:Class ; rdfs:label "bearing replacement specification"@en ;
+    rdfs:subClassOf obo:IAO_0000007 .
+:BearingReplacement a owl:Class ; rdfs:label "bearing replacement"@en ; rdfs:subClassOf obo:OBI_0000011 ;
+    rdfs:comment "No individual is asserted: the requested replacement has not occurred."@en .
+
+#################################################################
+# Individuals
+#################################################################
+:MP_PumpInspection a owl:NamedIndividual , :MaintenanceProcedure ;
+    rdfs:label "pump inspection procedure"@en ;
+    obo:BFO_0000051 :MP_Interval .
+
+:MP_Interval a owl:NamedIndividual , :IntervalSpecification ;
+    rdfs:label "30-day inspection interval"@en ;
+    obo:IAO_0000004 "30"^^xsd:decimal ;
+    :hasUnit unit:DAY .
+
+:Alex a owl:NamedIndividual , :Person ;
+    rdfs:label "Alex"@en ;
+    obo:RO_0000053 :Alex_TechRole , :Plan_I17 .
+
+:Alex_TechRole a owl:NamedIndividual , :TechnicianRole ;
+    rdfs:label "Alex's technician role"@en .
+
+:Plan_I17 a owl:NamedIndividual , obo:OBI_0000260 ;
+    rdfs:label "plan realized in Inspection 17"@en ;
+    obo:RO_0000059 :MP_PumpInspection .
+
+:P_17 a owl:NamedIndividual , :Pump ;
+    rdfs:label "Pump P-17"@en ;
+    obo:BFO_0000051 :P_17_Bearing .
+
+:P_17_Bearing a owl:NamedIndividual , :Bearing ;
+    rdfs:label "bearing of P-17"@en ;
+    rdfs:comment "Introduced so the finding and work order have a target. The scenario does not name it."@en .
+
+:Vib_P17 a owl:NamedIndividual , :Vibration ;
+    rdfs:label "vibration of P-17 during Inspection 17"@en ;
+    obo:RO_0000057 :P_17 .
+
+:Inspection_17 a owl:NamedIndividual , :PumpInspection ;
+    rdfs:label "Inspection 17"@en ;
+    :hasAgent :Alex ;
+    obo:OBI_0000293 :P_17 ;
+    obo:OBI_0000299 :R_17 ;
+    obo:BFO_0000055 :Plan_I17 , :Alex_TechRole .
+
+:R_17 a owl:NamedIndividual , :InspectionReport ;
+    rdfs:label "Report R-17"@en ;
+    obo:IAO_0000136 :P_17 ;
+    obo:BFO_0000051 :M_17 , :F_17 .
+
+:M_17 a owl:NamedIndividual , :VibrationVelocityDatum ;
+    rdfs:label "vibration velocity 4.2 mm/s"@en ;
+    obo:IAO_0000136 :Vib_P17 ;
+    obo:IAO_0000004 "4.2"^^xsd:decimal ;
+    :hasUnit unit:MilliM-PER-SEC .
+
+:F_17 a owl:NamedIndividual , :BearingReplacementNeedFinding ;
+    rdfs:label "finding: P-17 requires bearing replacement"@en ;
+    obo:IAO_0000136 :P_17_Bearing .
+
+:W_22 a owl:NamedIndividual , :WorkOrder ;
+    rdfs:label "Work Order W-22"@en ;
+    obo:BFO_0000051 :W_22_Action ;
+    prov:wasDerivedFrom :F_17 .
+
+:W_22_Action a owl:NamedIndividual , :BearingReplacementSpecification ;
+    rdfs:label "replace bearing of P-17"@en ;
+    obo:IAO_0000136 :P_17_Bearing .
