@@ -1,0 +1,139 @@
+@prefix : <https://example.org/worlds-ontology-ecosystem/day1#> .
+@prefix ex: <https://example.org/worlds-ontology-ecosystem/day1/> .
+@prefix bfo: <http://purl.obolibrary.org/obo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://example.org/worlds-ontology-ecosystem/day1> .
+
+<https://example.org/worlds-ontology-ecosystem/day1> rdf:type owl:Ontology ;
+                                                      owl:imports bfo:bfo.owl ;
+                                                      rdfs:comment "Starter ontology for the Day 1 exercise. Students complete the class hierarchy, create individuals, add assertions, define MovingPatrolBoat, and run a reasoner."@en ;
+                                                      rdfs:label "Day 1 Patrol Boat Exercise"@en .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://example.org/worlds-ontology-ecosystem/day1/hasMeasurementUnit
+ex:hasMeasurementUnit rdf:type owl:ObjectProperty ;
+                      rdfs:label "has measurement unit"@en .
+
+
+###  https://example.org/worlds-ontology-ecosystem/day1/isAbout
+ex:isAbout rdf:type owl:ObjectProperty ;
+           rdfs:label "is about"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://example.org/worlds-ontology-ecosystem/day1/hasDecimalValue
+ex:hasDecimalValue rdf:type owl:DatatypeProperty ;
+                   rdfs:range xsd:decimal ;
+                   rdfs:label "has decimal value"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://example.org/worlds-ontology-ecosystem/day1/ActOfMotion
+ex:ActOfMotion rdf:type owl:Class ;
+               rdfs:subClassOf bfo:BFO_0000015 ;
+               rdfs:comment "An act of motion class to be placed beneath BFO process."@en ;
+               rdfs:label "ActOfMotion"@en .
+
+
+###  https://example.org/worlds-ontology-ecosystem/day1/DurationMeasurementDatum
+ex:DurationMeasurementDatum rdf:type owl:Class ;
+                            rdfs:subClassOf ex:MeasurementDatum ;
+                            rdfs:label "DurationMeasurementDatum"@en .
+
+
+###  https://example.org/worlds-ontology-ecosystem/day1/MeasurementDatum
+ex:MeasurementDatum rdf:type owl:Class ;
+                    rdfs:subClassOf bfo:BFO_0000031 ;
+                    rdfs:comment "An informational measurement datum to be placed beneath BFO generically dependent continuant."@en ;
+                    rdfs:label "MeasurementDatum"@en .
+
+
+###  https://example.org/worlds-ontology-ecosystem/day1/MeasurementUnit
+ex:MeasurementUnit rdf:type owl:Class ;
+                   rdfs:subClassOf bfo:BFO_0000031 ;
+                   rdfs:comment "A simplified informational representation of a measurement unit for this exercise."@en ;
+                   rdfs:label "MeasurementUnit"@en .
+
+
+###  https://example.org/worlds-ontology-ecosystem/day1/MovingPatrolBoat
+ex:MovingPatrolBoat rdf:type owl:Class ;
+                    owl:equivalentClass [ owl:intersectionOf ( ex:PatrolBoat
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty bfo:BFO_0000056 ;
+                                                                 owl:someValuesFrom ex:ActOfMotion
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ;
+                    rdfs:comment "Students will define this class using necessary and sufficient conditions."@en ;
+                    rdfs:label "MovingPatrolBoat"@en .
+
+
+###  https://example.org/worlds-ontology-ecosystem/day1/PatrolBoat
+ex:PatrolBoat rdf:type owl:Class ;
+              rdfs:subClassOf bfo:BFO_0000040 ;
+              rdfs:comment "A patrol boat class to be placed beneath BFO material entity."@en ;
+              rdfs:label "PatrolBoat"@en .
+
+
+###  https://example.org/worlds-ontology-ecosystem/day1/SpeedMeasurementDatum
+ex:SpeedMeasurementDatum rdf:type owl:Class ;
+                         rdfs:subClassOf ex:MeasurementDatum ;
+                         rdfs:label "SpeedMeasurementDatum"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://example.org/worlds-ontology-ecosystem/day1#duration_measurement_01
+:duration_measurement_01 rdf:type owl:NamedIndividual ,
+                                  ex:DurationMeasurementDatum ;
+                         ex:hasMeasurementUnit :hour ;
+                         ex:isAbout :motion_01 ;
+                         ex:hasDecimalValue 1.0 .
+
+
+###  https://example.org/worlds-ontology-ecosystem/day1#hour
+:hour rdf:type owl:NamedIndividual ,
+               ex:MeasurementUnit .
+
+
+###  https://example.org/worlds-ontology-ecosystem/day1#knot
+:knot rdf:type owl:NamedIndividual ,
+               ex:MeasurementUnit .
+
+
+###  https://example.org/worlds-ontology-ecosystem/day1#motion_01
+:motion_01 rdf:type owl:NamedIndividual ,
+                    ex:ActOfMotion .
+
+
+###  https://example.org/worlds-ontology-ecosystem/day1#patrol_boat_01
+:patrol_boat_01 rdf:type owl:NamedIndividual ,
+                         ex:PatrolBoat ;
+                bfo:BFO_0000056 :motion_01 .
+
+
+###  https://example.org/worlds-ontology-ecosystem/day1#speed_measurement_01
+:speed_measurement_01 rdf:type owl:NamedIndividual ,
+                               ex:SpeedMeasurementDatum ;
+                      ex:hasMeasurementUnit :knot ;
+                      ex:isAbout :motion_01 ;
+                      ex:hasDecimalValue 12.0 .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
